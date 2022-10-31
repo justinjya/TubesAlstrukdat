@@ -1,4 +1,5 @@
-# TubesAlstrukdat K3 Kelompok 5
+# Tugas Besar 1 IF2111 Algoritma dan Struktur Data STI
+K3 | Kelompok 5
 
 ### Deskripsi Singkat Program :
 BNMO (dibaca: Binomo) adalah sebuah robot video game console yang dimiliki oleh Indra dan Doni. Dua bulan yang lalu, ia mengalami kerusakan dan telah berhasil diperbaiki. Sayangnya, setelah diperbaiki ia justru mendapatkan lebih banyak bug dalam sistemnya. Oleh karena itu, Indra dan Doni mencari programmer lain yang lebih handal untuk ulang memprogram robot video game console kesayangannya.
