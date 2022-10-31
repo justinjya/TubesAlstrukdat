@@ -6,6 +6,20 @@
 #include "./ADT/mesinkata/mesinkata.h"
 // #include "./ADT/queue/queue.h"
 
+/* Membandingkan string1 dengan string2
+ * Mengeluarkan 1 bila string1 = string2
+ * Mengeluarkan 2 bila string1 != string2
+ */
+int compareString(char *string1, char *string2);
+
+/* Menggabungkan string1 dengan string2
+ * Hasil penggabungan menjadi string3
+ */
+void concat(char *string1, char *string2, char *string3);
+
+/* Mengubah type Word menjadi type char
+ */
+void wordToString(Word currentWord, char *string);
 
 /* Membaca file konfigurasi default yang berisi list game
  * yang akan dimainkan.
