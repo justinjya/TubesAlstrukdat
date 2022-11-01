@@ -5,7 +5,6 @@ int main()
     ArrayDin Games;
     ArrayDin Queue;
     ArrayDin History;
-    ArrayDin Test2;
     Games = MakeArrayDin();
     Queue = MakeArrayDin();
     History = MakeArrayDin();
