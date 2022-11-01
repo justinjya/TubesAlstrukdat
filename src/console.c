@@ -137,14 +137,11 @@ void SAVE(ArrayDin *Games, ArrayDin *History, char *inputfile)
     {
         fprintf(open, "%s\n", Games->A[i]);
     }
-
-    if (!IsEmpty(*History))
+    
+    fprintf(open, "%d\n", History->Neff);
+    for (int i = 0; i < History->Neff; i++)
     {
-        fprintf(open, "%d\n", History->Neff);
-        for (int i = 0; i < History->Neff; i++)
-        {
-            fprintf(open, "%s\n", History->A[i]);
-        }
+        fprintf(open, "%s\n", History->A[i]);
     }
     printf("Save file berhasil disimpan.\n");
     fclose(open);
