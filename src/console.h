@@ -10,7 +10,7 @@
  * Mengeluarkan 1 bila string1 = string2
  * Mengeluarkan 2 bila string1 != string2
  */
-int compareString(char *string1, char *string2);
+boolean compareString(char *string1, char *string2);
 
 /* Menggabungkan string1 dengan string2
  * Hasil penggabungan menjadi string3
