@@ -92,36 +92,44 @@ void LOADFILE(ArrayDin *Games, ArrayDin *History, char *inputfile)
     int amount;
     int arrayNumber = 0;
 
-    STARTWORD(directory);
-    while (currentChar != MARK)
+    START(directory);
+    if (pita == NULL)
     {
-        wordToString(currentWord, string);
-        amount = atoi(string);
-        ADVWORD();
-        for (int j = 0; j < amount; j++)
+        printf("File tidak dapat dibuka. Silahkan masukkan nama file lain.\n");
+    }
+    else
+    {
+        fclose(pita);
+        STARTWORD(directory);
+        while (currentChar != MARK)
         {
             wordToString(currentWord, string);
-            temp = (char *) malloc (currentWord.Length * sizeof(char));
-            i = 0;
-            while (i <= currentWord.Length)
-            {
-                temp[i] = string[i];
-                i++;
-            }
-            if (arrayNumber == 0)
-            {
-                InsertLast(Games, temp);
-            }
-            else
-            {
-                InsertLast(History, temp);
-            }
+            amount = atoi(string);
             ADVWORD();
+            for (int j = 0; j < amount; j++)
+            {
+                wordToString(currentWord, string);
+                temp = (char *) malloc (currentWord.Length * sizeof(char));
+                i = 0;
+                while (i <= currentWord.Length)
+                {
+                    temp[i] = string[i];
+                    i++;
+                }
+                if (arrayNumber == 0)
+                {
+                    InsertLast(Games, temp);
+                }
+                else
+                {
+                    InsertLast(History, temp);
+                }
+                ADVWORD();
+            }
+            arrayNumber++;
         }
-        arrayNumber++;
+        printf("File %s berhasil dibaca. BNMO berhasil dijalankan.\n", inputfile);
     }
-    printf("File %s berhasil dibaca. BNMO berhasil dijalankan.\n", inputfile);
-    // perlu buat kalau file gaada
 }
 
 void SAVE(ArrayDin *Games, ArrayDin *History, char *inputfile)
