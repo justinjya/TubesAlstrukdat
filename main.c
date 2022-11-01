@@ -13,27 +13,28 @@ int main()
     char *command;
 
     printf("Selamat datang pada BNMO\n");
+    printf("Jalankan command START atau LOAD <filename> untuk membuka file.\n");
     while (endProgram == false)
     {
         printf("\nENTER COMMAND: ");
         scanf("%s", command);
-        if (compareString(command, "START") == true)
+        if (IsEmpty(Games))
         {
-            STARTBNMO(&Games);
-        }
-        else if (compareString(command, "LOAD") == true)
-        {
-            char *inputfile;
-            inputfile = (char *) malloc (50 * sizeof(char));
-            scanf("%s", inputfile);
-            LOADFILE(&Games, &History, inputfile);
-        }
-        else if (compareString(command, "SAVE") == true)
-        {
-            char *inputfile;
-            inputfile = (char *) malloc (50 * sizeof(char));
-            scanf("%s", inputfile);
-            SAVE(&Games, &History, inputfile);
+            if (compareString(command, "START") == true)
+            {
+                STARTBNMO(&Games);
+            }
+            else if (compareString(command, "LOAD") == true)
+            {
+                char *inputfile;
+                inputfile = (char *) malloc (50 * sizeof(char));
+                scanf("%s", inputfile);
+                LOADFILE(&Games, &History, inputfile);
+            }
+            else
+            {
+                printf("Belum ada file yang dibuka. Silahkan buka file terlebih dahulu.\n");
+            }
         }
     }
 }
