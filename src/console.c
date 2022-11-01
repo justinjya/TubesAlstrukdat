@@ -1,17 +1,17 @@
 #include "console.h"
 
-int compareString(char *string1, char *string2)
+boolean compareString(char *string1, char *string2)
 {
     while (*string1 != '\0' && *string2 != '\0')
     {
         if (*string1 != *string2)
         {
-            return 0;
+            return false;
         }
         string1++;
         string2++;
     }
-    return 1;
+    return true;
 }
 
 void concat(char *string1, char *string2, char *string3)
@@ -120,6 +120,8 @@ void LOADFILE(ArrayDin *Games, ArrayDin *History, char *inputfile)
         }
         arrayNumber++;
     }
+    printf("File %s berhasil dibaca. BNMO berhasil dijalankan.\n", inputfile);
+    // perlu buat kalau file gaada
 }
 
 void SAVE(ArrayDin *Games, ArrayDin *History, char *inputfile)
@@ -137,12 +139,13 @@ void SAVE(ArrayDin *Games, ArrayDin *History, char *inputfile)
     {
         fprintf(open, "%s\n", Games->A[i]);
     }
-    
+
     fprintf(open, "%d\n", History->Neff);
     for (int i = 0; i < History->Neff; i++)
     {
         fprintf(open, "%s\n", History->A[i]);
     }
+    fprintf(open, ".");
     printf("Save file berhasil disimpan.\n");
     fclose(open);
 }
