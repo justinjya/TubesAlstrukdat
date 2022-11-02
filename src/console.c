@@ -56,25 +56,23 @@ void STARTBNMO(ArrayDin *Games)
     char *temp;
     int i;
     int amount;
+
     STARTWORD(directory);
-    while (currentChar != MARK)
+    wordToString(currentWord, string);
+    amount = atoi(string);
+    ADVWORD();
+    for (int j = 0; j < amount; j++)
     {
         wordToString(currentWord, string);
-        amount = atoi(string);
-        ADVWORD();
-        for (int j = 0; j < amount; j++)
+        temp = (char *) malloc (currentWord.Length * sizeof(char));
+        i = 0;
+        while (i <= currentWord.Length)
         {
-            wordToString(currentWord, string);
-            temp = (char *) malloc (currentWord.Length * sizeof(char));
-            i = 0;
-            while (i <= currentWord.Length)
-            {
-                temp[i] = string[i];
-                i++;
-            }
-            InsertLast(Games, temp);
-            ADVWORD();
+            temp[i] = string[i];
+            i++;
         }
+        InsertLast(Games, temp);
+        ADVWORD();
     }
     printf("File konfigurasi sistem berhasil dibaca. BNMO berhasil dijalankan.\n");
 }
@@ -101,7 +99,7 @@ void LOADFILE(ArrayDin *Games, ArrayDin *History, char *inputfile)
     {
         fclose(pita);
         STARTWORD(directory);
-        while (currentChar != MARK)
+        while (arrayNumber < 2)
         {
             wordToString(currentWord, string);
             amount = atoi(string);
@@ -153,7 +151,6 @@ void SAVE(ArrayDin *Games, ArrayDin *History, char *inputfile)
     {
         fprintf(open, "%s\n", History->A[i]);
     }
-    fprintf(open, ".");
     printf("Save file berhasil disimpan.\n");
     fclose(open);
 }
