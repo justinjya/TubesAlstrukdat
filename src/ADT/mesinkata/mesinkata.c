@@ -17,8 +17,8 @@ void STARTWORD(char *directory, int type)
 {
     if (type == 0)
     {
-        START(NULL);
-        IgnoreBlanks();
+        START(directory, type);
+        IgnoreBlanks(type);
         if (currentChar == '\n')
         {
             EndWord = true;
@@ -31,8 +31,8 @@ void STARTWORD(char *directory, int type)
     }
     else
     {
-        START(directory);
-        IgnoreBlanks();
+        START(directory, type);
+        IgnoreBlanks(type);
         if (currentChar == '\n' || currentChar == MARK)
         {
             EndWord = true;
@@ -49,7 +49,7 @@ void ADVWORD(int type)
 {
     if (type == 0)
     {
-        IgnoreBlanks();
+        IgnoreBlanks(type);
         if (currentChar == '\n')
         {
             EndWord = true;
@@ -57,12 +57,12 @@ void ADVWORD(int type)
         else
         {
             CopyWord(type);
-            IgnoreBlanks();
+            IgnoreBlanks(type);
         }
     }
     else
     {
-        ADV();
+        ADV(type);
         if (currentChar == '\n' || currentChar == MARK)
         {
             EndWord = true;
@@ -82,7 +82,7 @@ void CopyWord(int type)
         while ((currentChar != '\n') && (currentChar != BLANK))
         {
             currentWord.TabWord[i] = currentChar;
-            ADV();
+            ADV(type);
             i++;
         }
         currentWord.TabWord[i] = '\0';
@@ -102,7 +102,7 @@ void CopyWord(int type)
         while (currentChar != MARK && currentChar != '\n')
         {
             currentWord.TabWord[i] = currentChar;
-            ADV();
+            ADV(type);
             i++;
         }
         currentWord.TabWord[i] = '\n';
