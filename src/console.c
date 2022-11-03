@@ -146,4 +146,37 @@ void SAVE(ArrayDin *Games, char *inputfile)
     printf("Save file berhasil disimpan.\n");
 }
 
+void CREATEGAME (ArrayDin *arrayGames){
+    char *gamesname;
+    int i = 0;
+    boolean found = false;
+
+    /* Input game yang ingin ditambah */
+    printf("Masukkan nama game yang akan ditambahkan: "); scanf("%[^\n]", &gamesname);
+    
+    /* Proses pencarian nama games yang diinput apakah sudah terdaftar sebelumnya */
+    for (i; i < (*arrayGames).Neff; i++){
+        if ((*arrayGames).A[i] == gamesname){
+            found = true;
+        }
+    }
+    if (found) /* Kondisi ketika game belum terdaftar */{
+        InsertLast(arrayGames, gamesname);
+        printf("Game berhasil ditambahkan");
+    } else /* Kondisi ketika game seudah terdaftar */{
+        printf("Game sudah terdaftar");
+    }
+}
+
+#include <stdio.h>
+#include "arraydin.c"
+
+void LISTGAME (ArrayDin arrayGames){
+    int i = 0;
+    printf("Berikut adalah daftar game yang tersedia");
+    
+    for (i; i < arrayGames.Neff; i++){
+        printf("%d. %s\n", i + 1, arrayGames.A[i]);
+    }
+}
 
