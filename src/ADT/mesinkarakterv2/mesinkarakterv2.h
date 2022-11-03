@@ -6,7 +6,7 @@
 
 #include "C:\Users\Legion\OneDrive - Institut Teknologi Bandung\vscode\C\tubes\src\boolean.h"
 
-#define MARK '\n'
+#define MARK '.'
 /* State Mesin */
 extern char currentChar;
 extern boolean EOP;
