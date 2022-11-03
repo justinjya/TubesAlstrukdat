@@ -49,8 +49,8 @@ void CopyWord(int type);
           currentChar = BLANK atau currentChar = MARK;
           currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong"
-    type = 0 -> Untuk membaca karakter hingga newline, dipakai ketika menerima input stdin 
-    type = 1 -> Untuk membaca karakter hingga newline atau mark, dipakai ketika membaca pita dari file */
+    type = 0 -> Untuk membaca karakter hingga newline. Kata dipisah per BLANK. Dipakai ketika menerima input stdin 
+    type = 1 -> Untuk membaca karakter hingga newline atau mark. Kata dipisah per newline. Dipakai ketika membaca pita dari file */
 
 boolean isEndWord();
 
