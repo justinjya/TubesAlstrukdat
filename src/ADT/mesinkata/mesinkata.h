@@ -20,6 +20,9 @@ typedef struct
 extern boolean EndWord;
 extern Word currentWord;
 
+/* type = 0 -> Untuk membaca karakter hingga newline. Kata dipisah per BLANK. Dipakai ketika menerima input stdin 
+   type = 1 -> Untuk membaca karakter hingga newline atau mark. Kata dipisah per newline. Dipakai ketika membaca pita dari file */
+
 void IgnoreBlanks();
 /* Mengabaikan satu atau beberapa BLANK
    I.S. : currentChar sembarang
@@ -29,18 +32,14 @@ void STARTWORD(char *directory, int type);
 /* I.S. : currentChar sembarang
    F.S. : EndWord = true, dan currentChar = MARK;
           atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
-          currentChar karakter pertama sesudah karakter terakhir kata 
-    type = 0 -> Untuk membaca karakter hingga newline, dipakai ketika menerima input stdin 
-    type = 1 -> Untuk membaca karakter hingga newline atau mark, dipakai ketika membaca pita dari file */
+          currentChar karakter pertama sesudah karakter terakhir kata */
 
 void ADVWORD(int type);
 /* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi
    F.S. : currentWord adalah kata terakhir yang sudah diakuisisi,
           currentChar adalah karakter pertama dari kata berikutnya, mungkin MARK
           Jika currentChar = MARK, EndWord = true.
-   Proses : Akuisisi kata menggunakan procedure SalinWord
-   type = 0 -> Untuk membaca karakter hingga newline, dipakai ketika menerima input stdin 
-   type = 1 -> Untuk membaca karakter hingga newline atau mark, dipakai ketika membaca pita dari file */
+   Proses : Akuisisi kata menggunakan procedure SalinWord */
 
 void CopyWord(int type);
 /* Mengakuisisi kata, menyimpan dalam currentWord
@@ -48,9 +47,7 @@ void CopyWord(int type);
    F.S. : currentWord berisi kata yang sudah diakuisisi;
           currentChar = BLANK atau currentChar = MARK;
           currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
-          Jika panjang kata melebihi NMax, maka sisa kata "dipotong"
-    type = 0 -> Untuk membaca karakter hingga newline. Kata dipisah per BLANK. Dipakai ketika menerima input stdin 
-    type = 1 -> Untuk membaca karakter hingga newline atau mark. Kata dipisah per newline. Dipakai ketika membaca pita dari file */
+          Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
 
 boolean isEndWord();
 
