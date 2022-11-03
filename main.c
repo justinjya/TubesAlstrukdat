@@ -17,7 +17,7 @@ int main()
     while (endProgram == false)
     {
         printf("\nENTER COMMAND: ");
-        scanf("%s", command);
+        inputString(0, command);
         if (IsEmpty(Games))
         {
             if (compareString(command, "START") == true)
@@ -28,12 +28,24 @@ int main()
             {
                 char *inputfile;
                 inputfile = (char *) malloc (50 * sizeof(char));
-                scanf("%s", inputfile);
+                ADVWORD(0);
+                wordToString(currentWord, inputfile);
                 LOADFILE(&Games, &History, inputfile);
             }
             else
             {
                 printf("Belum ada file yang dibuka. Silahkan buka file terlebih dahulu.\n");
+            }
+        }
+        else
+        {
+            if (compareString(command, "SAVE") == true)
+            {
+                char *inputfile;
+                inputfile = (char *) malloc (50 * sizeof(char));
+                ADVWORD(0);
+                wordToString(currentWord, inputfile);
+                SAVE(&Games, inputfile);
             }
         }
     }
