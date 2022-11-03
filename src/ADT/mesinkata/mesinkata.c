@@ -5,11 +5,11 @@
 boolean EndWord;
 Word currentWord;
 
-void IgnoreBlanks()
+void IgnoreBlanks(int type)
 {
     while (currentChar == ' ')
     {
-        ADV(2);
+        ADV(type);
     }
 }
 
