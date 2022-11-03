@@ -45,44 +45,40 @@ void wordToString(Word currentWord, char *string)
     string[i] = '\0';
 }
 
-void STARTBNMO(ArrayDin *Games)
+int wordToInteger(Word currentWord)
 {
-    char placeholder[] = ".\\data\\";
-    char directory[50];
-
-    concat(placeholder, "config.txt", directory);
-
-    char string[50];
-    char *temp;
-    int i;
-    int amount;
-
-    STARTWORD(directory);
-    wordToString(currentWord, string);
-    amount = atoi(string);
-    ADVWORD();
-    for (int j = 0; j < amount; j++)
+    int value = 0;
+    int satuan = 1;
+    int i = currentWord.Length - 1;
+    while (i >= 0)
     {
-        wordToString(currentWord, string);
-        temp = (char *) malloc (currentWord.Length * sizeof(char));
-        i = 0;
-        while (i <= currentWord.Length)
-        {
-            temp[i] = string[i];
-            i++;
-        }
-        InsertLast(Games, temp);
-        ADVWORD();
+        value += (currentWord.TabWord[i] - 48) * satuan;
+        satuan *= 10;
+        i--;
     }
-    printf("File konfigurasi sistem berhasil dibaca. BNMO berhasil dijalankan.\n");
+    return value;
 }
 
-void LOADFILE(ArrayDin *Games, ArrayDin *History, char *inputfile)
+void inputString(int type, char* value)
+{
+    STARTWORD(NULL, type);
+    wordToString(currentWord, value);
+}
+
+void STARTBNMO(ArrayDin *Games)
+{
+    LOADFILE(Games, "config");
+}
+
+void LOADFILE(ArrayDin *Games, char *inputfile)
 {
     char placeholder[] = ".\\data\\";
     char directory[50];
-    
-    concat(placeholder, inputfile, directory);
+    char txt[] = ".txt";
+    char filename[25];
+
+    concat(inputfile, txt, filename);
+    concat(placeholder, filename, directory);
 
     char string[50];
     char *temp;
@@ -98,44 +94,43 @@ void LOADFILE(ArrayDin *Games, ArrayDin *History, char *inputfile)
     else
     {
         fclose(pita);
-        STARTWORD(directory);
-        while (arrayNumber < 2)
+        STARTWORD(directory, 1);
+        wordToString(currentWord, string);
+        amount = atoi(string);
+        ADVWORD(1);
+        for (int j = 0; j < amount; j++)
         {
             wordToString(currentWord, string);
-            amount = atoi(string);
-            ADVWORD();
-            for (int j = 0; j < amount; j++)
+            temp = (char *) malloc (currentWord.Length * sizeof(char));
+            i = 0;
+            while (i <= currentWord.Length)
             {
-                wordToString(currentWord, string);
-                temp = (char *) malloc (currentWord.Length * sizeof(char));
-                i = 0;
-                while (i <= currentWord.Length)
-                {
-                    temp[i] = string[i];
-                    i++;
-                }
-                if (arrayNumber == 0)
-                {
-                    InsertLast(Games, temp);
-                }
-                else
-                {
-                    InsertLast(History, temp);
-                }
-                ADVWORD();
+                temp[i] = string[i];
+                i++;
             }
-            arrayNumber++;
+            InsertLast(Games, temp);
+            ADVWORD(1);
         }
-        printf("File %s berhasil dibaca. BNMO berhasil dijalankan.\n", inputfile);
+        if (directory == "config.txt")
+        {
+            printf("File konfigurasi sistem berhasil dibaca. BNMO berhasil dijalankan.\n");
+        }
+        else
+        {
+            printf("File %s berhasil dibaca. BNMO berhasil dijalankan.\n", inputfile);
+        }   
     }
 }
 
-void SAVE(ArrayDin *Games, ArrayDin *History, char *inputfile)
+void SAVE(ArrayDin *Games, char *inputfile)
 {
     char placeholder[] = ".\\data\\";
     char directory[50];
+    char txt[] = ".txt";
+    char filename[25];
 
-    concat(placeholder, inputfile, directory);
+    concat(inputfile, txt, filename);
+    concat(placeholder, filename, directory);
 
     FILE *open;
     open = fopen(directory, "w");
@@ -146,11 +141,9 @@ void SAVE(ArrayDin *Games, ArrayDin *History, char *inputfile)
         fprintf(open, "%s\n", Games->A[i]);
     }
 
-    fprintf(open, "%d\n", History->Neff);
-    for (int i = 0; i < History->Neff; i++)
-    {
-        fprintf(open, "%s\n", History->A[i]);
-    }
-    printf("Save file berhasil disimpan.\n");
+    fprintf(open, ".");
     fclose(open);
+    printf("Save file berhasil disimpan.\n");
 }
+
+
