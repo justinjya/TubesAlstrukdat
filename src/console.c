@@ -177,3 +177,39 @@ void LISTGAME (ArrayDin arrayGames){
     }
 }
 
+void QUEUEGAME(ArrayDin Queue, ArrayDin Games){
+    printf("Berikut adalah daftar antrian game-mu\n");
+    // daftar antrian berjumlah >= 0
+    if (!IsEmpty(Queue)){
+        int i;
+        for(i=1;i<=Length(Queue);i++){
+            printf("%d. %s\n",i,Queue.A[i-1]);
+        }
+    }
+    printf("\n");
+    printf("Berikut adalah daftar game yang tersedia\n");
+    // dalam file konfigurasi default sudah terdapat minimal 3 game, sehingga pemeriksaan berupa isEmpty(Games) tidak perlu dilakukan
+    int i;
+    for (i=1;i<=Length(Games);i++){
+        printf("%d. %s\n",i,Games.A[i-1]);
+    }
+    printf("\n");
+    // baca input user
+    printf("Nomor game yang mau ditambahkan ke antrian: ");
+    //scanf("%d",&nomor_game);
+    STARTWORD(NULL,0);
+    if(!EndWord){
+        // validasi input
+        if(wordToInteger(currentWord)>=1 && wordToInteger(currentWord)<=Length(Games)){
+            InsertLast(&Queue, Games.A[wordToInteger(currentWord)-1]);
+            printf("Game berhasil ditambahkan ke dalam daftar antrian.\n");        
+        }
+        else{
+            printf("Nomor permainan tidak valid, silahkan masukkan nomor game pada list.\n");
+        }
+    }
+    else{
+        printf("Nomor permainan tidak valid, silahkan masukkan nomor game pada list.\n");
+    }
+    
+}
