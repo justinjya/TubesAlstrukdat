@@ -9,7 +9,7 @@ void IgnoreBlanks()
 {
     while (currentChar == ' ')
     {
-        ADV();
+        ADV(2);
     }
 }
 
