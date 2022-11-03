@@ -31,8 +31,8 @@ void wordToString(Word currentWord, char *string);
 int wordToInteger(Word currentWord);
 
 /* Menerima input stdin yang akan diubah menjadi string
- * type = 0 -> Menggunakan mesinkata type 0
- * type = 1 -> Menggunakan mesinkata type 1
+ * type = 0 -> Menggunakan mesinkata type 0 (Memisahkan setiap word dengan blank)
+ * type = 1 -> Menggunakan mesinkata type 1 (Memisahkan setiap word dengan newline)
  *
  * Contoh pemakaian:
  * char *string;
