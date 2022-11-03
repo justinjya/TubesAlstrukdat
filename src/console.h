@@ -18,8 +18,28 @@ boolean compareString(char *string1, char *string2);
 void concat(char *string1, char *string2, char *string3);
 
 /* Mengubah type Word menjadi type char
+ * Mengisi string dengan isi currentWord.TabWord
  */
 void wordToString(Word currentWord, char *string);
+
+/* Mengubah type Word menjadi type int
+ *
+ * Contoh pemakaian:
+ * int value;
+ * value = wordToString(currentWord)
+ */
+int wordToInteger(Word currentWord);
+
+/* Menerima input stdin yang akan diubah menjadi string
+ * type = 0 -> Menggunakan mesinkata type 0
+ * type = 1 -> Menggunakan mesinkata type 1
+ *
+ * Contoh pemakaian:
+ * char *string;
+ * string = (char *) malloc (n * sizeof(char));
+ * inputString(0, string);
+ */
+void inputString(int type, char* value);
 
 /* Membaca file konfigurasi default yang berisi list game
  * yang akan dimainkan.
@@ -29,12 +49,12 @@ void STARTBNMO(ArrayDin *Games);
 /* Membaca file konfigurasi dari input pemain yang berisi list
  * game yang dapat dimainkan, dan histori game.
  */
-void LOADFILE(ArrayDin *Games, ArrayDin *History, char *inputfile);
+void LOADFILE(ArrayDin *Games, char *inputfile);
 
 /* Menyimpan state game pemain saat ini ke dalam suatu file
  * yang merupakan input dari pemain.
  */
-void SAVE(ArrayDin *Games, ArrayDin *History, char *inputfile);
+void SAVE(ArrayDin *Games, char *inputfile);
 
 /* Menambahkan game baru pada daftar game.
  */
