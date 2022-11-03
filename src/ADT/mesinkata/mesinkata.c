@@ -49,7 +49,7 @@ void ADVWORD(int type)
 {
     if (type == 0)
     {
-        ADV();
+        IgnoreBlanks();
         if (currentChar == '\n')
         {
             EndWord = true;
@@ -85,7 +85,7 @@ void CopyWord(int type)
             ADV();
             i++;
         }
-        currentWord.TabWord[i] = '\n';
+        currentWord.TabWord[i] = '\0';
 
         if (i > NMax)
         {
