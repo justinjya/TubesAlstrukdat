@@ -168,9 +168,6 @@ void CREATEGAME (ArrayDin *arrayGames){
     }
 }
 
-#include <stdio.h>
-#include "arraydin.c"
-
 void LISTGAME (ArrayDin arrayGames){
     int i = 0;
     printf("Berikut adalah daftar game yang tersedia");
