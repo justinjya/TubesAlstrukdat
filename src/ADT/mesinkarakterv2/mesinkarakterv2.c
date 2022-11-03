@@ -19,13 +19,13 @@ void START(char *directory)
                  Jika currentChar = MARK maka EOP akan menyala (true) */
 
        /* Algoritma */
-       if (directory == NULL)
+       if (directory == NULL) // Untuk dipakai menerima input
        {
               pita = stdin;
        }
        else
        {
-              pita = fopen(directory, "r");
+              pita = fopen(directory, "r"); // Untuk dipakai membaca file
        }
        ADV();
 }
