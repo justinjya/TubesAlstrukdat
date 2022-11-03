@@ -40,8 +40,9 @@ void ADV(int type)
                        Jika  currentChar = MARK maka EOP akan menyala (true) */
 
        /* Algoritma */
-       retval = fscanf(pita, "%c", &currentChar);
+       
        if(type == 1){
+            retval = fscanf(pita, "%c", &currentChar);
             EOP = (currentChar == MARK);
             if (EOP)
             {
@@ -49,6 +50,7 @@ void ADV(int type)
             }
        }
        else if(type == 0){
+            retval = fscanf(pita, "%c", &currentChar);
             EOP = (currentChar == MARK2);
             if (EOP){
                 fclose(pita);
