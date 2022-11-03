@@ -10,7 +10,7 @@ boolean EOP;
 static FILE *pita;
 static int retval;
 
-void START(char *directory)
+void START(char *directory, int type)
 {
        /* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
           Karakter pertama yang ada pada pita posisinya adalah pada jendela.
@@ -27,10 +27,10 @@ void START(char *directory)
        {
               pita = fopen(directory, "r"); // Untuk dipakai membaca file
        }
-       ADV();
+       ADV(type);
 }
 
-void ADV()
+void ADV(int type)
 {
        /* Pita dimajukan satu karakter.
           I.S. : Karakter pada jendela =
@@ -41,9 +41,17 @@ void ADV()
 
        /* Algoritma */
        retval = fscanf(pita, "%c", &currentChar);
-       EOP = (currentChar == MARK);
-       if (EOP)
-       {
-              fclose(pita);
+       if(type == 1){
+            EOP = (currentChar == MARK);
+            if (EOP)
+            {
+                    fclose(pita);
+            }
+       }
+       else if(type == 0){
+            EOP = (currentChar == MARK2);
+            if (EOP){
+                fclose(pita);
+            }
        }
 }
