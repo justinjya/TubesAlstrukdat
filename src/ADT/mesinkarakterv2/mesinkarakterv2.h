@@ -5,7 +5,6 @@
 #define __MESIN_KAR_H_
 
 #include "C:\Users\Legion\OneDrive - Institut Teknologi Bandung\vscode\C\tubes\src\boolean.h"
-
 #define MARK '.'
 #define MARK2 '\n'
 /* State Mesin */
