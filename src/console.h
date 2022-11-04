@@ -5,7 +5,7 @@
 #include "./ADT/mesinkarakter/mesinkarakter.h"
 #include "./ADT/mesinkata/mesinkata.h"
 #include "ADT/arraydin/processedorder.h"
-#include "./ADT/queue/circular_queue_of_pesanan.h"
+#include "ADT/queue/circular_queue_of_pesanan.h"
 // #include "./ADT/queue/queue.h"
 
 /* Membandingkan string1 dengan string2
