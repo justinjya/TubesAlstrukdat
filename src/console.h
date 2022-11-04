@@ -43,9 +43,18 @@ int wordToInteger(Word currentWord);
  */
 void inputString(int type, char* value);
 
+/*
+*/
+char* food_id_generator(int id);
+
+/*
+*/
+int random_number(int lowerlimit, int upperlimit);
+
 /* Membaca file konfigurasi default yang berisi list game
  * yang akan dimainkan.
  */
+
 void STARTBNMO(ArrayDin *Games);
 
 /* Membaca file konfigurasi dari input pemain yang berisi list
