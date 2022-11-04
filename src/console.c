@@ -213,3 +213,316 @@ void QUEUEGAME(ArrayDin Queue, ArrayDin Games){
     }
     
 }
+
+void DINERDASH(){
+    int i;
+    int saldo = 0;
+    int served_customer = 0;
+    QueueOfPesanan pesanan;
+    processedorder oncook;
+    processedorder readytoserve;
+    pesanan = CreateQueueOfPesanan(10);
+    oncook = MakeProcessedOrder(5);
+    readytoserve = MakeProcessedOrder(InitialSize);
+    PushPesanan(&pesanan,CreatePesanan(food_id_generator(1),random_number(1,5),random_number(1,5),random_number(10000,50000)));
+    PushPesanan(&pesanan,CreatePesanan(food_id_generator(2),random_number(1,5),random_number(1,5),random_number(10000,50000)));
+    PushPesanan(&pesanan,CreatePesanan(food_id_generator(3),random_number(1,5),random_number(1,5),random_number(10000,50000)));
+    printf("Selamat datang di Diner Dash!\n\n");
+    printf("SALDO: %d\n\n",saldo);
+    printf("Daftar Pesanan\n");
+    printf("Makanan | Durasi Memasak | Ketahanan | Harga\n");
+    printf("----------------------------------------------\n");
+    i = pesanan.HEAD;
+    while(i!=(pesanan.TAIL+1)%pesanan.MaxEl){
+        if(strlen(pesanan.Tab[i].makanan)==2){
+            printf("%s      | %d              | %d         | %d\n",pesanan.Tab[i].makanan,pesanan.Tab[i].durasimasak,pesanan.Tab[i].ketahanan,pesanan.Tab[i].harga);
+        }
+        else{
+            printf("%s     | %d              | %d         | %d\n",pesanan.Tab[i].makanan,pesanan.Tab[i].durasimasak,pesanan.Tab[i].ketahanan,pesanan.Tab[i].harga);
+        }
+        i = (i+1)%pesanan.MaxEl;
+    }
+    printf("\n");
+    printf("Daftar Makanan yang sedang dimasak\n");
+    printf("Makanan | Sisa durasi memasak\n");
+    printf("--------------------------------\n");
+    if(!IsProcessedOrderEmpty(oncook)){
+        for(i=1;i<=LengthOfProcessedOrder(oncook);i++){
+            if(strlen(oncook.A[i-1].makanan) == 2){
+                printf("%s      | %d\n",oncook.A[i-1].makanan,oncook.A[i-1].sisa_durasi_or_ketahanan_masakan);
+            }
+            else{
+                printf("%s     | %d\n",oncook.A[i-1].makanan,oncook.A[i-1].sisa_durasi_or_ketahanan_masakan);
+            }
+        }
+        
+    }
+    else{
+        printf("        |  \n");
+    }
+    printf("\n");
+    printf("Daftar Makanan yang siap disajikan\n");
+    printf("Makanan | Sisa Ketahanan Makanan\n");
+    printf("-----------------------------------\n");
+    if(!IsProcessedOrderEmpty(readytoserve)){
+        for(i=1;i<=LengthOfProcessedOrder(readytoserve);i++){
+            if(strlen(readytoserve.A[i-1].makanan) == 2){
+                printf("%s      | %d\n",readytoserve.A[i-1].makanan,readytoserve.A[i-1].sisa_durasi_or_ketahanan_masakan);
+            }
+            else{
+                printf("%s     | %d\n",readytoserve.A[i-1].makanan,readytoserve.A[i-1].sisa_durasi_or_ketahanan_masakan);
+            }
+        }
+    }
+    else{
+        printf("        |  \n");
+    }
+    printf("\n\n");
+    boolean endGame = false;
+    char* command;
+    char* attribut;
+    attribut = (char*) malloc(99*sizeof(char));
+    command = (char*) malloc(99*sizeof(char));
+    printf("MASUKKAN COMMAND: ");
+    scanf("%s %s",command,attribut);
+    printf("\n");
+    while(!endGame){
+        if(compareString(command,"COOK")==1){
+            boolean found = false;
+            i = pesanan.HEAD;
+            while (i!=(pesanan.TAIL+1)%pesanan.MaxEl && found == false){
+                if(compareString(pesanan.Tab[i].makanan, attribut)==1){
+                    found = true;
+                }
+                i = (i+1)%pesanan.MaxEl;
+            }
+            
+            if(found){
+                if(LengthOfProcessedOrder(oncook)<GetProcessedOrderCapacity(oncook)){
+                    int idx = (i-1) % pesanan.MaxEl;
+                    
+                    printf("Berhasil memasak %s\n",attribut);
+                    PushPesanan(&pesanan,CreatePesanan(food_id_generator(LengthQueueOfPesanan(pesanan)+served_customer+1),random_number(1,5),random_number(1,5),random_number(10000,50000)));
+                    
+                    if (!IsProcessedOrderEmpty(oncook)){
+                        for(i=0;i<LengthOfProcessedOrder(oncook);i++){
+                            oncook.A[i].sisa_durasi_or_ketahanan_masakan-=1;
+                        }
+                    }
+                    if(!IsProcessedOrderEmpty(readytoserve)){
+                        for(i=0;i<LengthOfProcessedOrder(readytoserve);i++){
+                            readytoserve.A[i].sisa_durasi_or_ketahanan_masakan-=1;
+                            if(readytoserve.A[i].sisa_durasi_or_ketahanan_masakan == 0){
+                                DeleteProcessedOrderAt(&readytoserve, i);
+                            }
+                        }
+                    }
+                    for(i=0;i<LengthOfProcessedOrder(oncook);i++){
+                        if(oncook.A[i].sisa_durasi_or_ketahanan_masakan == 0){
+                            printf("Makanan %s telah selesai dimasak\n",oncook.A[i].makanan);
+                            int j = pesanan.HEAD;
+                            while(compareString(pesanan.Tab[j].makanan, oncook.A[i].makanan)!=1){
+                                j = (j+1) % pesanan.MaxEl;
+                            }
+                            InsertProcessedOrderLast(&readytoserve,MakeMasakan(pesanan.Tab[j].makanan, pesanan.Tab[j].ketahanan));
+                            DeleteProcessedOrderAt(&oncook, i);
+                        }
+                    }
+                    
+                    InsertProcessedOrderLast(&oncook, MakeMasakan(pesanan.Tab[idx].makanan,pesanan.Tab[idx].durasimasak));
+                    
+                    printf("========================================================\n\n");
+                    printf("SALDO: %d\n\n",saldo);
+                    printf("Daftar Pesanan\n");
+                    printf("Makanan | Durasi Memasak | Ketahanan | Harga\n");
+                    printf("----------------------------------------------\n");
+                    //pesanan tidak mungkin kosong
+                    i = pesanan.HEAD;
+                    while(i!=pesanan.TAIL){
+                        if(strlen(pesanan.Tab[i].makanan)==2){
+                            printf("%s      | %d              | %d         | %d\n",pesanan.Tab[i].makanan,pesanan.Tab[i].durasimasak,pesanan.Tab[i].ketahanan,pesanan.Tab[i].harga);
+                        }
+                        else{
+                            printf("%s     | %d              | %d         | %d\n",pesanan.Tab[i].makanan,pesanan.Tab[i].durasimasak,pesanan.Tab[i].ketahanan,pesanan.Tab[i].harga);
+                        }
+                        i = (i+1)%pesanan.MaxEl;
+                    }
+                    if(strlen(pesanan.Tab[i].makanan)==2){
+                        printf("%s      | %d              | %d         | %d\n",pesanan.Tab[i].makanan,pesanan.Tab[i].durasimasak,pesanan.Tab[i].ketahanan,pesanan.Tab[i].harga);
+                    }
+                    else{
+                        printf("%s     | %d              | %d         | %d\n",pesanan.Tab[i].makanan,pesanan.Tab[i].durasimasak,pesanan.Tab[i].ketahanan,pesanan.Tab[i].harga);
+                    }
+                    printf("\n");
+                    printf("Daftar Makanan yang sedang dimasak\n");
+                    printf("Makanan | Sisa durasi memasak\n");
+                    printf("--------------------------------\n");
+                    if(!IsProcessedOrderEmpty(oncook)){
+                        for(i=0;i<LengthOfProcessedOrder(oncook);i++){
+                            if(strlen(oncook.A[i].makanan) == 2){
+                                printf("%s      | %d\n",oncook.A[i].makanan,oncook.A[i].sisa_durasi_or_ketahanan_masakan);
+                            }
+                            else{
+                                printf("%s     | %d\n",oncook.A[i].makanan,oncook.A[i].sisa_durasi_or_ketahanan_masakan);
+                            }
+                        }
+                        
+                    }
+                    else{
+                        printf("        |  \n");
+                    }
+                    printf("\n");
+                    printf("Daftar Makanan yang siap disajikan\n");
+                    printf("Makanan | Sisa Ketahanan Makanan\n");
+                    printf("-----------------------------------\n");
+                    if(!IsProcessedOrderEmpty(readytoserve)){
+                        for(i=0;i<LengthOfProcessedOrder(readytoserve);i++){
+                            if(strlen(readytoserve.A[i].makanan) == 2){
+                                printf("%s      | %d\n",readytoserve.A[i].makanan,readytoserve.A[i].sisa_durasi_or_ketahanan_masakan);
+                            }
+                            else{
+                                printf("%s     | %d\n",readytoserve.A[i].makanan,readytoserve.A[i].sisa_durasi_or_ketahanan_masakan);
+                            }
+                        }
+                    }
+                    else{
+                        printf("        |  \n");
+                    }
+                    printf("\n\n");
+                }
+                else{
+                    printf("Maaf kapasitas maksimum memasak telah dicapai. Silakan tunggu hingga terdapat makanan yang selesai dimasak!\n\n");
+                }
+            }
+            else{
+                printf("Maaf pesanan yang ingin dimasak tidak ditemukan\n\n");
+            }
+        
+        }
+        else if(compareString(command,"SERVE") == 1){
+            if(compareString(attribut,pesanan.Tab[pesanan.HEAD].makanan) == 1){
+                boolean found = false;
+                i = 0;
+                while (i<readytoserve.Neff && found == false){
+                    if(compareString(readytoserve.A[i].makanan, attribut) == 1){
+                        found = true;
+                    }
+                    i++;
+                }
+                if (found){
+                    masakan m = MakeMasakan(pesanan.Tab[pesanan.HEAD].makanan,pesanan.Tab[pesanan.HEAD].ketahanan);
+                    saldo += pesanan.Tab[pesanan.HEAD].harga;
+                    PopPesanan(&pesanan);
+                    DeleteProcessedOrderAt(&readytoserve,SearchMasakan(readytoserve,m));
+                    served_customer+=1;
+                    printf("Berhasil mengantar %s\n",attribut);
+                    PushPesanan(&pesanan,CreatePesanan(food_id_generator(LengthQueueOfPesanan(pesanan)+served_customer+1),random_number(1,5),random_number(1,5),random_number(10000,50000)));
+                    if (!IsProcessedOrderEmpty(oncook)){
+                        for(i=0;i<LengthOfProcessedOrder(oncook);i++){
+                            oncook.A[i].sisa_durasi_or_ketahanan_masakan-=1;
+                        }
+                    }
+                    if(!IsProcessedOrderEmpty(readytoserve)){
+                        for(i=0;i<LengthOfProcessedOrder(readytoserve);i++){
+                            readytoserve.A[i].sisa_durasi_or_ketahanan_masakan-=1;
+                            if(readytoserve.A[i].sisa_durasi_or_ketahanan_masakan == 0){
+                                DeleteProcessedOrderAt(&readytoserve, i);
+                            }
+                        }
+                    }
+                    for(i=0;i<LengthOfProcessedOrder(oncook);i++){
+                        if(oncook.A[i].sisa_durasi_or_ketahanan_masakan == 0){
+                            printf("Makanan %s telah selesai dimasak\n",oncook.A[i].makanan);
+                            int j = pesanan.HEAD;
+                            while(compareString(pesanan.Tab[j].makanan, oncook.A[i].makanan)!=1){
+                                j = (j+1) % pesanan.MaxEl;
+                            }
+                            InsertProcessedOrderLast(&readytoserve,MakeMasakan(pesanan.Tab[j].makanan, pesanan.Tab[j].ketahanan));
+                            DeleteProcessedOrderAt(&oncook, i);
+                        }
+                    }
+                    
+                    printf("========================================================\n\n");
+                    printf("SALDO: %d\n\n",saldo);
+                    printf("Daftar Pesanan\n");
+                    printf("Makanan | Durasi Memasak | Ketahanan | Harga\n");
+                    printf("----------------------------------------------\n");
+                    // pesanan tidak mungkin kosong
+                    i = pesanan.HEAD;
+                    while(i!=pesanan.TAIL){
+                        if(strlen(pesanan.Tab[i].makanan)==2){
+                            printf("%s      | %d              | %d         | %d\n",pesanan.Tab[i].makanan,pesanan.Tab[i].durasimasak,pesanan.Tab[i].ketahanan,pesanan.Tab[i].harga);
+                        }
+                        else{
+                            printf("%s     | %d              | %d         | %d\n",pesanan.Tab[i].makanan,pesanan.Tab[i].durasimasak,pesanan.Tab[i].ketahanan,pesanan.Tab[i].harga);
+                        }
+                        i = (i+1)%pesanan.MaxEl;
+                    }
+                    if(strlen(pesanan.Tab[i].makanan)==2){
+                        printf("%s      | %d              | %d         | %d\n",pesanan.Tab[i].makanan,pesanan.Tab[i].durasimasak,pesanan.Tab[i].ketahanan,pesanan.Tab[i].harga);
+                    }
+                    else{
+                        printf("%s     | %d              | %d         | %d\n",pesanan.Tab[i].makanan,pesanan.Tab[i].durasimasak,pesanan.Tab[i].ketahanan,pesanan.Tab[i].harga);
+                    }
+                    printf("\n");
+                    printf("Daftar Makanan yang sedang dimasak\n");
+                    printf("Makanan | Sisa durasi memasak\n");
+                    printf("--------------------------------\n");
+                    if(!IsProcessedOrderEmpty(oncook)){
+                        for(i=0;i<LengthOfProcessedOrder(oncook);i++){
+                            if(strlen(oncook.A[i].makanan) == 2){
+                                printf("%s      | %d\n",oncook.A[i].makanan,oncook.A[i].sisa_durasi_or_ketahanan_masakan);
+                            }
+                            else{
+                                printf("%s     | %d\n",oncook.A[i].makanan,oncook.A[i].sisa_durasi_or_ketahanan_masakan);
+                            }
+                        }
+                        
+                    }
+                    else{
+                        printf("        |  \n");
+                    }
+                    printf("\n");
+                    printf("Daftar Makanan yang siap disajikan\n");
+                    printf("Makanan | Sisa Ketahanan Makanan\n");
+                    printf("-----------------------------------\n");
+                    if(!IsProcessedOrderEmpty(readytoserve)){
+                        for(i=0;i<LengthOfProcessedOrder(readytoserve);i++){
+                            if(strlen(readytoserve.A[i].makanan) == 2){
+                                printf("%s      | %d\n",readytoserve.A[i].makanan,readytoserve.A[i].sisa_durasi_or_ketahanan_masakan);
+                            }
+                            else{
+                                printf("%s     | %d\n",readytoserve.A[i].makanan,readytoserve.A[i].sisa_durasi_or_ketahanan_masakan);
+                            }
+                        }
+                    }
+                    else{
+                        printf("        |  \n");
+                    }
+                    printf("\n\n");
+                }
+                else{
+                    printf("Maaf pesanan yang ingin disajikan tidak ditemukan\n\n");
+                }
+
+            }
+            else{
+                printf("%s belum dapat disajikan karena %s belum selesai\n\n",attribut,pesanan.Tab[pesanan.HEAD].makanan);
+            }
+        }
+
+        if(LengthQueueOfPesanan(pesanan)>7 || served_customer == 15){
+            endGame = true;
+        }
+        else{
+            free(command);
+            free(attribut);
+            attribut = (char*) malloc(99*sizeof(char));
+            command = (char*) malloc(99*sizeof(char));
+            printf("MASUKKAN COMMAND: ");
+            scanf("%s %s",command,attribut);
+            printf("\n");
+        }
+    }
+    printf("Skor akhir: %d\n",saldo);
+}
