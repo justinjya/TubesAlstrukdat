@@ -206,36 +206,37 @@ void LISTGAME (ArrayDin arrayGames){
     }
 }
 
-void QUEUEGAME(ArrayDin Queue, ArrayDin Games){
+void QUEUEGAME(QueueOfString Queue, ArrayDin Games){
+    int i, no;
     printf("Berikut adalah daftar antrian game-mu\n");
     // daftar antrian berjumlah >= 0
-    if (!IsEmpty(Queue)){
-        int i;
-        for(i=1;i<=Length(Queue);i++){
-            printf("%d. %s\n",i,Queue.A[i-1]);
+    if (!IsQueueOfStringEmpty(Queue)){
+        i = Queue.HEAD;
+        no = 1;
+        while (i != Queue.TAIL)
+        {
+            printf("%d. %s\n",no,Queue.Tab[i]);
+            i = (i+1) % Queue.MaxEl;
+            no++;
         }
+        printf("%d. %s\n",no,Queue.Tab[i]);
     }
     printf("\n");
     printf("Berikut adalah daftar game yang tersedia\n");
-    // dalam file konfigurasi default sudah terdapat minimal 3 game, sehingga pemeriksaan berupa isEmpty(Games) tidak perlu dilakukan
+    // dalam file konfigurasi default sudah terdapat minimal 3 game, sehingga pemeriksaan berupa apakah Games kosong tidak perlu dilakukan
     int i;
     for (i=1;i<=Length(Games);i++){
         printf("%d. %s\n",i,Games.A[i-1]);
     }
     printf("\n");
     // baca input user
+    int nomor_game;
     printf("Nomor game yang mau ditambahkan ke antrian: ");
-    //scanf("%d",&nomor_game);
-    STARTWORD(NULL,0);
-    if(!EndWord){
-        // validasi input
-        if(wordToInteger(currentWord)>=1 && wordToInteger(currentWord)<=Length(Games)){
-            InsertLast(&Queue, Games.A[wordToInteger(currentWord)-1]);
-            printf("Game berhasil ditambahkan ke dalam daftar antrian.\n");        
-        }
-        else{
-            printf("Nomor permainan tidak valid, silahkan masukkan nomor game pada list.\n");
-        }
+    scanf("%d",&nomor_game);
+    // validasi input
+    if(nomor_game>=1 && nomor_game<=Length(Games)){
+        PushString(&Queue,Games.A[nomor_game-1]);
+        printf("Game berhasil ditambahkan ke dalam daftar antrian.\n");        
     }
     else{
         printf("Nomor permainan tidak valid, silahkan masukkan nomor game pada list.\n");
