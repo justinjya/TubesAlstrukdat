@@ -1,4 +1,5 @@
 #include "console.h"
+#include <time.h>
 
 boolean compareString(char *string1, char *string2)
 {
