@@ -206,6 +206,24 @@ void LISTGAME (ArrayDin arrayGames){
     }
 }
 
+void DELETEGAME (ArrayDin *arrayGames){
+	int a, i;
+	
+	LISTGAME(*arrayGames);
+	printf("Masukkan nomor game yang akan dihapus: ");
+	scanf("%d", &a);
+	
+	if ((a>=1) && (a<=5)){
+		printf("Game gagal dihapus \n");
+	}
+	else if (a>5){
+		i = a-1;
+		DeleteAt(arrayGames, i);
+		printf("Game berhasil dihapus \n");
+		}
+		
+	}
+
 void QUEUEGAME(QueueOfString Queue, ArrayDin Games){
     int i, no;
     printf("Berikut adalah daftar antrian game-mu\n");
@@ -242,6 +260,44 @@ void QUEUEGAME(QueueOfString Queue, ArrayDin Games){
         printf("Nomor permainan tidak valid, silahkan masukkan nomor game pada list.\n");
     }
     
+}
+
+
+void RNG(){
+	
+	int jumlah, angka, tebak, skor;
+    srand(time(NULL));
+    angka = rand()% 100 + 1;
+    jumlah = 0;
+    
+    /* printf("%d", angka); */
+
+
+    printf("RNG Telah dimulai. Uji keberuntungan Anda dengan menebak X.\n");
+    printf("Tebakan: ");
+    scanf("%d", &tebak);
+
+    if (tebak == angka){
+        printf("Ya, X adalah %d", angka);
+    
+    } else if (tebak != angka){
+        while (tebak != angka){
+            jumlah += 1;
+            if (tebak > angka){
+                printf("Lebih kecil\n");
+            } else if (tebak < angka){
+                printf("Lebih besar\n");
+            }
+            printf("Tebakan: ");
+            scanf("%d", &tebak);
+        }
+        if (tebak == angka){
+            printf("Ya, X adalah %d \n", angka);
+    }
+    
+} skor = (25-jumlah)*4;
+    printf("Skor = %d", skor); 
+
 }
 
 void DINERDASH(){
