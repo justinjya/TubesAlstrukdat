@@ -265,45 +265,7 @@ void QUEUEGAME(QueueOfString Queue, ArrayDin Games){
 }
 
 
-void PLAYGAME(Queue *queuegame, char *gameplaying)
-{
-    printf("Berikut adalah daftar Game-mu\n");
-    
-    if (IsEmpty(*queuegame))
-    {
-        printf("Belum ada antrian game yang kamu miliki\n");
-    }
-    
-    else
-    {
-        int i;
-        for(i = idxHead; i <= idxTail; i++)
-        {
-            printf("%d. %s\n",i,Games.A[i-1]);
-            if ((Games.A[i] != idxHead) & (Games.A[i] > Games.A[4]))
-            {
-                printf("Loading %s ...", queuegame->buffer[queuegame->idxHead]);
-            }
 
-            else if (Games.A[i] = "RNG")
-            {
-                RNG();
-            }
-
-            else if (Games.A[i] = "DINNER DASH")
-            {
-                DINNERDASH();
-            }
-
-            else
-            {
-                printf("Game %s masih dalam maintenance, belum dapat dimainkan. SIlahkan pilih game lain.", queuegame->buffer[queuegame->idx_head]);
-            }
-
-            dequeue(queuegame, &gameplaying);
-        }
-    }
-}
 
 
 void RNG(){
