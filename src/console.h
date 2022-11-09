@@ -93,11 +93,11 @@ void QUEUEGAME();
  * sistem. Jika suatu permainan tidak dapat dimainkan akan menampilkan
  * pesan bahwa game tidak dapat dimainkan.
  */
-void PLAYGAME();
+void PLAYGAME(Queue *queuegame, char *gameplaying);
 
 /* Melewatkan permainan sebanyak n kali.
  */
-void SKIPGAME();
+void SKIPGAME(Queue *queuegame, char *gameplaying);
 
 /* Keluar dari program.
  */
