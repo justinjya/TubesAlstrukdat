@@ -4,21 +4,13 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 
-#include "C:\Users\Legion\OneDrive - Institut Teknologi Bandung\vscode\C\boolean.h"
+#include "../../boolean.h"
 
 #define IDX_UNDEF -1
 #define CAPACITY 100
 
 /* Definisi elemen dan address */
-typedef int ElType;
-// typedef struct
-// {
-//     char *M;
-//     int ID;
-//     int Durasi;
-//     int Ketahanan;
-//     int Harga;
-// } InfoType;
+typedef char* ElType;
 typedef struct
 {
     ElType buffer[CAPACITY];
