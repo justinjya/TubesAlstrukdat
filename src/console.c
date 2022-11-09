@@ -276,6 +276,7 @@ void PLAYGAME(Queue *queuegame, char *gameplaying)
     
     else
     {
+        int i;
         for(i = idxHead; i <= idxTail; i++)
         {
             printf("%d. %s\n",i,Games.A[i-1]);
@@ -296,7 +297,7 @@ void PLAYGAME(Queue *queuegame, char *gameplaying)
 
             else
             {
-                printf("Game %s masih dalam maintenance, belum dapat dimainkan. SIlahkan pilih game lain.", queuegame->buffer[queuegame->idxHead]);
+                printf("Game %s masih dalam maintenance, belum dapat dimainkan. SIlahkan pilih game lain.", queuegame->buffer[queuegame->idx_head]);
             }
 
             dequeue(queuegame, &gameplaying);
