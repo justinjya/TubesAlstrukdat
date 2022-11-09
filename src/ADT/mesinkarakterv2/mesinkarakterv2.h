@@ -4,14 +4,14 @@
 #ifndef __MESIN_KAR_H_
 #define __MESIN_KAR_H_
 
-#include "C:\Users\Legion\OneDrive - Institut Teknologi Bandung\vscode\C\tubes\src\boolean.h"
+#include "../../boolean.h"
+
 #define MARK '.'
-#define MARK2 '\n'
 /* State Mesin */
 extern char currentChar;
 extern boolean EOP;
 
-void START(char *directory, int type);
+void START(char *directory);
 /* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
    Karakter pertama yang ada pada pita posisinya adalah pada jendela.
    I.S. : sembarang
@@ -19,7 +19,7 @@ void START(char *directory, int type);
           Jika currentChar != MARK maka EOP akan padam (false)
           Jika currentChar = MARK maka EOP akan menyala (true) */
 
-void ADV(int type);
+void ADV();
 /* Pita dimajukan satu karakter.
    I.S. : Karakter pada jendela = currentChar, currentChar != MARK
    F.S. : currentChar adalah karakter berikutnya dari currentChar yang lama,
