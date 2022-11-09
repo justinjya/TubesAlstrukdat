@@ -1,4 +1,4 @@
-#include ".\src\console.h"
+#include ".\src\console.c"
 
 int main()
 {
@@ -14,6 +14,7 @@ int main()
 
     printf("Selamat datang pada BNMO\n");
     printf("Jalankan command START atau LOAD <filename> untuk membuka file.\n");
+    printf("Jalankan command QUIT untuk keluar dari program.\n");
     while (endProgram == false)
     {
         printf("\nENTER COMMAND: ");
@@ -33,10 +34,16 @@ int main()
                 wordToString(currentWord, inputfile);
                 LOADFILE(&Games, inputfile);
             }
+            else if (compareString(command, "QUIT") == true)
+            {
+                QUIT(&Games, &GamesQueue);
+                endProgram = true;
+            }
             else
             {
                 printf("Belum ada file yang dibuka. Silahkan buka file terlebih dahulu.\n");
                 printf("Jalankan command START atau LOAD <filename> untuk membuka file.\n");
+                printf("Jalankan command QUIT untuk keluar dari program.\n");
             }
         }
         else
