@@ -1,13 +1,15 @@
-#ifndef __CONSOLE__
-#define __CONSOLE__
+#ifndef __CONSOLE_H__
+#define __CONSOLE_H__
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 #include "./ADT/arraydin/arraydin.h"
-#include "./ADT/mesinkarakter/mesinkarakter.h"
+#include "./ADT/mesinkarakterv2/mesinkarakterv2.h"
 #include "./ADT/mesinkata/mesinkata.h"
-#include "ADT/arraydin/processedorder.h"
-#include "ADT/queue/circular_queue_of_pesanan.h"
-#include "ADT/queue/queue_of_string.h"
-// #include "./ADT/queue/queue.h"
+#include "./ADT/queue/queue.h"
+// #include "./ADT/arraydin/processedorder.h"
+// #include "./ADT/queue/circular_queue_of_pesanan.h"
 
 /* Membandingkan string1 dengan string2
  * Mengeluarkan 1 bila string1 = string2
@@ -33,7 +35,7 @@ void wordToString(Word currentWord, char *string);
  */
 int wordToInteger(Word currentWord);
 
-/* Menerima input stdin yang akan diubah menjadi string
+/* Menerima input stdin yang kemudian diubah menjadi string
  * type = 0 -> Menggunakan mesinkata type 0 (Memisahkan setiap word dengan blank)
  * type = 1 -> Menggunakan mesinkata type 1 (Memisahkan setiap word dengan newline)
  *
@@ -43,6 +45,14 @@ int wordToInteger(Word currentWord);
  * inputString(0, string);
  */
 void inputString(int type, char* value);
+
+/* Menerima input stdin yang kemudian diubah menjadi integer
+ *
+ * Contoh pemakaian:
+ * int value;
+ * inputInteger(&value);
+ */
+void inputInteger(int *value);
 
 /*
 */
@@ -55,7 +65,6 @@ int random_number(int lowerlimit, int upperlimit);
 /* Membaca file konfigurasi default yang berisi list game
  * yang akan dimainkan.
  */
-
 void STARTBNMO(ArrayDin *Games);
 
 /* Membaca file konfigurasi dari input pemain yang berisi list
@@ -70,11 +79,11 @@ void SAVE(ArrayDin *Games, char *inputfile);
 
 /* Menambahkan game baru pada daftar game.
  */
-void CREATEGAME();
+void CREATEGAME(ArrayDin *arrayGames);
 
 /* Menampilkan daftar game yang disediakan oleh sistem
  */
-void LISTGAME();
+void LISTGAME(ArrayDin *arrayGames);
 
 /* Menghapus sebuah game dari daftar game. Aturan penghapusan :
  * - Game yang dapat dihapus hanya game yang dibuat secara
@@ -82,22 +91,22 @@ void LISTGAME();
  * - 5 game pertama pada file konfigurasi tidak dapat dihapus.
  * - Game yang saat itu terdapat di dalam queue game tidak dapat dihapus.
  */
-void DELETEGAME();
+void DELETEGAME(ArrayDin *arrayGames);
 
 /* Mendaftarkan permainan kedalam list. List queue akan hilang ketika
  * pemain menjalankan command QUIT.
  */
-void QUEUEGAME();
+void QUEUEGAME(ArrayDin *Games, Queue *Queue);
 
 /* Memainkan sebuah permainan sesuai permainan yang tersedia oleh
  * sistem. Jika suatu permainan tidak dapat dimainkan akan menampilkan
  * pesan bahwa game tidak dapat dimainkan.
  */
-void PLAYGAME(Queue *queuegame, char *gameplaying);
+void PLAYGAME(ArrayDin *arraygame, Queue *queuegame);
 
 /* Melewatkan permainan sebanyak n kali.
  */
-void SKIPGAME(Queue *queuegame, char *gameplaying);
+void SKIPGAME(ArrayDin *arraygame, Queue *queuegame, int skips);
 
 /* Keluar dari program.
  */
