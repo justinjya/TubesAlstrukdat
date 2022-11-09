@@ -1,15 +1,14 @@
 #include <stdio.h>
 #include "mesinkata.h"
-#include "C:\Users\Legion\OneDrive - Institut Teknologi Bandung\vscode\C\tubes\src\ADT\mesinkarakterv2\mesinkarakterv2.h"
 
 boolean EndWord;
 Word currentWord;
 
-void IgnoreBlanks(int type)
+void IgnoreBlanks()
 {
     while (currentChar == ' ')
     {
-        ADV(type);
+        ADV();
     }
 }
 
@@ -17,8 +16,8 @@ void STARTWORD(char *directory, int type)
 {
     if (type == 0)
     {
-        START(directory, type);
-        IgnoreBlanks(type);
+        START(NULL);
+        IgnoreBlanks();
         if (currentChar == '\n')
         {
             EndWord = true;
@@ -31,8 +30,8 @@ void STARTWORD(char *directory, int type)
     }
     else
     {
-        START(directory, type);
-        IgnoreBlanks(type);
+        START(directory);
+        IgnoreBlanks();
         if (currentChar == '\n' || currentChar == MARK)
         {
             EndWord = true;
@@ -49,7 +48,7 @@ void ADVWORD(int type)
 {
     if (type == 0)
     {
-        IgnoreBlanks(type);
+        ADV();
         if (currentChar == '\n')
         {
             EndWord = true;
@@ -57,12 +56,12 @@ void ADVWORD(int type)
         else
         {
             CopyWord(type);
-            IgnoreBlanks(type);
+            IgnoreBlanks();
         }
     }
     else
     {
-        ADV(type);
+        ADV();
         if (currentChar == '\n' || currentChar == MARK)
         {
             EndWord = true;
@@ -82,10 +81,10 @@ void CopyWord(int type)
         while ((currentChar != '\n') && (currentChar != BLANK))
         {
             currentWord.TabWord[i] = currentChar;
-            ADV(type);
+            ADV();
             i++;
         }
-        currentWord.TabWord[i] = '\0';
+        currentWord.TabWord[i] = '\n';
 
         if (i > NMax)
         {
@@ -102,7 +101,7 @@ void CopyWord(int type)
         while (currentChar != MARK && currentChar != '\n')
         {
             currentWord.TabWord[i] = currentChar;
-            ADV(type);
+            ADV();
             i++;
         }
         currentWord.TabWord[i] = '\n';
