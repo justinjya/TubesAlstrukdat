@@ -192,9 +192,11 @@ void LISTGAME(ArrayDin *arrayGames){
     }
 }
 
-void DELETEGAME(ArrayDin *arrayGames){
+void DELETEGAME(ArrayDin *arrayGames, Queue *queueGames){
 	char *input;
     int i, a;
+    boolean found;
+    found = false;
 	input = (char *) malloc (5 * sizeof(char));
 
 	LISTGAME(arrayGames);
@@ -206,8 +208,18 @@ void DELETEGAME(ArrayDin *arrayGames){
 	}
 	else if (a>5){
 		i = a-1;
-		DeleteAt(arrayGames, i);
-		printf("Game berhasil dihapus.\n");
+        for (int j = 0; j <= IDX_TAIL(*queueGames); j++) {
+            if (arrayGames->A[i] == queueGames->buffer[j]) {
+                found = true;
+            }
+        }
+        if (found == false) {
+            DeleteAt(arrayGames, i);
+            printf("Game berhasil dihapus.\n");
+        }
+        else {
+            printf("Game gagal dihapus.\n");
+        }
 	}
 }
 
@@ -296,25 +308,35 @@ void PLAYGAME(ArrayDin *arraygame, Queue *queuegame)
 void SKIPGAME(ArrayDin *arraygames, Queue *queuegame, int skips)
 {
     printf("Berikut adalah daftar game-mu:\n");
-    for (IdxType i = IDX_HEAD(*queuegame); i <= IDX_TAIL(*queuegame); i++)
+    if (!isEmpty(*queuegame))
     {
-        printf("%d. %s\n", i + 1, queuegame->buffer[i]);
+        for (IdxType i = IDX_HEAD(*queuegame); i <= IDX_TAIL(*queuegame); i++)
+        {
+            printf("%d. %s\n", i + 1, queuegame->buffer[i]);
+        }
     }
-
-    ElType val;
-    for (IdxType i = 0; i < skips; i++)
-    {
-        dequeue(queuegame, &val);
-    }
-
-    if (isEmpty(*queuegame))
+    else
     {
         printf("\nTidak ada permainan lagi dalam daftar game-mu.\n");
     }
 
-    else
+    if (!isEmpty(*queuegame))
     {
-        PLAYGAME(arraygames, queuegame);
+        ElType val;
+        for (IdxType i = 0; i < skips; i++)
+        {
+            dequeue(queuegame, &val);
+        }
+
+        if (!isEmpty(*queuegame))
+        {
+            printf("\n");
+            PLAYGAME(arraygames, queuegame);
+        }
+        else
+        {
+            printf("\nTidak ada permainan lagi dalam daftar game-mu.\n");
+        }
     }
 }
 
@@ -326,7 +348,7 @@ void QUIT(ArrayDin *Games, Queue *GamesQueue)
     {
         dequeue(GamesQueue, &val);
     }
-    printf("Anda keluar dari game BNMO.\nBye bye ...\n");
+    printf("Anda keluar dari game BNMO.\nBye bye ...\n\n");
 }
 
 void HELP(int type)
