@@ -325,7 +325,10 @@ void SKIPGAME(ArrayDin *arraygames, Queue *queuegame, int skips)
         ElType val;
         for (IdxType i = 0; i < skips; i++)
         {
-            dequeue(queuegame, &val);
+            if (!isEmpty(*queuegame))
+            {
+                dequeue(queuegame, &val);
+            }
         }
 
         if (!isEmpty(*queuegame))
