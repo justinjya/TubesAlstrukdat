@@ -16,7 +16,7 @@ void STARTWORD(char *directory, int type)
 {
     if (type == 0)
     {
-        START(NULL);
+        START(directory);
         IgnoreBlanks();
         if (currentChar == '\n')
         {
@@ -48,7 +48,7 @@ void ADVWORD(int type)
 {
     if (type == 0)
     {
-        ADV();
+        IgnoreBlanks();
         if (currentChar == '\n')
         {
             EndWord = true;
