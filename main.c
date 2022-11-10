@@ -12,7 +12,7 @@ int main()
     char *command;
     command = (char *) malloc (50 * sizeof(char));
 
-    printf("Selamat datang pada BNMO\n");
+    printf("Selamat datang pada BNMO!\n\n");
     printf("Jalankan command START atau LOAD <filename> untuk membuka file.\n");
     printf("Jalankan command QUIT untuk keluar dari program.\n");
     while (endProgram == false)
@@ -38,6 +38,10 @@ int main()
             {
                 QUIT(&Games, &GamesQueue);
                 endProgram = true;
+            }
+            else if (compareString(command, "HELP") == true)
+            {
+                HELP(0);
             }
             else
             {
@@ -90,7 +94,7 @@ int main()
             }
             else if (compareString(command, "HELP") == true)
             {
-                HELP();
+                HELP(1);
             }
             else
             {
