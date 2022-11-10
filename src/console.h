@@ -56,11 +56,8 @@ void inputInteger(int *value);
 
 /*
 */
-char* food_id_generator(int id);
 
-/*
-*/
-int random_number(int lowerlimit, int upperlimit);
+
 
 /* Membaca file konfigurasi default yang berisi list game
  * yang akan dimainkan.
@@ -130,6 +127,40 @@ void DINERDASH();
  * akan langsung selesai dan masuk ke tahap game over dengan skor akhir
  * berupa integer random.
  */
+int random_number(int lowerlimit, int upperlimit);
+/*
+  Menerima input berupa dua buah integer, yaitu batas bawah dan batas atas dari angka yang ingin dikembalikan. Mengembalikan integer yang berada di batas bawah dan batas atas
+*/
+char* food_id_generator(int id);
+/*
+  Menerima input berupa id bertipe integer serta mengembalikan Food ID bertipe char* dengan format "M(id)"
+*/
+
+char* getCurrentWord(Word string);
+/*
+  Menerima input berupa sebuah Word dan mengembalikan pointer to char dari Word.TabWord sesuai dengan Word.Length
+*/
+
+void PrintUIPesanan(QueueOfPesanan pesanan);
+/*Menampikan daftar pesanan di Diner Dash
+  Menerima input berupa sebuah QueueOfPesanan
+*/
+
+void PrintUIOnCook(processedorder oncook);
+/*Menampilkan daftar pesanan yang sedang dimasak di Diner Dash
+  Menerima input berupa sebuah processedorder
+*/
+
+void PrintUIReadyToServe(processedorder readytoserve);
+/*Menampilkan daftar pesanan yang siap untuk disajikan di Diner Dash
+  Menerima input berupa processedorder
+*/
+
+int stringlen(char* string);
+/*Mengembalikan panjang dari sebuah string
+ Menerima input berupa pointer to char 
+*/
+
 void GAMEBUATAN();
 
 #endif
