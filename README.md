@@ -17,3 +17,4 @@ BNMO (dibaca: Binomo) adalah robot game console yang dapat menjalankan permainan
 
 ### Cara Kompilasi Program :
 
+![image](https://user-images.githubusercontent.com/103380665/201135749-ad1c501b-7060-4d30-8748-618b542d5178.png)
