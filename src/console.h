@@ -8,8 +8,8 @@
 #include "./ADT/mesinkarakterv2/mesinkarakterv2.h"
 #include "./ADT/mesinkata/mesinkata.h"
 #include "./ADT/queue/queue.h"
-// #include "./ADT/arraydin/processedorder.h"
-// #include "./ADT/queue/circular_queue_of_pesanan.h"
+// #include "./ADT/dinerdash/processedorder.h"
+// #include "./ADT/dinerdash/circular_queue_of_pesanan.h"
 
 /* Membandingkan string1 dengan string2
  * Mengeluarkan 1 bila string1 = string2
