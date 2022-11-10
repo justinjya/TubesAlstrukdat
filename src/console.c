@@ -385,6 +385,7 @@ void RNG(){
     nyerah = false;
 
     printf("RNG Telah dimulai. Uji keberuntungan Anda dengan menebak X.\n");
+    printf("Masukkan 0 jika ingin menyerah.\n");
     printf("Tebakan: ");
     inputInteger(&tebak);
 
