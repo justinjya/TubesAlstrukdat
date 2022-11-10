@@ -1,4 +1,4 @@
-#include ".\src\console.c"
+#include ".\src\console.h"
 
 int main()
 {
@@ -13,7 +13,7 @@ int main()
     command = (char *) malloc (50 * sizeof(char));
 
     printf("Selamat datang pada BNMO!\n\n");
-    printf("Jalankan command START atau LOAD <filename> untuk membuka file.\n");
+    printf("Jalankan command START atau LOAD <filename tanpa .txt> untuk membuka file.\n");
     printf("Jalankan command QUIT untuk keluar dari program.\n");
     while (endProgram == false)
     {
@@ -60,29 +60,68 @@ int main()
                 wordToString(currentWord, inputfile);
                 SAVE(&Games, inputfile);
             }
-            else if (compareString(command, "CREATEGAME") == true)
+            else if (compareString(command, "CREATE") == true)
             {
-                CREATEGAME(&Games);
+                char *game;
+                game = (char *) malloc (10 * sizeof(char));
+                ADVWORD(0);
+                wordToString(currentWord, game);
+                if (compareString(game, "GAME") == true)
+                {
+                    CREATEGAME(&Games);
+                }
             }
-            else if (compareString(command, "LISTGAME") == true)
+            else if (compareString(command, "LIST") == true)
             {
-                LISTGAME(&Games);
+                char *game;
+                game = (char *) malloc (10 * sizeof(char));
+                ADVWORD(0);
+                wordToString(currentWord, game);
+                if (compareString(game, "GAME") == true)
+                {
+                    LISTGAME(&Games);
+                }
             }
-            else if (compareString(command, "DELETEGAME") == true)
+            else if (compareString(command, "DELETE") == true)
             {
-                DELETEGAME(&Games);
+                char *game;
+                game = (char *) malloc (10 * sizeof(char));
+                ADVWORD(0);
+                wordToString(currentWord, game);
+                if (compareString(game, "GAME") == true)
+                {
+                    DELETEGAME(&Games);
+                }
             }
-            else if (compareString(command, "QUEUEGAME") == true)
+            else if (compareString(command, "QUEUE") == true)
             {
-                QUEUEGAME(&Games, &GamesQueue);
+                char *game;
+                game = (char *) malloc (10 * sizeof(char));
+                ADVWORD(0);
+                wordToString(currentWord, game);
+                if (compareString(game, "GAME") == true)
+                {
+                    QUEUEGAME(&Games, &GamesQueue);
+                }
             }
-            else if (compareString(command, "PLAYGAME") == true)
+            else if (compareString(command, "PLAY") == true)
             {
-                PLAYGAME(&Games, &GamesQueue);
+                char *game;
+                game = (char *) malloc (10 * sizeof(char));
+                ADVWORD(0);
+                wordToString(currentWord, game);
+                if (compareString(game, "GAME") == true)
+                {
+                    PLAYGAME(&Games, &GamesQueue);
+                }
             }
             else if (compareString(command, "SKIPGAME") == true)
             {
                 ADVWORD(0);
+                if (currentChar == '\n')
+                {
+                    printf("test\n");
+                }
                 int skips;
                 skips = wordToInteger(currentWord);
                 SKIPGAME(&Games, &GamesQueue, skips);
