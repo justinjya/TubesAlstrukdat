@@ -3,8 +3,8 @@
 #include "./ADT/mesinkarakterv2/mesinkarakterv2.c"
 #include "./ADT/mesinkata/mesinkata.c"
 #include "./ADT/queue/queue.c"
-#include "./ADT/dinerdash/processedorder.h"
-#include "./ADT/dinerdash/circular_queue_of_pesanan.h"
+#include "./ADT/dinerdash/processedorder.c"
+#include "./ADT/dinerdash/circular_queue_of_pesanan.c"
 
 boolean compareString(char *string1, char *string2)
 {
@@ -76,7 +76,6 @@ void inputInteger(int *value)
     STARTWORD(NULL, 1);
     *value = wordToInteger(currentWord); 
 }
-
 
 void STARTBNMO(ArrayDin *Games)
 {
@@ -273,15 +272,15 @@ void PLAYGAME(ArrayDin *arraygame, Queue *queuegame)
                 RNG();
             }
 
-            else if (compareString(HEAD(*queuegame), "DINNER DASH") == true)
+            else if (compareString(HEAD(*queuegame), "Diner Dash") == true)
             {
                 printf("Loading %s ...\n", HEAD(*queuegame));
-                // DINNERDASH();
+                DINERDASH();
             }
 
             else
             {
-                printf("Game %s masih dalam maintenance, belum dapat dimainkan. SIlahkan pilih game lain.\n", HEAD(*queuegame));
+                printf("Game %s masih dalam maintenance, belum dapat dimainkan. Silahkan pilih game lain.\n", HEAD(*queuegame));
             }
 
         }
@@ -336,14 +335,14 @@ void HELP(int type)
     {
         printf("DAFTAR COMMANDS:\n");
         printf("  1. START\n");
-        printf("  2. LOAD <filename>\n");
+        printf("  2. LOAD <filename tanpa .txt>\n");
         printf("  3. QUIT\n");
         printf("  4. HELP\n");
     }
     else
     {
         printf("DAFTAR COMMANDS:\n");
-        printf("  1. SAVE <filename>\n");
+        printf("  1. SAVE <filename tanpa .txt>\n");
         printf("  2. CREATEGAME\n");
         printf("  3. LISTGAME\n");
         printf("  4. DELETEGAME\n");
