@@ -136,8 +136,7 @@ void LOADFILE(ArrayDin *Games, char *inputfile)
     {
         fclose(pita);
         STARTWORD(directory, 1);
-        wordToString(currentWord, string);
-        amount = atoi(string);
+        amount = wordToInteger(currentWord);
         ADVWORD(1);
         for (int j = 0; j < amount; j++)
         {
@@ -194,7 +193,8 @@ void CREATEGAME(ArrayDin *arrayGames){
     boolean found = false;
 
     /* Input game yang ingin ditambah */
-    printf("Masukkan nama game yang akan ditambahkan: ");
+    LISTGAME(arrayGames);
+    printf("\nMasukkan nama game yang akan ditambahkan: ");
     inputString(1 , gamesname);
     
     /* Proses pencarian nama games yang diinput apakah sudah terdaftar sebelumnya */
@@ -205,15 +205,15 @@ void CREATEGAME(ArrayDin *arrayGames){
     }
     if (found == false) /* Kondisi ketika game belum terdaftar */{
         InsertLast(arrayGames, gamesname);
-        printf("Game berhasil ditambahkan");
+        printf("Game berhasil ditambahkan.\n");
     } else /* Kondisi ketika game seudah terdaftar */{
-        printf("Game sudah terdaftar");
+        printf("Game sudah terdaftar. Silahkan masukkan nama game lain.\n");
     }
 }
 
 void LISTGAME(ArrayDin *arrayGames){
     int i = 0;
-    printf("Berikut adalah daftar game yang tersedia\n");
+    printf("Berikut adalah daftar game yang tersedia:\n");
     
     /* Menampilkan list game dari nomor 1 indeks ke-0 */
     for (i; i < arrayGames->Neff; i++){
@@ -227,23 +227,22 @@ void DELETEGAME(ArrayDin *arrayGames){
 	input = (char *) malloc (5 * sizeof(char));
 
 	LISTGAME(arrayGames);
-	printf("Masukkan nomor game yang akan dihapus: ");
+	printf("\nMasukkan nomor game yang akan dihapus: ");
 	inputInteger(&a);
 	
 	if ((a>=1) && (a<=5)){
-		printf("Game gagal dihapus \n");
+		printf("Game gagal dihapus.\n");
 	}
 	else if (a>5){
 		i = a-1;
 		DeleteAt(arrayGames, i);
-		printf("Game berhasil dihapus \n");
-		}
-		
+		printf("Game berhasil dihapus.\n");
 	}
+}
 
 void QUEUEGAME(ArrayDin *Games, Queue *Queue){
     int i, no;
-    printf("Berikut adalah daftar antrian game-mu\n");
+    printf("Berikut adalah daftar antrian game-mu:\n");
 
     // daftar antrian berjumlah >= 0
     if (!isEmpty(*Queue)){
@@ -259,7 +258,7 @@ void QUEUEGAME(ArrayDin *Games, Queue *Queue){
     }
 
     printf("\n");
-    printf("Berikut adalah daftar game yang tersedia\n");
+    printf("Berikut adalah daftar game yang tersedia:\n");
     // dalam file konfigurasi default sudah terdapat minimal 3 game, sehingga pemeriksaan berupa apakah Games kosong tidak perlu dilakukan
     for (i=1;i<=Length(*Games);i++){
         printf("%d. %s\n", i, Games->A[i-1]);
@@ -285,7 +284,7 @@ void PLAYGAME(ArrayDin *arraygame, Queue *queuegame)
 {
     if (isEmpty(*queuegame))
     {
-        printf("Belum ada antrian game yang kamu miliki\n");
+        printf("Belum ada antrian game yang kamu miliki.\n");
     }
 
     else
@@ -313,13 +312,13 @@ void PLAYGAME(ArrayDin *arraygame, Queue *queuegame)
                 printf("Game %s masih dalam maintenance, belum dapat dimainkan. SIlahkan pilih game lain.\n", HEAD(*queuegame));
             }
 
-            dequeue(queuegame, &val);
         }
         else
         {
             printf("Loading %s ...\n", HEAD(*queuegame));
             GAMEBUATAN();
         }
+        dequeue(queuegame, &val);
     }
 }
 
@@ -356,23 +355,32 @@ void QUIT(ArrayDin *Games, Queue *GamesQueue)
     {
         dequeue(GamesQueue, &val);
     }
-    printf("\nAnda keluar dari game BNMO.\nBye bye ...\n");
+    printf("Anda keluar dari game BNMO.\nBye bye ...\n");
 }
 
-void HELP()
+void HELP(int type)
 {
-    printf("DAFTAR COMMANDS:\n");
-    printf("  1. START\n");
-    printf("  2. LOAD <filename>\n");
-    printf("  3. SAVE <filename>\n");
-    printf("  4. CREATEGAME\n");
-    printf("  5. LISTGAME\n");
-    printf("  6. DELETEGAME\n");
-    printf("  7. QUEUEGAME\n");
-    printf("  8. PLAYGAME\n");
-    printf("  9. SKIPGAME <n>\n");
-    printf("  10. QUIT\n");
-    printf("  11. HELP\n");
+    if (type == 0)
+    {
+        printf("DAFTAR COMMANDS:\n");
+        printf("  1. START\n");
+        printf("  2. LOAD <filename>\n");
+        printf("  3. QUIT\n");
+        printf("  4. HELP\n");
+    }
+    else
+    {
+        printf("DAFTAR COMMANDS:\n");
+        printf("  1. SAVE <filename>\n");
+        printf("  2. CREATEGAME\n");
+        printf("  3. LISTGAME\n");
+        printf("  4. DELETEGAME\n");
+        printf("  5. QUEUEGAME\n");
+        printf("  6. PLAYGAME\n");
+        printf("  7. SKIPGAME <n>\n");
+        printf("  8. QUIT\n");
+        printf("  9. HELP\n");
+    }
 }
 
 void RNG(){
@@ -631,7 +639,6 @@ void DINERDASH(){
     printf("Skor akhir: %d\n",saldo);
 }
 
-
 int random_number(int lowerlimit, int upperlimit){
     int number;
     number = (rand() % (upperlimit - lowerlimit + 1)) + lowerlimit;
@@ -660,7 +667,6 @@ char* food_id_generator(int id){
     food_id [count+1] = '\0'; 
     return food_id;
 }
-
 
 char* getCurrentWord(Word string){
     char* string1 = malloc ((string.Length)*sizeof(char));
