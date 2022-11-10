@@ -3,8 +3,8 @@
 #include "./ADT/mesinkarakterv2/mesinkarakterv2.c"
 #include "./ADT/mesinkata/mesinkata.c"
 #include "./ADT/queue/queue.c"
-#include "./ADT/arraydin/processedorder.h"
-#include "./ADT/queue/circular_queue_of_pesanan.h"
+#include "./ADT/dinerdash/processedorder.h"
+#include "./ADT/dinerdash/circular_queue_of_pesanan.h"
 
 boolean compareString(char *string1, char *string2)
 {
@@ -77,34 +77,6 @@ void inputInteger(int *value)
     *value = wordToInteger(currentWord); 
 }
 
-int random_number(int lowerlimit, int upperlimit){
-    int number;
-    number = (rand() % (upperlimit - lowerlimit + 1)) + lowerlimit;
-    return number; 
-}
-
-char* food_id_generator(int id){
-    int angka1 = id;
-    int angka2 = id;
-    int count = 0;
-    while (angka1!=0){
-        angka1/=10;
-        count++;
-    }
-    char *food_id = malloc (sizeof(char) * count+2);
-    int i;
-    for (i=count;i>=0;i--){
-        if(i==0){
-            food_id[i] = 'M';
-        }
-        else{
-            food_id[i] = (angka2 % 10)+'0';
-            angka2 /= 10;
-        }
-    }
-    food_id [count+1] = '\0'; 
-    return food_id;
-}
 
 void STARTBNMO(ArrayDin *Games)
 {
