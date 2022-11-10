@@ -8,8 +8,8 @@
 #include "./ADT/mesinkarakterv2/mesinkarakterv2.h"
 #include "./ADT/mesinkata/mesinkata.h"
 #include "./ADT/queue/queue.h"
-// #include "./ADT/dinerdash/processedorder.h"
-// #include "./ADT/dinerdash/circular_queue_of_pesanan.h"
+#include "./ADT/dinerdash/processedorder.h"
+#include "./ADT/dinerdash/circular_queue_of_pesanan.h"
 
 /* Membandingkan string1 dengan string2
  * Mengeluarkan 1 bila string1 = string2
@@ -56,8 +56,11 @@ void inputInteger(int *value);
 
 /*
 */
+char* food_id_generator(int id);
 
-
+/*
+*/
+int random_number(int lowerlimit, int upperlimit);
 
 /* Membaca file konfigurasi default yang berisi list game
  * yang akan dimainkan.
@@ -123,44 +126,45 @@ void RNG();
  */
 void DINERDASH();
 
+/*
+  Menerima input berupa dua buah integer, yaitu batas bawah dan batas atas dari angka yang ingin dikembalikan. Mengembalikan integer yang berada di batas bawah dan batas atas
+*/
+int random_number(int lowerlimit, int upperlimit);
+
+/*
+  Menerima input berupa id bertipe integer serta mengembalikan Food ID bertipe char* dengan format "M(id)"
+*/
+char* food_id_generator(int id);
+
+/*
+  Menerima input berupa sebuah Word dan mengembalikan pointer to char dari Word.TabWord sesuai dengan Word.Length
+*/
+char* getCurrentWord(Word string);
+
+/*Menampikan daftar pesanan di Diner Dash
+  Menerima input berupa sebuah QueueOfPesanan
+*/
+void PrintUIPesanan(QueueOfPesanan pesanan);
+
+/*Menampilkan daftar pesanan yang sedang dimasak di Diner Dash
+  Menerima input berupa sebuah processedorder
+*/
+void PrintUIOnCook(processedorder oncook);
+
+/*Menampilkan daftar pesanan yang siap untuk disajikan di Diner Dash
+  Menerima input berupa processedorder
+*/
+void PrintUIReadyToServe(processedorder readytoserve);
+
+/*Mengembalikan panjang dari sebuah string
+ Menerima input berupa pointer to char 
+*/
+int stringlen(char* string);
+
 /* Permainan buatan pemain yang dibuat dengan command CREATE GAME yang
  * akan langsung selesai dan masuk ke tahap game over dengan skor akhir
  * berupa integer random.
  */
-int random_number(int lowerlimit, int upperlimit);
-/*
-  Menerima input berupa dua buah integer, yaitu batas bawah dan batas atas dari angka yang ingin dikembalikan. Mengembalikan integer yang berada di batas bawah dan batas atas
-*/
-char* food_id_generator(int id);
-/*
-  Menerima input berupa id bertipe integer serta mengembalikan Food ID bertipe char* dengan format "M(id)"
-*/
-
-char* getCurrentWord(Word string);
-/*
-  Menerima input berupa sebuah Word dan mengembalikan pointer to char dari Word.TabWord sesuai dengan Word.Length
-*/
-
-void PrintUIPesanan(QueueOfPesanan pesanan);
-/*Menampikan daftar pesanan di Diner Dash
-  Menerima input berupa sebuah QueueOfPesanan
-*/
-
-void PrintUIOnCook(processedorder oncook);
-/*Menampilkan daftar pesanan yang sedang dimasak di Diner Dash
-  Menerima input berupa sebuah processedorder
-*/
-
-void PrintUIReadyToServe(processedorder readytoserve);
-/*Menampilkan daftar pesanan yang siap untuk disajikan di Diner Dash
-  Menerima input berupa processedorder
-*/
-
-int stringlen(char* string);
-/*Mengembalikan panjang dari sebuah string
- Menerima input berupa pointer to char 
-*/
-
 void GAMEBUATAN();
 
 #endif
