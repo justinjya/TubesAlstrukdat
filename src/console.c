@@ -356,20 +356,26 @@ void HELP(int type)
 
 void RNG(){
 	int jumlah, angka, tebak, skor;
+    boolean nyerah;
     srand(time(NULL));
     angka = rand()% 100 + 1;
     jumlah = 0;
+    nyerah = false;
 
     printf("RNG Telah dimulai. Uji keberuntungan Anda dengan menebak X.\n");
     printf("Tebakan: ");
     inputInteger(&tebak);
 
-    if (tebak == angka){
+    if (tebak == 0) {
+        nyerah = true;
+        jumlah = 25;
+        printf("\n");
+        printf("Anda kurang beruntung, X adalah %d \n", angka);
+    } else if (tebak == angka){
         printf("\n");
         printf("Ya, X adalah %d", angka);
-    
-    } else if (tebak != angka){
-        while (tebak != angka){
+    } else if (tebak != angka && nyerah == false){
+        while (tebak != angka && nyerah == false){
             jumlah += 1;
             if (tebak > angka){
                 printf("Lebih kecil\n");
@@ -378,8 +384,14 @@ void RNG(){
             }
             printf("Tebakan: ");
             inputInteger(&tebak);
+            if (tebak == 0) {
+                nyerah = true;
+                jumlah = 25;
+            }
         }
-        if (tebak == angka){
+        if (nyerah == true){
+            printf("Anda kurang beruntung, X adalah %d \n", angka);
+        } else if (tebak == angka && nyerah == false){
             printf("\n");
             printf("Ya, X adalah %d \n", angka);
         }
@@ -397,9 +409,9 @@ void DINERDASH(){
     pesanan = CreateQueueOfPesanan(10);
     oncook = MakeProcessedOrder(5);
     readytoserve = MakeProcessedOrder(InitialSize);
-    PushPesanan(&pesanan,CreatePesanan("M0",random_number(1,5),random_number(1,5),random_number(10,50) * 1000));
-    PushPesanan(&pesanan,CreatePesanan("M1",random_number(1,5),random_number(1,5),random_number(10,50) * 1000));
-    PushPesanan(&pesanan,CreatePesanan("M2",random_number(1,5),random_number(1,5),random_number(10,50) * 1000));
+    PushPesanan(&pesanan,CreatePesanan("M0",random_number(1,3),random_number(2,5),random_number(10,50) * 1000));
+    PushPesanan(&pesanan,CreatePesanan("M1",random_number(1,3),random_number(2,5),random_number(10,50) * 1000));
+    PushPesanan(&pesanan,CreatePesanan("M2",random_number(1,3),random_number(2,5),random_number(10,50) * 1000));
     printf("Selamat datang di Diner Dash!\n\n");
     boolean endGame = false;
     
@@ -413,7 +425,7 @@ void DINERDASH(){
         printf("MASUKKAN COMMAND: ");
         STARTWORD(NULL,0);
         printf("\n");
-        if(compareString(getCurrentWord(currentWord),"COOK") || compareString(getCurrentWord(currentWord),"SERVE") || compareString(getCurrentWord(currentWord),"SKIP")){
+        if(compareString(getCurrentWord(currentWord),"COOK") == true || compareString(getCurrentWord(currentWord),"SERVE") == true || compareString(getCurrentWord(currentWord),"SKIP") == true || compareString(getCurrentWord(currentWord),"QUIT") == true){
             if(compareString(getCurrentWord(currentWord),"COOK")==true){
                 ADVWORD(0);
                 if(currentChar == '\n'){
@@ -595,6 +607,9 @@ void DINERDASH(){
                     
                 }
             }
+            else if(compareString(getCurrentWord(currentWord),"QUIT") == true){
+                    endGame = true;
+            }
 
             if(LengthQueueOfPesanan(pesanan)>7 || served_customer == 15){
                 endGame = true;
@@ -602,7 +617,7 @@ void DINERDASH(){
         }
         else{
             printf("Masukkan kembali command!\n\n");
-            while(!EndWord){
+            while (!EndWord){
                 ADVWORD(0);
             }
         }
