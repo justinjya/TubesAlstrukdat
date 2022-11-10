@@ -16,5 +16,7 @@ BNMO (dibaca: Binomo) adalah robot game console yang dapat menjalankan permainan
 18221017	Ahmad Rivai Yahya  
 
 ### Cara Kompilasi Program :
-
-![image](https://user-images.githubusercontent.com/103380665/201135749-ad1c501b-7060-4d30-8748-618b542d5178.png)
+  1. __Clone repository__ ini
+  2. Buka terminal
+  3. Ganti _directory_ ke _direcotry_ tempat dimana Anda meng-_clone repository_ ini 
+  4. Jalani _command_ ini: gcc ./main.c ./src/console.c -o bnmo
