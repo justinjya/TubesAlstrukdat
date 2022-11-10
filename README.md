@@ -2,11 +2,11 @@
 K3 | Kelompok 5
 
 ### Deskripsi Singkat Program :
-BNMO (dibaca: Binomo) adalah robot game console yang dapat menjalankan permainan. BNMO memiliki beberapa fitur utama, yaitu:  
-  1. Memainkan game  
-  2. Menambahkan game  
-  3. Menghapus game  
-  4. Mengurutkan game yang akan dimainkan  
+BNMO (dibaca: Binomo) adalah _robot game console_ yang dapat menjalankan permainan. BNMO memiliki beberapa fitur utama, yaitu:  
+  1. Memainkan _game_  
+  2. Menambahkan _game_  
+  3. Menghapus _game_  
+  4. Mengurutkan _game_ yang akan dimainkan  
 
 ### Anggota Kelompok :
 18221016	Justin Yusuf Abidjoko  
@@ -16,7 +16,7 @@ BNMO (dibaca: Binomo) adalah robot game console yang dapat menjalankan permainan
 18221017	Ahmad Rivai Yahya  
 
 ### Cara Kompilasi Program :
-  1. __Clone repository__ ini
+  1. _Clone repository_ ini
   2. Buka terminal
   3. Ganti _directory_ ke _direcotry_ tempat dimana Anda meng-_clone repository_ ini 
   4. Jalani _command_ ini: gcc ./main.c ./src/console.c -o bnmo
