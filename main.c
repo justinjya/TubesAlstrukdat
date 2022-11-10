@@ -1,4 +1,4 @@
-#include ".\src\console.h"
+#include ".\src\console.c"
 
 int main()
 {
@@ -31,8 +31,18 @@ int main()
                 char *inputfile;
                 inputfile = (char *) malloc (50 * sizeof(char));
                 ADVWORD(0);
-                wordToString(currentWord, inputfile);
-                LOADFILE(&Games, inputfile);
+                if (currentChar == '\n')
+                {
+                    wordToString(currentWord, inputfile);
+                    if (compareString(inputfile, "LOAD") == false)
+                    {
+                        LOADFILE(&Games, inputfile);
+                    }
+                    else
+                    {
+                        printf("Command belum memiliki parameter. Silahkan input command sesuai format LOAD <filename tanpa .txt>\n");
+                    }
+                }
             }
             else if (compareString(command, "QUIT") == true)
             {
@@ -57,8 +67,18 @@ int main()
                 char *inputfile;
                 inputfile = (char *) malloc (50 * sizeof(char));
                 ADVWORD(0);
-                wordToString(currentWord, inputfile);
-                SAVE(&Games, inputfile);
+                if (currentChar == '\n')
+                {
+                    wordToString(currentWord, inputfile);
+                    if (compareString(inputfile, "SAVE") == false)
+                    {
+                        SAVE(&Games, inputfile);   
+                    }
+                    else
+                    {
+                        printf("Command belum memiliki parameter. Silahkan input command sesuai format SAVE <filename tanpa .txt>\n");
+                    }
+                }
             }
             else if (compareString(command, "CREATE") == true)
             {
@@ -90,7 +110,7 @@ int main()
                 wordToString(currentWord, game);
                 if (compareString(game, "GAME") == true)
                 {
-                    DELETEGAME(&Games);
+                    DELETEGAME(&Games, &GamesQueue);
                 }
             }
             else if (compareString(command, "QUEUE") == true)
@@ -119,12 +139,18 @@ int main()
             {
                 ADVWORD(0);
                 if (currentChar == '\n')
-                {
-                    printf("test\n");
+                {   
+                    int skips;
+                    skips = wordToInteger(currentWord);
+                    if (skips == 379845011) // hasil ascii wordToInteger("SKIPGAME")
+                    {
+                        printf("Command belum memiliki parameter. Silahkan input command sesuai format SKIPGAME <skips>\n");
+                    }
+                    else
+                    {
+                        SKIPGAME(&Games, &GamesQueue, skips);
+                    }
                 }
-                int skips;
-                skips = wordToInteger(currentWord);
-                SKIPGAME(&Games, &GamesQueue, skips);
             }
             else if (compareString(command, "QUIT") == true)
             {
