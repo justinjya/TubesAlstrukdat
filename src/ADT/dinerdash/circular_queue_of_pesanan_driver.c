@@ -18,6 +18,8 @@ int main(){
     }
     if(IsQueueOfPesananFull(qp)){
         printf("QofPesanan is full\n");
+        printf("MaxEl of QofPesanan = %d\n",qp.MaxEl);
+        printf("HEAD : %d, TAIL : %d\n",qp.HEAD,qp.TAIL);
     }
     PopPesanan(&qp);
     printf("Length of QofPesanan : %d\n",LengthQueueOfPesanan(qp));
