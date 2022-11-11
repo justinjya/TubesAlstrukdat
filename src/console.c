@@ -227,7 +227,7 @@ void QUEUEGAME(ArrayDin *Games, Queue *Queue){
     int i, no;
     printf("Berikut adalah daftar antrean game-mu:\n");
 
-    // daftar antrian berjumlah >= 0
+    // daftar antrean berjumlah >= 0
     if (!isEmpty(*Queue)){
         i = IDX_HEAD(*Queue);
         no = 1;
