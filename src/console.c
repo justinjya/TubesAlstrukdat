@@ -225,7 +225,7 @@ void DELETEGAME(ArrayDin *arrayGames, Queue *queueGames){
 
 void QUEUEGAME(ArrayDin *Games, Queue *Queue){
     int i, no;
-    printf("Berikut adalah daftar antrian game-mu:\n");
+    printf("Berikut adalah daftar antrean game-mu:\n");
 
     // daftar antrian berjumlah >= 0
     if (!isEmpty(*Queue)){
@@ -250,13 +250,13 @@ void QUEUEGAME(ArrayDin *Games, Queue *Queue){
 
     // baca input user
     int nomor_game;
-    printf("Nomor game yang mau ditambahkan ke antrian: ");
+    printf("Nomor game yang mau ditambahkan ke antrean: ");
     inputInteger(&nomor_game);
 
     // validasi input
     if (nomor_game>=1 && nomor_game<=Length(*Games)){
         enqueue(Queue, Games->A[nomor_game-1]);
-        printf("Game berhasil ditambahkan ke dalam daftar antrian.\n");        
+        printf("Game berhasil ditambahkan ke dalam daftar antrean.\n");        
     }
     else{
         printf("Nomor permainan tidak valid, silahkan masukkan nomor game pada list.\n");
@@ -267,7 +267,7 @@ void PLAYGAME(ArrayDin *arraygame, Queue *queuegame)
 {
     if (isEmpty(*queuegame))
     {
-        printf("Belum ada antrian game yang kamu miliki.\n");
+        printf("Belum ada antrean game yang kamu miliki.\n");
     }
 
     else
@@ -369,9 +369,9 @@ void HELP(int type){
         printf("  2. CREATE GAME - Membuat game baru dari input user\n");
         printf("  3. LIST GAME - Menampilkan daftar game yang dapat tersedia dalam sistem\n");
         printf("  4. DELETE GAME - Menghapus game yang tersedia dari sistem\n");
-        printf("  5. QUEUE GAME - Menambahkan game ke dalam antrian game\n");
+        printf("  5. QUEUE GAME - Menambahkan game ke dalam antrean game\n");
         printf("  6. PLAY GAME - Memainkan game yang berada di depan antrian\n");
-        printf("  7. SKIP GAME <n> - Melewati game yang berada di dalam antrian sebanyak n kali\n");
+        printf("  7. SKIP GAME <n> - Melewati game yang berada di dalam antrean sebanyak n kali\n");
         printf("  8. QUIT - Keluar dari program\n");
         printf("  9. HELP - Menampilkan daftar command yang dapat dijalankan\n");
     }
