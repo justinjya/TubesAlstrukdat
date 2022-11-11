@@ -359,23 +359,23 @@ void HELP(int type)
     if (type == 0)
     {
         printf("DAFTAR COMMANDS:\n");
-        printf("  1. START\n");
-        printf("  2. LOAD <filename tanpa .txt>\n");
-        printf("  3. QUIT\n");
-        printf("  4. HELP\n");
+        printf("  1. START - Menjalankan file configurasi default\n");
+        printf("  2. LOAD <filename tanpa .txt> - Menjalankan file dari input user\n");
+        printf("  3. QUIT - Keluar dari program\n");
+        printf("  4. HELP - Menampilkan daftar command yang dapat dijalankan\n");
     }
     else
     {
         printf("DAFTAR COMMANDS:\n");
-        printf("  1. SAVE <filename tanpa .txt>\n");
-        printf("  2. CREATEGAME\n");
-        printf("  3. LISTGAME\n");
-        printf("  4. DELETEGAME\n");
-        printf("  5. QUEUEGAME\n");
-        printf("  6. PLAYGAME\n");
-        printf("  7. SKIPGAME <n>\n");
-        printf("  8. QUIT\n");
-        printf("  9. HELP\n");
+        printf("  1. SAVE <filename tanpa .txt> - Menyimpan state sistem ke dalam file dari input user\n");
+        printf("  2. CREATE GAME - Membuat game baru dari input user\n");
+        printf("  3. LIST GAME - Menampilkan daftar game yang dapat tersedia dalam sistem\n");
+        printf("  4. DELETE GAME - Menghapus game yang tersedia dari sistem\n");
+        printf("  5. QUEUE GAME - Menambahkan game ke dalam antrian game\n");
+        printf("  6. PLAY GAME - Memainkan game yang berada di depan antrian\n");
+        printf("  7. SKIP GAME <n> - Melewati game yang berada di dalam antrian sebanyak n kali\n");
+        printf("  8. QUIT - Keluar dari program\n");
+        printf("  9. HELP - Menampilkan daftar command yang dapat dijalankan\n");
     }
 }
 
