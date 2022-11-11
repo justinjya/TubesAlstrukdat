@@ -1,4 +1,4 @@
-#include ".\src\console.c"
+#include ".\src\console.h"
 
 int main()
 {
@@ -90,6 +90,10 @@ int main()
                 {
                     CREATEGAME(&Games);
                 }
+                else
+                {
+                    printf("Command tidak dikenali, apakah yang Anda maksud CREATE GAME?\n");
+                }
             }
             else if (compareString(command, "LIST") == true)
             {
@@ -100,6 +104,10 @@ int main()
                 if (compareString(game, "GAME") == true)
                 {
                     LISTGAME(&Games);
+                }
+                else
+                {
+                    printf("Command tidak dikenali, apakah yang Anda maksud LIST GAME?\n");
                 }
             }
             else if (compareString(command, "DELETE") == true)
@@ -112,6 +120,10 @@ int main()
                 {
                     DELETEGAME(&Games, &GamesQueue);
                 }
+                else
+                {
+                    printf("Command tidak dikenali, apakah yang Anda maksud DELETE GAME?\n");
+                }
             }
             else if (compareString(command, "QUEUE") == true)
             {
@@ -122,6 +134,10 @@ int main()
                 if (compareString(game, "GAME") == true)
                 {
                     QUEUEGAME(&Games, &GamesQueue);
+                }
+                else
+                {
+                    printf("Command tidak dikenali, apakah yang Anda maksud QUEUE GAME?\n");
                 }
             }
             else if (compareString(command, "PLAY") == true)
@@ -134,22 +150,37 @@ int main()
                 {
                     PLAYGAME(&Games, &GamesQueue);
                 }
+                else
+                {
+                    printf("Command tidak dikenali, apakah yang Anda maksud PLAY GAME?\n");
+                }
             }
-            else if (compareString(command, "SKIPGAME") == true)
+            else if (compareString(command, "SKIP") == true)
             {
+                char *game;
+                game = (char *) malloc (10 * sizeof(char));
                 ADVWORD(0);
-                if (currentChar == '\n')
-                {   
-                    int skips;
-                    skips = wordToInteger(currentWord);
-                    if (skips == 379845011) // hasil ascii wordToInteger("SKIPGAME")
-                    {
-                        printf("Command belum memiliki parameter. Silahkan input command sesuai format SKIPGAME <skips>\n");
+                wordToString(currentWord, game);
+                if (compareString(game, "GAME") == true)
+                {
+                    ADVWORD(0);
+                    if (currentChar == '\n')
+                    {   
+                        int skips;
+                        skips = wordToInteger(currentWord);
+                        if (skips == 25011) // hasil ascii wordToInteger("GAME")
+                        {
+                            printf("Command belum memiliki parameter. Silahkan input command sesuai format SKIPGAME <skips>\n");
+                        }
+                        else
+                        {
+                            SKIPGAME(&Games, &GamesQueue, skips);
+                        }
                     }
-                    else
-                    {
-                        SKIPGAME(&Games, &GamesQueue, skips);
-                    }
+                }
+                else
+                {
+                    printf("Command tidak dikenali, apakah yang Anda maksud SKIP GAME <skips>?\n");
                 }
             }
             else if (compareString(command, "QUIT") == true)
