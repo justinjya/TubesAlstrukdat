@@ -83,7 +83,7 @@ void LISTGAME(ArrayDin *arrayGames);
  * - 5 game pertama pada file konfigurasi tidak dapat dihapus.
  * - Game yang saat itu terdapat di dalam queue game tidak dapat dihapus.
  */
-void DELETEGAME(ArrayDin *arrayGames);
+void DELETEGAME(ArrayDin *arrayGames, Queue *gamesQueue);
 
 /* Mendaftarkan permainan kedalam list. List queue akan hilang ketika
  * pemain menjalankan command QUIT.
@@ -102,7 +102,7 @@ void SKIPGAME(ArrayDin *arraygame, Queue *queuegame, int skips);
 
 /* Keluar dari program.
  */
-void QUIT();
+void QUIT(ArrayDin *Games, Queue *GamesQueue);
 
 /* Menampilan daftar command-command yang dapat dijalankan
  * oleh pemain.
