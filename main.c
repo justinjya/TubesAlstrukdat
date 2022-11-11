@@ -12,6 +12,10 @@ int main()
     char *command;
     command = (char *) malloc (50 * sizeof(char));
 
+    printf("                                  PERINGATAN!!!\n");
+    printf("======================================================================================\n");
+    printf("PROGRAM AKAN ERROR ATAU BERHENTI KETIKA MENJALANKAN COMMAND YANG MEMILIKI KARAKTER '.'\n");
+    printf("======================================================================================\n\n");
     printf("Selamat datang pada BNMO!\n\n");
     printf("Jalankan command START atau LOAD <filename tanpa .txt> untuk membuka file.\n");
     printf("Jalankan command QUIT untuk keluar dari program.\n");
