@@ -54,14 +54,6 @@ void inputString(int type, char* value);
  */
 void inputInteger(int *value);
 
-/*
-*/
-char* food_id_generator(int id);
-
-/*
-*/
-int random_number(int lowerlimit, int upperlimit);
-
 /* Membaca file konfigurasi default yang berisi list game
  * yang akan dimainkan.
  */
@@ -122,43 +114,40 @@ void HELP();
  */
 void RNG();
 
-/* 
+/* Permainan mengantarkan makanan namun terurut berdasarkan prioritasnya.
  */
 void DINERDASH();
 
-/*
-  Menerima input berupa dua buah integer, yaitu batas bawah dan batas atas dari angka yang ingin dikembalikan. Mengembalikan integer yang berada di batas bawah dan batas atas
-*/
+/* Menerima input berupa dua buah integer, yaitu batas bawah dan batas atas dari angka yang ingin dikembalikan. Mengembalikan integer yang berada di batas bawah dan batas atas
+ */
 int random_number(int lowerlimit, int upperlimit);
 
-/*
-  Menerima input berupa id bertipe integer serta mengembalikan Food ID bertipe char* dengan format "M(id)"
-*/
+/* Menerima input berupa id bertipe integer serta mengembalikan Food ID bertipe char* dengan format "M(id)"
+ */
 char* food_id_generator(int id);
 
-/*
-  Menerima input berupa sebuah Word dan mengembalikan pointer to char dari Word.TabWord sesuai dengan Word.Length
-*/
+/* Menerima input berupa sebuah Word dan mengembalikan pointer to char dari Word.TabWord sesuai dengan Word.Length
+ */
 char* getCurrentWord(Word string);
 
-/*Menampikan daftar pesanan di Diner Dash
-  Menerima input berupa sebuah QueueOfPesanan
-*/
+/* Menampikan daftar pesanan di Diner Dash
+ * Menerima input berupa sebuah QueueOfPesanan
+ */
 void PrintUIPesanan(QueueOfPesanan pesanan);
 
-/*Menampilkan daftar pesanan yang sedang dimasak di Diner Dash
-  Menerima input berupa sebuah processedorder
-*/
+/* Menampilkan daftar pesanan yang sedang dimasak di Diner Dash
+ * Menerima input berupa sebuah processedorder
+ */
 void PrintUIOnCook(processedorder oncook);
 
-/*Menampilkan daftar pesanan yang siap untuk disajikan di Diner Dash
-  Menerima input berupa processedorder
-*/
+/* Menampilkan daftar pesanan yang siap untuk disajikan di Diner Dash
+ * Menerima input berupa processedorder
+ */
 void PrintUIReadyToServe(processedorder readytoserve);
 
-/*Mengembalikan panjang dari sebuah string
- Menerima input berupa pointer to char 
-*/
+/* Mengembalikan panjang dari sebuah string
+ * Menerima input berupa pointer to char 
+ */
 int stringlen(char* string);
 
 /* Permainan buatan pemain yang dibuat dengan command CREATE GAME yang
