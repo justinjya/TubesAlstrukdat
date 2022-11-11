@@ -370,7 +370,7 @@ void HELP(int type){
         printf("  3. LIST GAME - Menampilkan daftar game yang dapat tersedia dalam sistem\n");
         printf("  4. DELETE GAME - Menghapus game yang tersedia dari sistem\n");
         printf("  5. QUEUE GAME - Menambahkan game ke dalam antrean game\n");
-        printf("  6. PLAY GAME - Memainkan game yang berada di depan antrian\n");
+        printf("  6. PLAY GAME - Memainkan game yang berada di depan antrean\n");
         printf("  7. SKIP GAME <n> - Melewati game yang berada di dalam antrean sebanyak n kali\n");
         printf("  8. QUIT - Keluar dari program\n");
         printf("  9. HELP - Menampilkan daftar command yang dapat dijalankan\n");
