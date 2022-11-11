@@ -310,11 +310,14 @@ void SKIPGAME(ArrayDin *arraygames, Queue *queuegame, int skips)
     printf("Berikut adalah daftar game-mu:\n");
     if (!isEmpty(*queuegame))
     {
+        int k = 1;
         for (IdxType i = IDX_HEAD(*queuegame); i <= IDX_TAIL(*queuegame); i++)
         {
-            printf("%d. %s\n", i + 1, queuegame->buffer[i]);
+            printf("%d. %s\n", k, queuegame->buffer[i]);
+            k++;
         }
     }
+	
     else
     {
         printf("\nTidak ada permainan lagi dalam daftar game-mu.\n");
@@ -336,6 +339,7 @@ void SKIPGAME(ArrayDin *arraygames, Queue *queuegame, int skips)
             printf("\n");
             PLAYGAME(arraygames, queuegame);
         }
+	    
         else
         {
             printf("\nTidak ada permainan lagi dalam daftar game-mu.\n");
