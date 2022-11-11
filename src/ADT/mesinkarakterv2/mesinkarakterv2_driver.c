@@ -2,7 +2,7 @@
 #include "mesinkarakterv2.h"
 
 int main(){
-    char* dir = "../../../config.txt";
+    char* dir = "../../../data/config.txt";
     printf("BACA STDIN\n");
     START(NULL);
     while (!EOP)
