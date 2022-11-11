@@ -274,7 +274,6 @@ void PLAYGAME(ArrayDin *arraygame, Queue *queuegame)
     {
         IdxType index;
         ElType val;
-
         index = SearchArrayDin(*arraygame, HEAD(*queuegame));
         if (index < 5)
         {
@@ -347,29 +346,24 @@ void SKIPGAME(ArrayDin *arraygames, Queue *queuegame, int skips)
     }
 }
 
-void QUIT(ArrayDin *Games, Queue *GamesQueue)
-{
+void QUIT(ArrayDin *Games, Queue *GamesQueue){
     DeallocateArrayDin(Games);
     ElType val;
-    while (!isEmpty(*GamesQueue))
-    {
+    while (!isEmpty(*GamesQueue)){
         dequeue(GamesQueue, &val);
     }
     printf("Anda keluar dari game BNMO.\nBye bye ...\n\n");
 }
 
-void HELP(int type)
-{
-    if (type == 0)
-    {
+void HELP(int type){
+    if (type == 0){
         printf("DAFTAR COMMANDS:\n");
         printf("  1. START - Menjalankan file configurasi default\n");
         printf("  2. LOAD <filename tanpa .txt> - Menjalankan file dari input user\n");
         printf("  3. QUIT - Keluar dari program\n");
         printf("  4. HELP - Menampilkan daftar command yang dapat dijalankan\n");
     }
-    else
-    {
+    else{
         printf("DAFTAR COMMANDS:\n");
         printf("  1. SAVE <filename tanpa .txt> - Menyimpan state sistem ke dalam file dari input user\n");
         printf("  2. CREATE GAME - Membuat game baru dari input user\n");
@@ -386,7 +380,6 @@ void HELP(int type)
 void RNG(){
 	int jumlah, angka, tebak, skor;
     boolean nyerah;
-    srand(time(NULL));
     angka = rand()% 100 + 1;
     jumlah = 0;
     nyerah = false;
@@ -420,6 +413,7 @@ void RNG(){
             }
         }
         if (nyerah == true){
+            printf("\n");
             printf("Anda kurang beruntung, X adalah %d \n", angka);
         } else if (tebak == angka && nyerah == false){
             printf("\n");
@@ -769,9 +763,7 @@ void GAMEBUATAN()
 {
     char *rand;
     int score;
-
     rand = (char *) malloc (1 * sizeof(char));
     score = (int) rand % 100;
-
     printf("Skor = %d\n", score);
 }
