@@ -772,7 +772,6 @@ void GAMEBUATAN()
 
 void SnakeMeteor()
 {
-    /*makanan ga bs di body, makanan ga bs di obstacle, meteor ga bisa di makanan*/
     List Snake = MakeSnake();
     point Meteor = CreatePoint(-1,-1);
     point Obstacle = CreatePoint(random_number(0,4),random_number(0,4));
@@ -984,7 +983,6 @@ void SnakeMeteor()
                 temp = turn;
             }
             turn++;
-            displayPoint(Meteor);
             printf("\n\n");
         }
     }
