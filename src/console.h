@@ -10,6 +10,8 @@
 #include "./ADT/queue/queue.h"
 #include "./ADT/dinerdash/processedorder.h"
 #include "./ADT/dinerdash/circular_queue_of_pesanan.h"
+#include "./ADT/snakemeteor/listlinier.h"
+#include "./ADT/snakemeteor/point.h"
 
 /* Membandingkan string1 dengan string2
  * Mengeluarkan 1 bila string1 = string2
@@ -156,4 +158,47 @@ int stringlen(char* string);
  */
 void GAMEBUATAN();
 
+/*
+    Permainan snake dengan meteor, obstacle, serta food.
+    Snake dapat digerakkan dengan input 'w','s','d','a'.
+    Meteor,obstacle,food dijatuhkan secara random di arena permainan.
+    Lokasi obstacle bersifat tetap.
+    Lokasi food dapat berubah secara random setiap food telah termakan oleh snake.
+    Lokasi meteor dijatuhkan secara random setiap pergerakan snake.
+    Panjang snake bertambah 1 jika berhasil memakan food.
+    Jika snake terkena meteor pada bagian selain head, maka panjang snake berkurang 1.
+    Game berakhir ketika snake menyentuh obstacle atau seluruh komponen snake terkena meteor atau kepala snake terkena meteor atau kepala snake menabrak badannya sendiri.
+*/
+void SnakeMeteor();
+
+/*
+    Membuat snake dengan panjang sebesar 3 unit, yang terdiri atas komponen head beserta 2 komponen tubuh lainnya.
+    Kepala dari snake di-random pada sebuah titik dan 2 anggota badan yang berurut menurun dengan prioritas horizontal yang sama. 
+    Apabila badan menabrak dinding, maka akan berurut menurun dengan prioritas vertical yang sama.
+    Maksud dari menurun adalah secara skalar.
+*/
+List MakeSnake();
+
+/*
+    Menggambar arena permainan yang terdiri atas snake, meteor, obstacle, serta food.
+*/
+void PrintArena();
+
+/*
+    Mengubah integer menjadi string
+*/
+char* int_to_string(int num);
+
+/*
+    Mengembalikan body snake.
+    Jika snake kosong, maka mengembalikan list kosong.
+    Jika snake terdiri atas 1 komponen, maka mengembalikan list kosong.
+    Jika snake terdiri atas lebih dari 1 komponen, maka mengembalikan komponen setelah head dari snake hingga tail dari snake. 
+*/
+List SnakeBody(List Snake);
+
+/*
+    Mengembalikan nilai x modulo y, x dan y integer.
+*/
+int mod(int x,int y);
 #endif

@@ -5,6 +5,8 @@
 #include "./ADT/queue/queue.c"
 #include "./ADT/dinerdash/processedorder.c"
 #include "./ADT/dinerdash/circular_queue_of_pesanan.c"
+#include "./ADT/snakemeteor/listlinier.c"
+#include "./ADT/snakemeteor/point.c"
 
 boolean compareString(char *string1, char *string2)
 {
@@ -766,4 +768,370 @@ void GAMEBUATAN()
     rand = (char *) malloc (1 * sizeof(char));
     score = (int) rand % 100;
     printf("Skor = %d\n", score);
+}
+
+void SnakeMeteor()
+{
+    /*makanan ga bs di body, makanan ga bs di obstacle, meteor ga bisa di makanan*/
+    List Snake = MakeSnake();
+    point Meteor = CreatePoint(-1,-1);
+    point Obstacle = CreatePoint(random_number(0,4),random_number(0,4));
+    point Food = CreatePoint(random_number(0,4),random_number(0,4));
+    while (Search_LL(Snake,Obstacle)!=Nil || Search_LL(Snake,Food) != Nil || (Food.x == Obstacle.x && Food.y == Obstacle.y))
+    {
+        Obstacle = CreatePoint(random_number(0,4),random_number(0,4));
+        Food = CreatePoint(random_number(0,4),random_number(0,4));
+    }
+    printf("Selamat datang di snake on meteor!\n\n");
+    printf("Mengenerate peta, snake, dan makanan . . .\n\n");
+    printf("Berhasil digenerate!\n\n");
+    printf("------------------------------------------\n\n");
+    printf("Berikut merupakan peta permainan\n");
+    PrintArena(Snake,Meteor,Obstacle,Food);
+    printf("\n\n");
+    boolean endgame = false;
+    int turn = 1;
+    int temp = -999;
+    boolean meteorhot = false;
+    while(!endgame){
+        boolean input_valid = false;
+        while (input_valid == false)
+        {
+            printf("TURN %d\n",turn);
+            printf("Silahkan masukkan command anda: ");
+            STARTWORD(NULL,0);
+            if(compareString(getCurrentWord(currentWord), "a") || compareString(getCurrentWord(currentWord),"d") || compareString(getCurrentWord(currentWord),"s") || compareString(getCurrentWord(currentWord),"w")){
+                if(Info(Next(First(Snake))).x == mod(Info(First(Snake)).x + 1,5)){
+                    if(!compareString(getCurrentWord(currentWord), "d")){
+                        input_valid = true;           
+                    }
+                }
+                else if(Info(Next(First(Snake))).x == mod(Info(First(Snake)).x - 1,5)){
+                    if(!compareString(getCurrentWord(currentWord), "a")){
+                        input_valid = true;   
+                    }
+                }
+                else if(Info(Next(First(Snake))).y == mod(Info(First(Snake)).y + 1,5)){
+                    if(!compareString(getCurrentWord(currentWord), "s")){
+                        input_valid = true;
+                    }
+                }
+                else if(Info(Next(First(Snake))).y == mod(Info(First(Snake)).y - 1,5)){
+                    if(!compareString(getCurrentWord(currentWord), "w")){
+                        input_valid = true;
+                    }
+                }
+                else{
+                    input_valid = true;
+                }
+                if(!input_valid){
+                    printf("Anda tidak dapat bergerak ke tubuh anda sendiri!\n");
+                    printf("Silahkan input command yang lain!\n\n");
+                }
+            }
+            else{
+                printf("Command tidak valid! Silahkan input command menggunakan huruf w/a/s/d\n\n");
+            }
+            while (!EndWord)
+            {
+                ADVWORD(0);
+            }
+        }
+
+        if(compareString(getCurrentWord(currentWord),"w")){
+            if(First(Snake)->info.y - 1 == Meteor.y && First(Snake)->info.x == Meteor.x && meteorhot && turn-temp == 1){
+                printf("Meteor masih panas! Anda belum dapat kembali ke titik tersebut.\n");
+                printf("Silahkan masukkan command lainnya\n\n");
+            }
+            else{
+                meteorhot = false;
+                temp = -999;
+            }
+        }
+        else if(compareString(getCurrentWord(currentWord),"a")){
+            if(First(Snake)->info.x - 1 == Meteor.x && First(Snake)->info.y == Meteor.y && meteorhot && turn-temp == 1){
+                printf("Meteor masih panas! Anda belum dapat kembali ke titik tersebut.\n");
+                printf("Silahkan masukkan command lainnya\n\n");
+            }
+            else{
+                meteorhot = false;
+                temp = -999;
+            }
+        }
+        else if(compareString(getCurrentWord(currentWord),"d")){
+            if(First(Snake)->info.x + 1 == Meteor.x && First(Snake)->info.y == Meteor.y && meteorhot && turn-temp == 1){
+                printf("Meteor masih panas! Anda belum dapat kembali ke titik tersebut.\n");
+                printf("Silahkan masukkan command lainnya\n\n");
+            }
+            else{
+                meteorhot = false;
+                temp = -999;
+            }
+        }
+        else{
+            if(First(Snake)->info.x == Meteor.x && First(Snake)->info.y + 1 == Meteor.y && meteorhot && turn-temp == 1){
+                printf("Meteor masih panas! Anda belum dapat kembali ke titik tersebut.\n");
+                printf("Silahkan masukkan command lainnya\n\n");
+            }
+            else{
+                meteorhot = false;
+                temp = -999;
+            }
+        }
+
+        if(!meteorhot){
+            int x_temp, y_temp, x_temp1, y_temp1;
+            x_temp = ABSIS(Info(First(Snake)));
+            y_temp = ORDINAT(Info(First(Snake)));
+            if(compareString(getCurrentWord(currentWord),"w")){
+                ORDINAT(Info(First(Snake))) = mod(move(Info(First(Snake)),0,-1).y,5);
+            }
+            else if(compareString(getCurrentWord(currentWord),"s")){
+                ORDINAT(Info(First(Snake))) = mod(move(Info(First(Snake)),0,1).y,5);
+            }
+            else if(compareString(getCurrentWord(currentWord),"a")){
+                ABSIS(Info(First(Snake))) = mod(move(Info(First(Snake)),-1,0).x,5);
+            }
+            else{
+                ABSIS(Info(First(Snake))) = mod(move(Info(First(Snake)),1,0).x,5);
+            }
+
+            address p = Next(First(Snake));
+            while (p!=Nil)
+            {
+                x_temp1 = ABSIS(Info(p));
+                y_temp1 = ORDINAT(Info(p));
+                ABSIS(Info(p)) = x_temp;
+                ORDINAT(Info(p)) = y_temp;
+                x_temp = x_temp1;
+                y_temp = y_temp1;
+                p = p->next;
+            }
+            
+            if(First(Snake)->info.x == Food.x && First(Snake)->info.y == Food.y){
+                if(Search_LL(Snake,CreatePoint(mod((Last(Snake)->info.x - 1),5), Last(Snake)->info.y))==Nil && !(Obstacle.x == mod((Last(Snake)->info.x - 1),5) && Obstacle.y == Last(Snake)->info.y) && !(Meteor.x == mod((Last(Snake)->info.x - 1),5) && Meteor.y == Last(Snake)->info.y)){
+                    InsVLast_LL(&Snake,CreatePoint(mod((Last(Snake)->info.x - 1),5), Last(Snake)->info.y));
+                    while (Search_LL(Snake,Food) != Nil || (Food.x == Obstacle.x && Food.y == Obstacle.y))
+                    {
+                        Food = CreatePoint(random_number(0,4),random_number(0,4));
+                    }
+                }
+                else if(Search_LL(Snake,CreatePoint(Last(Snake)->info.x, mod((Last(Snake)->info.y - 1),5))) == Nil && !(Obstacle.x == Last(Snake)->info.x && Obstacle.y == mod((Last(Snake)->info.y - 1),5)) && !(Meteor.x == Last(Snake)->info.x && Meteor.y == mod((Last(Snake)->info.y - 1),5))){
+                    InsVLast_LL(&Snake,CreatePoint(Last(Snake)->info.x, mod((Last(Snake)->info.y - 1),5)));
+                    while (Search_LL(Snake,Food) != Nil || (Food.x == Obstacle.x && Food.y == Obstacle.y))
+                    {
+                        Food = CreatePoint(random_number(0,4),random_number(0,4));
+                    }
+                }
+                else if(Search_LL(Snake,CreatePoint(Last(Snake)->info.x, mod((Last(Snake)->info.y + 1),5))) == Nil && !(Obstacle.x == Last(Snake)->info.x && Obstacle.y == mod((Last(Snake)->info.y + 1),5)) && !(Meteor.x == Last(Snake)->info.x && Meteor.y == mod((Last(Snake)->info.y + 1),5))){
+                    InsVLast_LL(&Snake,CreatePoint(Last(Snake)->info.x, mod((Last(Snake)->info.y + 1),5)));
+                    while (Search_LL(Snake,Food) != Nil || (Food.x == Obstacle.x && Food.y == Obstacle.y))
+                    {
+                        Food = CreatePoint(random_number(0,4),random_number(0,4));
+                    }
+                }
+                else if(Search_LL(Snake,CreatePoint(mod((Last(Snake)->info.x + 1),5), Last(Snake)->info.y)) == Nil && !(Obstacle.x == mod((Last(Snake)->info.x + 1),5) && Obstacle.y == Last(Snake)->info.y) && !(Meteor.x == mod((Last(Snake)->info.x + 1),5) && Meteor.y == Last(Snake)->info.y)){
+                    InsVLast_LL(&Snake,CreatePoint(mod((Last(Snake)->info.x + 1),5), Last(Snake)->info.y));
+                    while (Search_LL(Snake,Food) != Nil || (Food.x == Obstacle.x && Food.y == Obstacle.y))
+                    {
+                        Food = CreatePoint(random_number(0,4),random_number(0,4));
+                    }
+                }
+                else{
+                    endgame = true;
+                    printf("Snake tidak dapat menambah ekornya lagi!\n");
+                }
+            }
+            else if(First(Snake)->info.x == Obstacle.x && First(Snake)->info.y == Obstacle.y){
+                endgame = true;
+                printf("Snake menabrak obstacle!\n");
+            }
+            else if(Search_LL(SnakeBody(Snake),First(Snake)->info)){
+                endgame = true;
+                printf("Snake menabrak komponennya sendiri!\n");
+            }
+
+            
+            if(!endgame){
+                Meteor = CreatePoint(random_number(0,4),random_number(0,4));
+                while (Meteor.x == Food.x && Meteor.y == Food.y)
+                {
+                    Meteor = CreatePoint(random_number(0,4),random_number(0,4));
+                }
+                printf("Berhasil bergerak!\n");
+                printf("Berikut merupakan peta permainan:\n");
+                PrintArena(Snake,Meteor,Obstacle,Food);
+                printf("\n");
+                if(Search_LL(Snake,Meteor)!=Nil){
+                    if(First(Snake)->info.x == Meteor.x && First(Snake)->info.y == Meteor.y){
+                        endgame = true;
+                        DelP_LL(&Snake,Meteor);
+                        printf("Kepala snake terkena meteor!\n");
+                    }
+                    else{
+                        printf("Anda terkena meteor!\n");
+                        printf("Berikut merupakan peta permainan sekarang:\n");
+                        DelP_LL(&Snake,Meteor);
+                        PrintArena(Snake,Meteor,Obstacle,Food);
+                        printf("\n");
+                        printf("Silahkan lanjutkan permainan!\n\n");
+                    }
+                }
+                else{
+                    printf("Anda beruntung tidak terkena meteor! Silahkan lanjutkan permainan!\n\n");
+                }
+                meteorhot = true;
+                temp = turn;
+            }
+            turn++;
+            displayPoint(Meteor);
+            printf("\n\n");
+        }
+    }
+    printf("Game berakhir. Skor: %d\n",NbElmt_LL(Snake)*2);
+}
+
+List MakeSnake()
+{
+    List snake;
+    CreateEmpty_LL(&snake);
+    InsVLast_LL(&snake,CreatePoint(random_number(0,4),random_number(0,4)));
+    if(Info(First(snake)).x >= 2){
+        InsVLast_LL(&snake, CreatePoint(Info(First(snake)).x - 1, Info(First(snake)).y));
+        InsVLast_LL(&snake, CreatePoint(Info(First(snake)).x - 2, Info(First(snake)).y));
+    }
+    else{
+        if(Info(First(snake)).x == 0){
+            if(Info(First(snake)).y <= 1){
+                InsVLast_LL(&snake,CreatePoint(0,Info(First(snake)).y + 1));
+                InsVLast_LL(&snake,CreatePoint(0,Info(First(snake)).y + 2));
+            }
+            else{
+                InsVLast_LL(&snake, CreatePoint(0, Info(First(snake)).y - 1));
+                InsVLast_LL(&snake, CreatePoint(0, Info(First(snake)).y - 2));
+            }
+        }
+        else{
+            if(Info(First(snake)).y == 0){
+                InsVLast_LL(&snake, CreatePoint(0,0));
+                InsVLast_LL(&snake, CreatePoint(0,1));
+            }
+            else{
+                InsVLast_LL(&snake, CreatePoint(Info(First(snake)).x - 1, Info(First(snake)).y));
+                InsVLast_LL(&snake, CreatePoint(Info(First(snake)).x - 1, Info(First(snake)).y - 1));
+            }
+        }
+    }
+    return snake;
+}
+
+void PrintArena(List snake, point meteor, point obstacle, point food)
+{
+    char* TANDA[25];
+    int i;
+    for (i=0;i<25;i++){
+        TANDA[i] = "0";
+    }
+    TANDA[Info(First(snake)).x + Info(First(snake)).y * 5] = "H";
+    address p = Next(First(snake));
+    int count = 1;
+    while (p!=Nil)
+    {
+        TANDA[Info(p).x + Info(p).y * 5] = int_to_string(count);
+        count++;
+        p = p->next;
+    }
+    TANDA[obstacle.x + obstacle.y * 5] = "b";
+    TANDA[food.x + food.y * 5] = "o";
+    if(meteor.x != -1 && meteor.y != -1){
+        TANDA[meteor.x + meteor.y * 5] = "m"; 
+    }
+    printf("----------------\n");
+    if(!compareString(TANDA[0],"0")){
+        if(stringlen(TANDA[0]) == 2){
+            printf("|%s|",TANDA[0]);
+        }
+        else{
+            printf("|%s |",TANDA[0]);
+        }
+    }
+    else{
+        printf("|  |");
+    }
+    for(i=1;i<25;i++){
+        if((i+5)%5==0){
+            printf("\n----------------\n|");
+        }
+        if(!compareString(TANDA[i],"0")){
+            if(stringlen(TANDA[i])==2){
+                printf("%s|",TANDA[i]);
+            }
+            else{
+                printf("%s |",TANDA[i]);
+            }
+            
+        }
+        else{
+            printf("  |");
+        }
+    }
+    printf("\n----------------");
+}
+
+char* int_to_string(int num){
+    if(num == 0){
+        char* result = "0";
+        return result;
+    }
+    else{
+        int temp;
+        char* result;
+        int idx_max = -1;
+        temp = num;
+        while (temp != 0){
+            idx_max++;
+            temp /= 10;
+        }
+        result = malloc ((idx_max+2)*sizeof(char));
+        result[idx_max+1]='\0';
+        while (num!=0)
+        {
+            temp = num%10;
+            num/=10;
+            result[idx_max] = temp+'0';
+            idx_max--;
+        }
+        return result;
+    }
+}
+
+List SnakeBody(List Snake){
+    if(IsEmpty_LL(Snake)){
+        return Snake;
+    }
+    else if(First(Snake)==Last(Snake)){
+        List BodyEmpty;
+        CreateEmpty_LL(&BodyEmpty);
+        return BodyEmpty;
+    }
+    else{
+        List Body;
+        CreateEmpty_LL(&Body);
+        Body.First = Next(First(Snake));
+        Body.Last = Last(Snake);
+        return Body;
+    }
+}
+
+int mod(int x, int y){
+    if(x>=0){
+        return x%y;
+    }
+    else{
+        while (x<0)
+        {
+            x+=y;
+        }
+        return x;
+    }
 }
