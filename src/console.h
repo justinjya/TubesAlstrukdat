@@ -4,7 +4,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+
+#include "./ADT/scoreboard/map.h"
 #include "./ADT/arraydin/arraydin.h"
+#include "./ADT/scoreboard/arraydin_sb.h"
 #include "./ADT/mesinkarakterv2/mesinkarakterv2.h"
 #include "./ADT/mesinkata/mesinkata.h"
 #include "./ADT/queue/queue.h"
@@ -13,11 +16,17 @@
 #include "./ADT/snakemeteor/listlinier.h"
 #include "./ADT/snakemeteor/point.h"
 
+
 /* Membandingkan string1 dengan string2
  * Mengeluarkan 1 bila string1 = string2
  * Mengeluarkan 2 bila string1 != string2
  */
 boolean compareString(char *string1, char *string2);
+
+/* Menambahkan blank space ' ' sebanyak space setelah string
+ * String memiliki memori yang cukup untuk menampung blank space.
+ */
+void addspace(char* dest, int num_of_spaces);
 
 /* Menggabungkan string1 dengan string2
  * Hasil penggabungan menjadi string3
@@ -73,7 +82,7 @@ void SAVE(ArrayDin *Games, char *inputfile);
 
 /* Menambahkan game baru pada daftar game.
  */
-void CREATEGAME(ArrayDin *arrayGames);
+void CREATEGAME(ArrayDin *arrayGames, ArrayDin_SB scoreboard);
 
 /* Menampilkan daftar game yang disediakan oleh sistem
  */
@@ -157,6 +166,16 @@ int stringlen(char* string);
  * berupa integer random.
  */
 void GAMEBUATAN();
+
+/*
+    Perintah SCOREBOARD merupakan command yang digunakan untuk melihat nama dan skor untuk semua game.
+    Nama pemain yang valid adalah nama yang belum terpakai di scoreboard game yang sedang dimainkan.
+    Urutan scoreboard game yang ditampilkan mengikuti urutan pada command LIST GAME.
+    Urutan nama pada scoreboard diurutkan berdasarkan skor. 
+    Skor tertinggi berada di urutan pertama dan yang terendah berada di urutan terakhir. 
+    Jika ada skor yang sama, skor yang lebih dulu dimasukkan ke scoreboard ditampilkan duluan.
+*/
+void SCOREBOARD();
 
 /*
     Permainan snake dengan meteor, obstacle, serta food.

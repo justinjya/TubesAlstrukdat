@@ -7,6 +7,7 @@ int main()
     Queue GamesQueue;
     Games = MakeArrayDin();
     CreateQueue(&GamesQueue);
+    ArrayDin_SB Scoreboard = MakeArrayDin_SB();
 
     boolean endProgram = false;
     char *command;
@@ -92,7 +93,7 @@ int main()
                 wordToString(currentWord, game);
                 if (compareString(game, "GAME") == true)
                 {
-                    CREATEGAME(&Games);
+                    CREATEGAME(&Games, Scoreboard);
                 }
                 else
                 {

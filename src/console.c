@@ -1,5 +1,7 @@
 #include "console.h"
+#include "./ADT/scoreboard/map.c"
 #include "./ADT/arraydin/arraydin.c"
+#include "./ADT/scoreboard/arraydin_sb.c"
 #include "./ADT/mesinkarakterv2/mesinkarakterv2.c"
 #include "./ADT/mesinkata/mesinkata.c"
 #include "./ADT/queue/queue.c"
@@ -7,6 +9,7 @@
 #include "./ADT/dinerdash/circular_queue_of_pesanan.c"
 #include "./ADT/snakemeteor/listlinier.c"
 #include "./ADT/snakemeteor/point.c"
+
 
 boolean compareString(char *string1, char *string2)
 {
@@ -20,6 +23,18 @@ boolean compareString(char *string1, char *string2)
         string2++;
     }
     return true;
+}
+
+void addspace(char *string, int space) {
+    int i;
+    int length = stringlen(string);
+    int temp = length;
+    while (length < temp + space)
+    {
+        string[length] = ' ';
+        length+=1;
+    }
+    string[length] = '\0';
 }
 
 void concat(char *string1, char *string2, char *string3)
@@ -159,7 +174,7 @@ void SAVE(ArrayDin *Games, char *inputfile)
     printf("Save file berhasil disimpan.\n");
 }
 
-void CREATEGAME(ArrayDin *arrayGames){
+void CREATEGAME(ArrayDin *arrayGames,ArrayDin_SB scoreboard){
     char *gamesname;
     gamesname = (char *) malloc (50 * sizeof(char));
     int i = 0;
@@ -179,6 +194,9 @@ void CREATEGAME(ArrayDin *arrayGames){
     if (found == false) /* Kondisi ketika game belum terdaftar */{
         InsertLast(arrayGames, gamesname);
         printf("Game berhasil ditambahkan.\n");
+        Map M;
+        CreateEmpty_M(&M);
+        InsertLast_SB(&scoreboard,M);
     } else /* Kondisi ketika game seudah terdaftar */{
         printf("Game sudah terdaftar. Silahkan masukkan nama game lain.\n");
     }
@@ -770,7 +788,50 @@ void GAMEBUATAN()
     printf("Skor = %d\n", score);
 }
 
-void SnakeMeteor()
+void SCOREBOARD(ArrayDin_SB Scoreboard, ArrayDin Games){
+    int i;
+    for (i=0;i<Scoreboard.Neff;i++){
+        printf("**** SCOREBOARD GAME %s ****\n", Get(Games,i));
+        printf("| NAMA        | SKOR       |\n");
+        if(IsEmpty_M(Scoreboard.A[i])){
+            printf("---- SCOREBOARD KOSONG -----\n\n");
+        }
+        else{
+            printf("|--------------------------|\n");
+            int j;
+            for (j=0;j<Scoreboard.A[i].Count;j++){
+                if(stringlen(Scoreboard.A[i].Elements[j].Key) == 12){
+                    if(stringlen(int_to_string(Scoreboard.A[i].Elements[j].Value))==1){
+                        printf("| %s| %d          |\n",Scoreboard.A[i].Elements[j].Key,Scoreboard.A[i].Elements[j].Value);
+                    }
+                    else{
+                        printf("| %s| %d         |\n",Scoreboard.A[i].Elements[j].Key,Scoreboard.A[i].Elements[j].Value);
+                    }
+                }
+                else{
+                    int k;
+                    char *string3;
+                    string3 = malloc(13*sizeof(char));
+                    for (k=0;k<stringlen(Scoreboard.A[i].Elements[j].Key);k++){
+                        string3[k] = Scoreboard.A[i].Elements[j].Key[k];
+                    }
+                    string3[k] = '\0';
+                    int a = 12 - stringlen(string3); // maks nama 12 karakter
+                    addspace(string3,a);
+                    if(stringlen(int_to_string(Scoreboard.A[i].Elements[j].Value))==1){
+                        printf("| %s| %d          |\n",string3,Scoreboard.A[i].Elements[j].Value);
+                    }
+                    else{
+                        printf("| %s| %d         |\n",string3,Scoreboard.A[i].Elements[j].Value);
+                    }
+                }
+            }
+        }
+        printf("\n");
+    }
+}
+
+void SnakeMeteor(ArrayDin Games, ArrayDin_SB Scoreboard)
 {
     /*makanan ga bs di body, makanan ga bs di obstacle, meteor ga bisa di makanan*/
     List Snake = MakeSnake();
@@ -801,22 +862,22 @@ void SnakeMeteor()
             printf("Silahkan masukkan command anda: ");
             STARTWORD(NULL,0);
             if(compareString(getCurrentWord(currentWord), "a") || compareString(getCurrentWord(currentWord),"d") || compareString(getCurrentWord(currentWord),"s") || compareString(getCurrentWord(currentWord),"w")){
-                if(Info(Next(First(Snake))).x == mod(Info(First(Snake)).x + 1,5)){
+                if(Info(Next(First(Snake))).x == mod(Info(First(Snake)).x + 1,5) && Info(Next(First(Snake))).y == Info(First(Snake)).y){
                     if(!compareString(getCurrentWord(currentWord), "d")){
                         input_valid = true;           
                     }
                 }
-                else if(Info(Next(First(Snake))).x == mod(Info(First(Snake)).x - 1,5)){
+                else if(Info(Next(First(Snake))).x == mod(Info(First(Snake)).x - 1,5) && Info(Next(First(Snake))).y == Info(First(Snake)).y){
                     if(!compareString(getCurrentWord(currentWord), "a")){
                         input_valid = true;   
                     }
                 }
-                else if(Info(Next(First(Snake))).y == mod(Info(First(Snake)).y + 1,5)){
+                else if(Info(Next(First(Snake))).y == mod(Info(First(Snake)).y + 1,5) && Info(Next(First(Snake))).x == Info(First(Snake)).x){
                     if(!compareString(getCurrentWord(currentWord), "s")){
                         input_valid = true;
                     }
                 }
-                else if(Info(Next(First(Snake))).y == mod(Info(First(Snake)).y - 1,5)){
+                else if(Info(Next(First(Snake))).y == mod(Info(First(Snake)).y - 1,5) && Info(Next(First(Snake))).x == Info(First(Snake)).x){
                     if(!compareString(getCurrentWord(currentWord), "w")){
                         input_valid = true;
                     }
@@ -984,11 +1045,37 @@ void SnakeMeteor()
                 temp = turn;
             }
             turn++;
-            displayPoint(Meteor);
+            PrintInfo_LL(Snake);
             printf("\n\n");
         }
     }
     printf("Game berakhir. Skor: %d\n",NbElmt_LL(Snake)*2);
+    STARTWORD(NULL,0);
+    int i;
+    char stringnama[13];
+    if(currentWord.Length > 12){
+        for(i=0;i<12;i++){
+            stringnama[i] = currentWord.TabWord[i];
+        }
+    }
+    else{
+        for (i=0;i<currentWord.Length;i++){
+            stringnama[i] = currentWord.TabWord[i];
+        }
+    }
+    stringnama[i] = '\0';
+    Insert_M(&Scoreboard.A[SearchArrayDin(Games,"Snake On Meteor")],stringnama,NbElmt_LL(Snake) * 2);
+    int el_idx = Scoreboard.A[SearchArrayDin(Games,"Snake On Meteor")].Count-1;
+    infotype temp1;
+    while (Scoreboard.A[SearchArrayDin(Games,"Snake On Meteor")].Elements[el_idx].Value > Scoreboard.A[SearchArrayDin(Games,"Snake On Meteor")].Elements[el_idx-1].Value){
+        temp1.Key = Scoreboard.A[SearchArrayDin(Games,"Snake On Meteor")].Elements[el_idx].Key;
+        temp1.Value = Scoreboard.A[SearchArrayDin(Games,"Snake On Meteor")].Elements[el_idx].Value;
+        Scoreboard.A[SearchArrayDin(Games,"Snake On Meteor")].Elements[el_idx].Key = Scoreboard.A[SearchArrayDin(Games,"Snake On Meteor")].Elements[el_idx-1].Key;
+        Scoreboard.A[SearchArrayDin(Games,"Snake On Meteor")].Elements[el_idx].Value = Scoreboard.A[SearchArrayDin(Games,"Snake On Meteor")].Elements[el_idx-1].Value;
+        Scoreboard.A[SearchArrayDin(Games,"Snake On Meteor")].Elements[el_idx-1].Key = temp1.Key;
+        Scoreboard.A[SearchArrayDin(Games,"Snake On Meteor")].Elements[el_idx-1].Value = temp1.Value;
+        el_idx--;
+    }
 }
 
 List MakeSnake()
