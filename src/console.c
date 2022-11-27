@@ -1044,10 +1044,6 @@ void SnakeMeteor(ArrayDin Games, ArrayDin_SB Scoreboard)
                 temp = turn;
             }
             turn++;
-<<<<<<< HEAD
-            PrintInfo_LL(Snake);
-=======
->>>>>>> 7399c57a9a804bcfa600298d4b9ea78ba142499b
             printf("\n\n");
         }
     }

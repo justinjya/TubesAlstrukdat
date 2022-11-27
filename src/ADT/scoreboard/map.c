@@ -1,10 +1,3 @@
-/*
-NIM:18221006
-Nama:Richard Haris
-Tanggal:30/10/22
-Topik praktikum:Set,Map,Hash
-Deskripsi:implementasi set.h
-*/
 #include <stdio.h>
 #include "map.h"
 /* *** Konstruktor/Kreator *** */
