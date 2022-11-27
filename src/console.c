@@ -833,7 +833,6 @@ void SCOREBOARD(ArrayDin_SB Scoreboard, ArrayDin Games){
 
 void SnakeMeteor(ArrayDin Games, ArrayDin_SB Scoreboard)
 {
-    /*makanan ga bs di body, makanan ga bs di obstacle, meteor ga bisa di makanan*/
     List Snake = MakeSnake();
     point Meteor = CreatePoint(-1,-1);
     point Obstacle = CreatePoint(random_number(0,4),random_number(0,4));
@@ -1045,7 +1044,10 @@ void SnakeMeteor(ArrayDin Games, ArrayDin_SB Scoreboard)
                 temp = turn;
             }
             turn++;
+<<<<<<< HEAD
             PrintInfo_LL(Snake);
+=======
+>>>>>>> 7399c57a9a804bcfa600298d4b9ea78ba142499b
             printf("\n\n");
         }
     }
