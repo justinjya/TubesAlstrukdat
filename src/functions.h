@@ -9,6 +9,10 @@
  */
 boolean compareString(char *string1, char *string2);
 
+/*
+ */
+char* int_to_string(int num);
+
 /* Menggabungkan string1 dengan string2
  * Hasil penggabungan menjadi string3
  */
@@ -34,6 +38,10 @@ void wordToString(Word currentWord, char *string);
  * value = wordToString(currentWord)
  */
 int wordToInteger(Word currentWord);
+
+/*
+ */
+int stringToInteger(char *string);
 
 /* Menerima input stdin yang kemudian diubah menjadi string
  * type = 0 -> Menggunakan mesinkata type 0 (Memisahkan setiap word dengan blank)
