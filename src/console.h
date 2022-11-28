@@ -1,92 +1,36 @@
 #ifndef __CONSOLE_H__
 #define __CONSOLE_H__
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
+#include "includes.h"
 
-#include "./ADT/scoreboard/map.h"
-#include "./ADT/arraydin/arraydin.h"
-#include "./ADT/scoreboard/arraydin_sb.h"
-#include "./ADT/mesinkarakterv2/mesinkarakterv2.h"
-#include "./ADT/mesinkata/mesinkata.h"
-#include "./ADT/queue/queue.h"
-#include "./ADT/dinerdash/processedorder.h"
-#include "./ADT/dinerdash/circular_queue_of_pesanan.h"
-#include "./ADT/snakemeteor/listlinier.h"
-#include "./ADT/snakemeteor/point.h"
-
-
-/* Membandingkan string1 dengan string2
- * Mengeluarkan 1 bila string1 = string2
- * Mengeluarkan 2 bila string1 != string2
+/* Permainan buatan pemain yang dibuat dengan command CREATE GAME yang
+ * akan langsung selesai dan masuk ke tahap game over dengan skor akhir
+ * berupa integer random.
  */
-boolean compareString(char *string1, char *string2);
-
-/* Menambahkan blank space ' ' sebanyak space setelah string
- * String memiliki memori yang cukup untuk menampung blank space.
- */
-void addspace(char* dest, int num_of_spaces);
-
-/* Menggabungkan string1 dengan string2
- * Hasil penggabungan menjadi string3
- */
-void concat(char *string1, char *string2, char *string3);
-
-/* Mengubah type Word menjadi type char
- * Mengisi string dengan isi currentWord.TabWord
- */
-void wordToString(Word currentWord, char *string);
-
-/* Mengubah type Word menjadi type int
- *
- * Contoh pemakaian:
- * int value;
- * value = wordToString(currentWord)
- */
-int wordToInteger(Word currentWord);
-
-/* Menerima input stdin yang kemudian diubah menjadi string
- * type = 0 -> Menggunakan mesinkata type 0 (Memisahkan setiap word dengan blank)
- * type = 1 -> Menggunakan mesinkata type 1 (Memisahkan setiap word dengan newline)
- *
- * Contoh pemakaian:
- * char *string;
- * string = (char *) malloc (n * sizeof(char));
- * inputString(0, string);
- */
-void inputString(int type, char* value);
-
-/* Menerima input stdin yang kemudian diubah menjadi integer
- *
- * Contoh pemakaian:
- * int value;
- * inputInteger(&value);
- */
-void inputInteger(int *value);
-
-/* Membaca file konfigurasi default yang berisi list game
- * yang akan dimainkan.
- */
-void STARTBNMO(ArrayDin *Games);
+void GAMEBUATAN();
 
 /* Membaca file konfigurasi dari input pemain yang berisi list
  * game yang dapat dimainkan, dan histori game.
  */
-void LOADFILE(ArrayDin *Games, char *inputfile);
+void LOADFILE(ArrayDin *Games, Stack *History, char *inputfile, int numberOfArrays);
+
+/* Membaca file konfigurasi default yang berisi list game
+ * yang akan dimainkan.
+ */
+void STARTBNMO(ArrayDin *Games, Stack *History);
 
 /* Menyimpan state game pemain saat ini ke dalam suatu file
  * yang merupakan input dari pemain.
  */
-void SAVE(ArrayDin *Games, char *inputfile);
-
-/* Menambahkan game baru pada daftar game.
- */
-void CREATEGAME(ArrayDin *arrayGames, ArrayDin_SB scoreboard);
+void SAVE(ArrayDin *Games, Stack *History, char *inputfile);
 
 /* Menampilkan daftar game yang disediakan oleh sistem
  */
 void LISTGAME(ArrayDin *arrayGames);
+
+/* Menambahkan game baru pada daftar game.
+ */
+void CREATEGAME(ArrayDin *arrayGames);
 
 /* Menghapus sebuah game dari daftar game. Aturan penghapusan :
  * - Game yang dapat dihapus hanya game yang dibuat secara
@@ -94,7 +38,7 @@ void LISTGAME(ArrayDin *arrayGames);
  * - 5 game pertama pada file konfigurasi tidak dapat dihapus.
  * - Game yang saat itu terdapat di dalam queue game tidak dapat dihapus.
  */
-void DELETEGAME(ArrayDin *arrayGames, Queue *gamesQueue);
+void DELETEGAME(ArrayDin *arrayGames, Queue *queueGames);
 
 /* Mendaftarkan permainan kedalam list. List queue akan hilang ketika
  * pemain menjalankan command QUIT.
@@ -105,11 +49,11 @@ void QUEUEGAME(ArrayDin *Games, Queue *Queue);
  * sistem. Jika suatu permainan tidak dapat dimainkan akan menampilkan
  * pesan bahwa game tidak dapat dimainkan.
  */
-void PLAYGAME(ArrayDin *arraygame, Queue *queuegame);
+void PLAYGAME(ArrayDin *arraygame, Queue *queuegame, Stack *history);
 
 /* Melewatkan permainan sebanyak n kali.
  */
-void SKIPGAME(ArrayDin *arraygame, Queue *queuegame, int skips);
+void SKIPGAME(ArrayDin *arraygame, Queue *queuegame, Stack *history, int skips);
 
 /* Keluar dari program.
  */
@@ -120,104 +64,4 @@ void QUIT(ArrayDin *Games, Queue *GamesQueue);
  */
 void HELP();
 
-/* RNG (Random Number Generator) merupakan permainan yang membuat pemain
- * menebak angka X.
- */
-void RNG();
-
-/* Permainan mengantarkan makanan namun terurut berdasarkan prioritasnya.
- */
-void DINERDASH();
-
-/* Menerima input berupa dua buah integer, yaitu batas bawah dan batas atas dari angka yang ingin dikembalikan. Mengembalikan integer yang berada di batas bawah dan batas atas
- */
-int random_number(int lowerlimit, int upperlimit);
-
-/* Menerima input berupa id bertipe integer serta mengembalikan Food ID bertipe char* dengan format "M(id)"
- */
-char* food_id_generator(int id);
-
-/* Menerima input berupa sebuah Word dan mengembalikan pointer to char dari Word.TabWord sesuai dengan Word.Length
- */
-char* getCurrentWord(Word string);
-
-/* Menampikan daftar pesanan di Diner Dash
- * Menerima input berupa sebuah QueueOfPesanan
- */
-void PrintUIPesanan(QueueOfPesanan pesanan);
-
-/* Menampilkan daftar pesanan yang sedang dimasak di Diner Dash
- * Menerima input berupa sebuah processedorder
- */
-void PrintUIOnCook(processedorder oncook);
-
-/* Menampilkan daftar pesanan yang siap untuk disajikan di Diner Dash
- * Menerima input berupa processedorder
- */
-void PrintUIReadyToServe(processedorder readytoserve);
-
-/* Mengembalikan panjang dari sebuah string
- * Menerima input berupa pointer to char 
- */
-int stringlen(char* string);
-
-/* Permainan buatan pemain yang dibuat dengan command CREATE GAME yang
- * akan langsung selesai dan masuk ke tahap game over dengan skor akhir
- * berupa integer random.
- */
-void GAMEBUATAN();
-
-/*
-    Perintah SCOREBOARD merupakan command yang digunakan untuk melihat nama dan skor untuk semua game.
-    Nama pemain yang valid adalah nama yang belum terpakai di scoreboard game yang sedang dimainkan.
-    Urutan scoreboard game yang ditampilkan mengikuti urutan pada command LIST GAME.
-    Urutan nama pada scoreboard diurutkan berdasarkan skor. 
-    Skor tertinggi berada di urutan pertama dan yang terendah berada di urutan terakhir. 
-    Jika ada skor yang sama, skor yang lebih dulu dimasukkan ke scoreboard ditampilkan duluan.
-*/
-void SCOREBOARD();
-
-/*
-    Permainan snake dengan meteor, obstacle, serta food.
-    Snake dapat digerakkan dengan input 'w','s','d','a'.
-    Meteor,obstacle,food dijatuhkan secara random di arena permainan.
-    Lokasi obstacle bersifat tetap.
-    Lokasi food dapat berubah secara random setiap food telah termakan oleh snake.
-    Lokasi meteor dijatuhkan secara random setiap pergerakan snake.
-    Panjang snake bertambah 1 jika berhasil memakan food.
-    Jika snake terkena meteor pada bagian selain head, maka panjang snake berkurang 1.
-    Game berakhir ketika snake menyentuh obstacle atau seluruh komponen snake terkena meteor atau kepala snake terkena meteor atau kepala snake menabrak badannya sendiri.
-*/
-void SnakeMeteor();
-
-/*
-    Membuat snake dengan panjang sebesar 3 unit, yang terdiri atas komponen head beserta 2 komponen tubuh lainnya.
-    Kepala dari snake di-random pada sebuah titik dan 2 anggota badan yang berurut menurun dengan prioritas horizontal yang sama. 
-    Apabila badan menabrak dinding, maka akan berurut menurun dengan prioritas vertical yang sama.
-    Maksud dari menurun adalah secara skalar.
-*/
-List MakeSnake();
-
-/*
-    Menggambar arena permainan yang terdiri atas snake, meteor, obstacle, serta food.
-*/
-void PrintArena();
-
-/*
-    Mengubah integer menjadi string
-*/
-char* int_to_string(int num);
-
-/*
-    Mengembalikan body snake.
-    Jika snake kosong, maka mengembalikan list kosong.
-    Jika snake terdiri atas 1 komponen, maka mengembalikan list kosong.
-    Jika snake terdiri atas lebih dari 1 komponen, maka mengembalikan komponen setelah head dari snake hingga tail dari snake. 
-*/
-List SnakeBody(List Snake);
-
-/*
-    Mengembalikan nilai x modulo y, x dan y integer.
-*/
-int mod(int x,int y);
 #endif
