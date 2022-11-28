@@ -8,8 +8,6 @@
 #include "../../boolean.h"
 #include "point.h"
 
-#define Nil NULL
-
 typedef struct tElmtlist *address;
 typedef struct tElmtlist { 
 	point info;
