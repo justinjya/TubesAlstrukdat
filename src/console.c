@@ -487,24 +487,6 @@ void SCOREBOARD(ArrayDin_SB Scoreboard, ArrayDin Games){
     }
 }
 
-void HISTORY(Stack *History, int n)
-{
-    idxTypeStack last;
-    last = (Top(*History) + 1) - n;
-    if (last < 0)
-    {
-        last = 0;
-    }
-
-    printf("Berikut adalah daftar Game yang telah dimainkan:\n");
-    int number = 1;
-    for (idxTypeStack i = Top(*History); i >= last; i--)
-    {
-        printf("%d. %s\n", number, History->T[i]);
-        number++;
-    }
-}
-
 void RESETHISTORY(Stack *History)
 {
     char *input;
