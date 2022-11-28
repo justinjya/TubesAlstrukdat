@@ -5,14 +5,14 @@
 boolean IsEmpty_LL(List L)
 {
 
-    return First(L) == Nil && Last(L) == Nil;
+    return First(L) == NULL && Last(L) == NULL;
 }
 
 void CreateEmpty_LL(List *L)
 {
 
-    First(*L) = Nil;
-    Last(*L) = Nil;
+    First(*L) = NULL;
+    Last(*L) = NULL;
 }
 
 
@@ -20,16 +20,16 @@ address Alokasi_LL(point X)
 {
 
     ElmtList *P = (ElmtList *)malloc(sizeof(ElmtList));
-    if (P != Nil)
+    if (P != NULL)
     {
         ABSIS(Info(P)) = ABSIS(X);
         ORDINAT(Info(P)) = ORDINAT(X);
-        Next(P) = Nil;
+        Next(P) = NULL;
         return P;
     }
     else
     {
-        return Nil;
+        return NULL;
     }
 }
 void Dealokasi_LL(address *P)
@@ -41,12 +41,12 @@ void Dealokasi_LL(address *P)
 address Search_LL(List L, point X)
 {
 
-    address hasil = Nil;
+    address hasil = NULL;
     if (!IsEmpty_LL(L))
     {
         address P = First(L);
         boolean found = false;
-        while (P != Nil && !found)
+        while (P != NULL && !found)
         {
             if (ABSIS(Info(P)) == ABSIS(X) && ORDINAT(Info(P)) == ORDINAT(X))
             {
@@ -66,7 +66,7 @@ void InsVFirst_LL(List *L, point X)
 {
 
     address tambah = Alokasi_LL(X);
-    if (tambah != Nil)
+    if (tambah != NULL)
     {
         InsertFirst_LL(L, tambah);
     }
@@ -76,7 +76,7 @@ void InsVLast_LL(List *L, point X)
 {
 
     address tambah = Alokasi_LL(X);
-    if (tambah != Nil)
+    if (tambah != NULL)
     {
         InsertLast_LL(L, tambah);
     }
@@ -106,7 +106,7 @@ void InsertFirst__LL(List *L, address P)
 
     Next(P) = First(*L);
     First(*L) = P;
-    if(Next(First(*L)) == Nil){
+    if(Next(First(*L)) == NULL){
         Last(*L) = P;
     }
 }
@@ -116,7 +116,7 @@ void InsertAfter_LL(List *L, address P, address Prec)
 
     Next(P) = Next(Prec);
     Next(Prec) = P;
-    if(Next(P) == Nil){
+    if(Next(P) == NULL){
         Last(*L) = P;
     }
 }
@@ -127,7 +127,7 @@ void InsertLast_LL(List *L, address P)
     {
         Next(P) = First(*L);
         First(*L) = P;
-        if(Next(First(*L)) == Nil){
+        if(Next(First(*L)) == NULL){
             Last(*L) = P;
         }
     }
@@ -143,8 +143,8 @@ void DelFirst_LL(List *L, address *P)
     *P = First(*L);
     if (First(*L) == Last(*L))
     {
-        First(*L) = Nil;
-        Last(*L) = Nil;
+        First(*L) = NULL;
+        Last(*L) = NULL;
     }
     else
     {
@@ -155,10 +155,10 @@ void DelP_LL(List *L, point X)
 {
 
     address P = Search_LL(*L, X);
-    if (P != Nil)
+    if (P != NULL)
     {
         address Acari = First(*L);
-        address prec = Nil;
+        address prec = NULL;
         address x;
         boolean found = (Info(Acari).x == X.x && Info(Acari).y == X.y);
         if (found)
@@ -167,7 +167,7 @@ void DelP_LL(List *L, point X)
         }
         else
         {
-            while (Acari != Nil && !found)
+            while (Acari != NULL && !found)
             {
                 if (Info(Acari).x == X.x && Info(Acari).y == X.y)
                 {
@@ -190,13 +190,13 @@ void DelLast_LL(List *L, address *P)
     if (First(*L) == Last(*L))
     {
         *P = Last(*L);
-        First(*L) = Nil;
-        Last(*L) = Nil;
+        First(*L) = NULL;
+        Last(*L) = NULL;
     }
     else
     {
         address y = First(*L);
-        while (Next(Next(y)) != Nil)
+        while (Next(Next(y)) != NULL)
         {
             y = Next(y);
         }
@@ -207,10 +207,10 @@ void DelAfter_LL(List *L, address *Pdel, address Prec)
 {
 
     *Pdel = Next(Prec);
-    if(*Pdel != Nil){
-        if (Next(*Pdel) == Nil)
+    if(*Pdel != NULL){
+        if (Next(*Pdel) == NULL)
         {
-            Next(Prec) = Nil;
+            Next(Prec) = NULL;
             Last(*L) = Prec;
         }
         else
@@ -227,9 +227,9 @@ void PrintInfo_LL(List L)
     {
         address P = First(L);
         printf("[");
-        while (P != Nil)
+        while (P != NULL)
         {
-            if (Next(P) != Nil)
+            if (Next(P) != NULL)
             {
                 printf("<%d,%d>,", Info(P).x, Info(P).y);
             }
@@ -253,7 +253,7 @@ int NbElmt_LL(List L)
     if (!IsEmpty_LL(L))
     {
         address P = First(L);
-        while (P != Nil)
+        while (P != NULL)
         {
             count += 1;
             P = Next(P);
