@@ -25,8 +25,7 @@ boolean IsFull_M(Map M){
 valuetype Value_M(Map M, keytype k){
     if(IsMember_M(M,k)){
         int i = 0;
-        while (M.Elements[i].Key!=k)
-        {
+        while (M.Elements[i].Key!=k){
             i++;
         }
         return M.Elements[i].Value;
@@ -44,9 +43,9 @@ void Insert_M(Map *M, keytype k, valuetype v){
         M->Elements[M->Count].Key=k;
         M->Elements[M->Count].Value=v;
         M->Count+=1;
-    }
-    
+    }   
 }
+
 /* Menambahkan Elmt sebagai elemen Map M. */
 /* I.S. M mungkin kosong, M tidak penuh
         M mungkin sudah beranggotakan v dengan key k */
@@ -55,22 +54,18 @@ void Insert_M(Map *M, keytype k, valuetype v){
 void Delete_M(Map *M, keytype k){
     if(IsMember_M(*M,k)){
         int i = 0;
-        while (M->Elements[i].Key!=k)
-        {
+        while (M->Elements[i].Key!=k){
             i++;
         }
         if(!( M->Elements[i].Key == M->Elements[M->Count-1].Key)){
             int j = i+1;
-            while (j<M->Count)
-            {
+            while (j<M->Count){
                 M->Elements[i]=M->Elements[j];
                 i++;
                 j++;
             }
-            
         }
-        M->Count-=1;
-        
+        M->Count-=1;   
     }
 }
 /* Menghapus Elmt dari Map M. */
@@ -81,8 +76,7 @@ void Delete_M(Map *M, keytype k){
 boolean IsMember_M(Map M, keytype k){
     boolean temp = false;
     int i=0;
-    while (i<M.Count && temp==false)
-    {
+    while (i<M.Count && temp==false){
         if(eq_string(M.Elements[i].Key,k)){
             temp=true;
         }
@@ -90,6 +84,7 @@ boolean IsMember_M(Map M, keytype k){
     }
     return temp;
 }
+/* Mengembalikan true jika k adalah member dari M */
 
 boolean eq_string(char* a, char* b){
     int lengtha=0;
@@ -116,6 +111,7 @@ boolean eq_string(char* a, char* b){
                     a[i]+=32;
                     if(a[i]!=b[i]){
                         temp = 0;
+                        a[i]-=32;
                         break;
                     }
                 }
@@ -123,6 +119,7 @@ boolean eq_string(char* a, char* b){
                     b[i]+=32;
                     if(a[i]!=b[i]){
                         temp = 0;
+                        b[i]-=32;
                         break;
                     }
                 }
@@ -140,4 +137,50 @@ boolean eq_string(char* a, char* b){
         }
     }
 }
-/* Mengembalikan true jika k adalah member dari M */
+/* Mengembalikan nilai true jika string1 sama dengan string2
+ * Mengembalikan nilai false jika string1 tidak sama dengan string2
+ * Kedua string dikatakan sama apabila memiliki panjang yang sama dan huruf per hurufnya merupakan abjad yang sama.
+ */ 
+
+int SearchIndex(Map M, keytype k){
+    int i=0;
+    while (i<M.Count){
+        if(eq_string(M.Elements[i].Key,k)){
+            return i;
+        }
+        i++;
+    }
+    return Undefined_M;
+}
+/* Mengembalikan index pertama kalinya ditemukan key k dari M
+ */
+
+void SortValueMap(Map *M, boolean ascending){
+    infotype temp;
+    if (ascending == true){
+        for (int i = 0; i < M->Count - 1; i++){
+            for (int j = 0; j < M->Count - 1; j++){
+                if (M->Elements[j + 1].Value < M->Elements[j].Value){
+                    temp = M->Elements[j];
+                    M->Elements[j] = M->Elements[j + 1];
+                    M->Elements[j + 1] = temp;
+                }
+            }
+        }
+    }
+    else{
+        for (int i = 0; i < M->Count - 1; i++){
+            for (int j = 0; j < M->Count - 1; j++){
+                if (M->Elements[j + 1].Value > M->Elements[j].Value){
+                    temp = M->Elements[j];
+                    M->Elements[j] = M->Elements[j + 1];
+                    M->Elements[j + 1] = temp;
+                }
+            }
+        }
+    }
+}
+/* Mengembalikan Map M yang sudah disortir berdasatkan value
+ * Mengembalikan hasil sortir ascending jika ascending = true
+ * Mengembalikan hasil sortir decending jika ascending = false
+ */
