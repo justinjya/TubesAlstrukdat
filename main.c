@@ -7,11 +7,12 @@ int main()
     Stack History;
     Queue GamesQueue;
     ArrayDin_SB Scoreboard;
-    Games = MakeArrayDin();
-    CreateEmptyStack(&History);
-    CreateQueue(&GamesQueue);
-    Scoreboard = MakeArrayDin_SB();
 
+    Games = MakeArrayDin(); 
+    CreateQueue(&GamesQueue);
+    CreateEmptyStack(&History);
+
+    boolean saved = false;
     boolean endProgram = false;
     char *command;
     command = (char *) malloc (50 * sizeof(char));
@@ -23,7 +24,6 @@ int main()
     printf("Selamat datang pada BNMO!\n\n");
     printf("Jalankan command START atau LOAD <filename tanpa .txt> untuk membuka file.\n");
     printf("Jalankan command QUIT untuk keluar dari program.\n");
-    // printf("ArrayDinCapacity = %d\n", GetCapacity(Games));
     while (endProgram == false)
     {
         printf("\nENTER COMMAND: ");
@@ -33,19 +33,19 @@ int main()
         {
             if (compareString(command, "START") == true)
             {
-                STARTBNMO(&Games, &History);
+                STARTBNMO(&Games, &History, &GamesQueue, &Scoreboard);
             }
             else if (compareString(command, "LOAD") == true)
             {
                 char *inputfile;
-                inputfile = (char *) malloc (50 * sizeof(char));
+                inputfile = (char *) malloc (30 * sizeof(char));
                 ADVWORD(0);
                 if (currentChar == '\n')
                 {
                     wordToString(currentWord, inputfile);
                     if (compareString(inputfile, "LOAD") == false)
                     {
-                        LOADFILE(&Games, &History, inputfile, 6);
+                        LOADFILE(&Games, &History, &GamesQueue, &Scoreboard, inputfile, false);
                     }
                     else
                     {
@@ -55,7 +55,7 @@ int main()
             }
             else if (compareString(command, "QUIT") == true)
             {
-                QUIT(&Games, &GamesQueue);
+                QUIT(&Games, &GamesQueue, &History, &Scoreboard, true);
                 endProgram = true;
             }
             else if (compareString(command, "HELP") == true)
@@ -81,7 +81,8 @@ int main()
                     wordToString(currentWord, inputfile);
                     if (compareString(inputfile, "SAVE") == false)
                     {
-                        SAVE(&Games, &History, inputfile);   
+                        SAVE(&Games, &History, &Scoreboard, inputfile);   
+                        saved = true;
                     }
                     else
                     {
@@ -97,7 +98,7 @@ int main()
                 wordToString(currentWord, game);
                 if (compareString(game, "GAME") == true)
                 {
-                    CREATEGAME(&Games);
+                    CREATEGAME(&Games, &Scoreboard);
                 }
                 else
                 {
@@ -127,7 +128,7 @@ int main()
                 wordToString(currentWord, game);
                 if (compareString(game, "GAME") == true)
                 {
-                    DELETEGAME(&Games, &GamesQueue);
+                    DELETEGAME(&Games, &GamesQueue, &Scoreboard);
                 }
                 else
                 {
@@ -157,7 +158,7 @@ int main()
                 wordToString(currentWord, game);
                 if (compareString(game, "GAME") == true)
                 {
-                    PLAYGAME(&Games, &GamesQueue, &History);
+                    PLAYGAME(&Games, &GamesQueue, &History, &Scoreboard);
                 }
                 else
                 {
@@ -183,7 +184,7 @@ int main()
                         }
                         else
                         {
-                            SKIPGAME(&Games, &GamesQueue, &History, skips);
+                            SKIPGAME(&Games, &GamesQueue, &History, &Scoreboard, skips);
                         }
                     }
                 }
@@ -196,41 +197,24 @@ int main()
             {
                 SCOREBOARD(Scoreboard, Games);
             }
-            else if (compareString(command, "HISTORY") == true)
-            {
-                ADVWORD(0);
-                if (currentChar == '\n')
-                {
-                    int n;
-                    n = wordToInteger(currentWord);
-                    if (n == -9999)
-                    {
-                        printf("Command belum memiliki parameter. Silahkan input command sesuai format HISTORY <skips>\n");   
-                    }
-                    else
-                    {
-                        HISTORY(&History, n);
-                    }
-                }
-            }
             else if (compareString(command, "RESET") == true)
             {
-                char *history;
-                history = (char *) malloc (10 * sizeof(char));
+                char *wordAfter;
+                wordAfter = (char *) malloc (13 * sizeof(char));
                 ADVWORD(0);
-                wordToString(currentWord, history);
-                if (compareString(history, "HISTORY") == true)
+                wordToString(currentWord, wordAfter);
+                if (compareString(wordAfter, "SCOREBOARD") == true)
                 {
-                    RESETHISTORY(&History);
+                    RESETSCOREBOARD(&Games, &Scoreboard);
                 }
                 else
                 {
-                    printf("Command tidak dikenali, apakah yang Anda maksud RESET HISTORY?\n");
+                    printf("Command tidak dikenali, apakah yang Anda maksud RESET SCOREBOARD?\n");
                 }
             }
             else if (compareString(command, "QUIT") == true)
             {
-                QUIT(&Games, &GamesQueue);
+                QUIT(&Games, &GamesQueue, &History, &Scoreboard, saved);
                 endProgram = true;
             }
             else if (compareString(command, "HELP") == true)
