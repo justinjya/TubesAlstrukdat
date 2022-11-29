@@ -121,7 +121,7 @@ int stringToInteger(char *string)
     int value = 0;
     int satuan = 1;
     int i = stringLen(string) - 1;
-    while (i >= 0)
+    while (i > 0)
     {
         if (string[i] < 48 || string[i] > 57)
         {
@@ -135,6 +135,34 @@ int stringToInteger(char *string)
         }
     }
     return value;
+}
+
+char* splitStringInt(char *string, int *number)
+{
+    int i = 0;
+    char *temp;
+    temp = (char *) malloc (stringLen(string) * sizeof(char));
+    while (*string != BLANK)
+    {
+        temp[i] = *string;
+        i++;
+        string++;
+    }
+    temp[i] = '\0';
+    i = 0;
+
+    char *num;
+    num = (char *) malloc (3 * sizeof(char));
+    while (*string != '\0')
+    {
+        num[i] = *string;
+        i++;
+        string++;
+    }
+    num[i]           = '\0';
+    *number = stringToInteger(num);
+    free(num);
+    return temp;
 }
 
 void inputString(int type, char* value)
@@ -167,10 +195,20 @@ char* getCurrentWord(Word string){
     return string1;
 }
 
-void INPUTNAMASCOREBOARD(int Skor)
+void inputNamaScoreboard(ArrayDin *Games, Queue *GamesQueue, ArrayDin_SB *Scoreboard, int Skor)
 {
     char *nama;
     nama = (char *) malloc (25 * sizeof(char));
     printf("Nama: ");
     inputString(0, nama);
+    if (!IsMember_M(Scoreboard->A[SearchArrayDin(*Games, HEAD(*GamesQueue))], nama))
+    {
+        Insert_M(&Scoreboard->A[SearchArrayDin(*Games, HEAD(*GamesQueue))], nama, Skor);
+    }
+    else
+    {
+        printf("Nama sudah dipakai. Silahkan input nama lain.\n");
+        inputNamaScoreboard(Games, GamesQueue, Scoreboard, Skor);
+    }
+    SortValueMap(&Scoreboard->A[SearchArrayDin(*Games, HEAD(*GamesQueue))], false);
 }
