@@ -1,0 +1,26 @@
+6
+RNG
+DINER DASH
+HANGMAN
+TOWER OF HANOI
+SNAKE ON METEOR
+DUMMY
+3
+HANGMAN
+TOWER OF HANOI
+RNG
+2
+BNMO 19
+Finn 12
+0
+3
+Jake 58
+Finn 31
+Marcelline 10
+0
+1
+Marshal 77
+2
+Justin 50
+Ken 44
+.
