@@ -159,7 +159,7 @@ char* splitStringInt(char *string, int *number)
         i++;
         string++;
     }
-    num[i]           = '\0';
+    num[i] = '\0';
     *number = stringToInteger(num);
     free(num);
     return temp;
