@@ -51,7 +51,7 @@ boolean IsFull_M(Map M);
 
 /* ********** Operator Dasar Map ********* */
 valuetype Value_M(Map M, keytype k);
-/* Mengembalikan Nil_Mai value dengan key k dari M */
+/* Mengembalikan nilai value dengan key k dari M */
 /* Jika tidak ada key k pada M, akan mengembalikan Undefined_M */
 
 void Insert_M(Map *M, keytype k, valuetype v);
@@ -74,4 +74,15 @@ boolean eq_string(char* a, char* b);
  * Mengembalikan nilai false jika string1 tidak sama dengan string2
  * Kedua string dikatakan sama apabila memiliki panjang yang sama dan huruf per hurufnya merupakan abjad yang sama.
  */ 
+
+int SearchIndex(Map M, keytype k);
+/* Mengembalikan index pertama kalinya ditemukan key k dari M
+ */
+
+void SortValueMap(Map *M, boolean ascending);
+/* Mengembalikan Map M yang sudah disortir berdasatkan value
+ * Mengembalikan hasil sortir ascending jika ascending = true
+ * Mengembalikan hasil sortir decending jika ascending = false
+ */
+
 #endif
