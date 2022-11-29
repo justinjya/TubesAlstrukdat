@@ -12,17 +12,17 @@ void GAMEBUATAN();
 /* Membaca file konfigurasi dari input pemain yang berisi list
  * game yang dapat dimainkan, dan histori game.
  */
-void LOADFILE(ArrayDin *Games, Stack *History, char *inputfile, int numberOfArrays);
+void LOADFILE(ArrayDin *Games, Stack *History, Queue *GamesQueue, ArrayDin_SB *Scoreboard, char *inputfile, boolean Start);
 
 /* Membaca file konfigurasi default yang berisi list game
  * yang akan dimainkan.
  */
-void STARTBNMO(ArrayDin *Games, Stack *History);
+void STARTBNMO(ArrayDin *Games, Stack *History, Queue *GamesQueue, ArrayDin_SB *Scoreboard);
 
 /* Menyimpan state game pemain saat ini ke dalam suatu file
  * yang merupakan input dari pemain.
  */
-void SAVE(ArrayDin *Games, Stack *History, char *inputfile);
+void SAVE(ArrayDin *Games, Stack *History, ArrayDin_SB *Scoreboard, char *inputfile);
 
 /* Menampilkan daftar game yang disediakan oleh sistem
  */
@@ -30,7 +30,7 @@ void LISTGAME(ArrayDin *arrayGames);
 
 /* Menambahkan game baru pada daftar game.
  */
-void CREATEGAME(ArrayDin *arrayGames);
+void CREATEGAME(ArrayDin *arrayGames, ArrayDin_SB *Scoreboard);
 
 /* Menghapus sebuah game dari daftar game. Aturan penghapusan :
  * - Game yang dapat dihapus hanya game yang dibuat secara
@@ -38,7 +38,7 @@ void CREATEGAME(ArrayDin *arrayGames);
  * - 5 game pertama pada file konfigurasi tidak dapat dihapus.
  * - Game yang saat itu terdapat di dalam queue game tidak dapat dihapus.
  */
-void DELETEGAME(ArrayDin *arrayGames, Queue *queueGames);
+void DELETEGAME(ArrayDin *arrayGames, Queue *queueGames, ArrayDin_SB *scoreboard);
 
 /* Mendaftarkan permainan kedalam list. List queue akan hilang ketika
  * pemain menjalankan command QUIT.
@@ -49,11 +49,11 @@ void QUEUEGAME(ArrayDin *Games, Queue *Queue);
  * sistem. Jika suatu permainan tidak dapat dimainkan akan menampilkan
  * pesan bahwa game tidak dapat dimainkan.
  */
-void PLAYGAME(ArrayDin *arraygame, Queue *queuegame, Stack *history);
+void PLAYGAME(ArrayDin *arraygame, Queue *queuegame, Stack *history, ArrayDin_SB *scoreboard);
 
 /* Melewatkan permainan sebanyak n kali.
  */
-void SKIPGAME(ArrayDin *arraygame, Queue *queuegame, Stack *history, int skips);
+void SKIPGAME(ArrayDin *arraygame, Queue *queuegame, Stack *history, ArrayDin_SB *scoreboard, int skips);
 
 /* Keluar dari program.
  */
@@ -63,5 +63,14 @@ void QUIT(ArrayDin *Games, Queue *GamesQueue);
  * oleh pemain.
  */
 void HELP();
+
+/* Menampilkan Scoreboard setiap Game yang tersedia dalam sistem
+ */
+void SCOREBOARD(ArrayDin_SB Scoreboard, ArrayDin Games);
+
+/* Menghilangkan isi Scoreboard Game yang tersedia dalam sistem atau
+ * Menghilangkan isi Scoreboard semua Game yang tersedia dalam sistem
+ */
+void RESETSCOREBOARD(ArrayDin *Games, ArrayDin_SB *Scoreboard);
 
 #endif
