@@ -5,16 +5,17 @@
 // #include "./games/towerofhanoi.c"
 #include "./games/snakeonmeteor.c"
 
-void GAMEBUATAN()
+int GAMEBUATAN()
 {
     char *rand;
     int score;
     rand = (char *) malloc (1 * sizeof(char));
     score = (int) rand % 100;
-    printf("Skor = %d\n", score);
+    printf("Skor akhir: %d\n", score);
+    return score;
 }
 
-void LOADFILE(ArrayDin *Games, Stack *History, char *inputfile, int numberOfArrays)
+void LOADFILE(ArrayDin *Games, Stack *History, Queue *GamesQueue, ArrayDin_SB *Scoreboard, char *inputfile, boolean Start)
 {
     char placeholder[] = ".\\data\\";
     char directory[50];
@@ -25,9 +26,9 @@ void LOADFILE(ArrayDin *Games, Stack *History, char *inputfile, int numberOfArra
     concat(placeholder, filename, directory);
 
     char *temp;
-    int score;
-    int amount;
-    int arrayNumber = 0;
+    int score, amount, totalScoreboard;
+    int arrayNumber = 1;
+    int arrayScoreboard = 0;
 
     START(directory);
     if (pita == NULL)
@@ -39,139 +40,58 @@ void LOADFILE(ArrayDin *Games, Stack *History, char *inputfile, int numberOfArra
         fclose(pita);
         STARTWORD(directory, 1);
         amount = wordToInteger(currentWord);
-        while (arrayNumber < numberOfArrays)
+        totalScoreboard = wordToInteger(currentWord);
+        *Scoreboard = MakeArrayDin_SB(amount);
+        while (arrayNumber <= totalScoreboard + 2)
         {
-            printf("amount = %d\n", amount);
             if (amount != -9999)
             {
                 for (int j = 0; j < amount; j++)
                 {
-                    if (arrayNumber < 2)
-                    {
-                        ADVWORD(1);
-                    }
-                    else
-                    {
-                        ADVWORD(0);
-                    }
-
-                    temp = (char *) malloc (currentWord.Length * sizeof(char));
+                    ADVWORD(1);
+                    temp = (char *) malloc (30 * sizeof(char));
                     wordToString(currentWord, temp);
-                    printf("%s\n", temp);
-
-                    if (arrayNumber == 0)
+                    if (arrayNumber == 1)
                     {
                         InsertLast(Games, temp);
                     }
-                    else if (arrayNumber == 1)
+                    else if (arrayNumber == 2)
                     {
                         Push(History, temp);
                     }
-                    // else if (arrayNumber == 2)
-                    // {
-                    //     InsertSet(namesRNG, temp);
-                    //     ADVWORD(0);
-                    //     ADV();
-                    //     score = wordToInteger(currentWord);
-                    //     InsertMap(scoreRNG, j, score);
-                    // }
-                    // else if (arrayNumber == 3)
-                    // {
-                    //     InsertSet(namesDinerDash, temp);
-                    //     ADVWORD(0);
-                    //     ADV();
-                    //     score = wordToInteger(currentWord);
-                    //     InsertMap(scoreDinerDash, j, score);
-                    // }
-                    // else if (arrayNumber == 4)
-                    // {
-                    //     InsertSet(namesHangman, temp);
-                    //     ADVWORD(0);
-                    //     ADV();
-                    //     score = wordToInteger(currentWord);
-                    //     InsertMap(scoreHangman, j, score);
-                    // }
-                    // else if (arrayNumber == 5)
-                    // {
-                    //     InsertSet(namesTowerOfHanoi, temp);
-                    //     ADVWORD(0);
-                    //     ADV();
-                    //     score = wordToInteger(currentWord);
-                    //     InsertMap(scoreTowerOfHanoi, j, score);
-                    // }
-                    // else if (arrayNumber == 6)
-                    // {
-                    //     InsertSet(namesSnakeOnMeteor, temp);
-                    //     ADVWORD(0);
-                    //     ADV();
-                    //     score = wordToInteger(currentWord);
-                    //     InsertMap(scoreSnakeOnMeteor, j, score);
-                    // }
+                    else
+                    {
+                        temp = splitStringInt(temp, &score);
+                        Insert_M(&Scoreboard->A[arrayScoreboard], temp, score);
+                    }
                 }
             }
-            printf("arrayNumber = %d\n", arrayNumber);
-            if (arrayNumber <= 1)
+            if (arrayNumber > 2)
             {
-                ADVWORD(1);
+                arrayScoreboard++;
             }
-            else
-            {
-                ADVWORD(0);
-            }
+            ADVWORD(1);
             arrayNumber++;
             amount = wordToInteger(currentWord);
-            if (arrayNumber > 1)
-            {
-                ADV();
-            }
         }
-        if (compareString(filename, "config.txt") == true)
+        if (Start == true)
         {
             printf("File konfigurasi sistem berhasil dibaca. BNMO berhasil dijalankan.\n");
         }
         else
         {
             printf("File %s berhasil dibaca. BNMO berhasil dijalankan.\n", inputfile);
-            printf("\nHistory:\n");
-            for (int i = Top(*History); i >= 0; i--)
-            {
-                printf("%s\n", History->T[i]);
-            }
-            // printf("\nscoreboardRNG:\n");
-            // for (int i = 0; i < namesRNG->Count; i++)
-            // {
-            //     printf("%s %d\n", namesRNG->Elements[i], scoreRNG->Elements[i].Value);
-            // }
-            // printf("\nscoreboardDinerDash:\n");
-            // for (int i = 0; i < namesDinerDash->Count; i++)
-            // {
-            //     printf("%s %d\n", namesDinerDash->Elements[i], scoreDinerDash->Elements[i].Value);
-            // }
-            // printf("\nscoreboardHangman:\n");
-            // for (int i = 0; i < namesHangman->Count; i++)
-            // {
-            //     printf("%s %d\n", namesHangman->Elements[i], scoreHangman->Elements[i].Value);
-            // }
-            // printf("\nscoreboardTowerOfHanoi:\n");
-            // for (int i = 0; i < namesTowerOfHanoi->Count; i++)
-            // {
-            //     printf("%s %d\n", namesTowerOfHanoi->Elements[i], scoreTowerOfHanoi->Elements[i].Value);
-            // }
-            // printf("\nscoreboardSnakeOnMeteor:\n");
-            // for (int i = 0; i < namesSnakeOnMeteor->Count; i++)
-            // {
-            //     printf("%s %d\n", namesSnakeOnMeteor->Elements[i], scoreSnakeOnMeteor->Elements[i].Value);
-            // }
         }
+        SortValueMap(&Scoreboard->A[0], false);
     }
 }
 
-void STARTBNMO(ArrayDin *Games, Stack *History)
+void STARTBNMO(ArrayDin *Games, Stack *History, Queue *GamesQueue, ArrayDin_SB *Scoreboard)
 {
-    LOADFILE(Games, History, "config", 1);
+    LOADFILE(Games, History, GamesQueue, Scoreboard, "config", true);
 }
 
-void SAVE(ArrayDin *Games, Stack *History, char *inputfile)
+void SAVE(ArrayDin *Games, Stack *History, ArrayDin_SB *Scoreboard, char *inputfile)
 {
     char placeholder[] = ".\\data\\";
     char directory[50];
@@ -199,6 +119,15 @@ void SAVE(ArrayDin *Games, Stack *History, char *inputfile)
         }
     }
 
+    for (int i = 0; i < Scoreboard->Neff; i++)
+    {
+        fprintf(open, "%d\n", Scoreboard->A[i].Count);
+        for (int j = 0; j < Scoreboard->A[i].Count; j++)
+        {
+            fprintf(open, "%s %d\n", Scoreboard->A[i].Elements[j]);
+        }
+    }
+
     fprintf(open, ".");
     fclose(open);
     printf("Save file berhasil disimpan.\n");
@@ -214,7 +143,7 @@ void LISTGAME(ArrayDin *arrayGames){
     }
 }
 
-void CREATEGAME(ArrayDin *arrayGames){
+void CREATEGAME(ArrayDin *arrayGames, ArrayDin_SB *Scoreboard){
     char *gamesname;
     gamesname = (char *) malloc (50 * sizeof(char));
     int i = 0;
@@ -233,13 +162,14 @@ void CREATEGAME(ArrayDin *arrayGames){
     }
     if (found == false) /* Kondisi ketika game belum terdaftar */{
         InsertLast(arrayGames, gamesname);
+        AddNeff_SB(Scoreboard);
         printf("Game berhasil ditambahkan.\n");
     } else /* Kondisi ketika game seudah terdaftar */{
         printf("Game sudah terdaftar. Silahkan masukkan nama game lain.\n");
     }
 }
 
-void DELETEGAME(ArrayDin *arrayGames, Queue *queueGames){
+void DELETEGAME(ArrayDin *arrayGames, Queue *queueGames, ArrayDin_SB *scoreboard){
 	char *input;
     int i, a;
     boolean found;
@@ -262,6 +192,7 @@ void DELETEGAME(ArrayDin *arrayGames, Queue *queueGames){
         }
         if (found == false) {
             DeleteAt(arrayGames, i);
+            SubNeff_SB(scoreboard);
             printf("Game berhasil dihapus.\n");
         }
         else {
@@ -310,7 +241,7 @@ void QUEUEGAME(ArrayDin *Games, Queue *Queue){
     }
 }
 
-void PLAYGAME(ArrayDin *arraygame, Queue *queuegame, Stack *history)
+void PLAYGAME(ArrayDin *arraygame, Queue *queuegame, Stack *history, ArrayDin_SB *scoreboard)
 {
     if (isEmpty(*queuegame))
     {
@@ -325,53 +256,53 @@ void PLAYGAME(ArrayDin *arraygame, Queue *queuegame, Stack *history)
         index = SearchArrayDin(*arraygame, HEAD(*queuegame));
         if (index < 5)
         {
+            printf("Loading %s ...\n", HEAD(*queuegame));
             if (compareString(HEAD(*queuegame), "RNG") == true)
             {
-                printf("Loading %s ...\n", HEAD(*queuegame));
                 skor = RNG();
             }
 
-            else if (compareString(HEAD(*queuegame), "Diner Dash") == true)
+            else if (compareString(HEAD(*queuegame), "DINER DASH") == true)
             {
-                printf("Loading %s ...\n", HEAD(*queuegame));
                 skor = DINERDASH();
             }
 
-            else if (compareString(HEAD(*queuegame), "Hangman") == true)
+            else if (compareString(HEAD(*queuegame), "HANGMAN") == true)
             {
-                printf("Loading %s ...\n", HEAD(*queuegame));
+                skor = 0;
                 // skor = HANGMAN();
             }
             
-            else if (compareString(HEAD(*queuegame), "Tower of Hanoi") == true)
+            else if (compareString(HEAD(*queuegame), "TOWER OF HANOI") == true)
             {
-                printf("Loading %s ...\n", HEAD(*queuegame));
+                skor = 0;
                 // skor = TOWEROFHANOI();
             }
 
-            else if (compareString(HEAD(*queuegame), "Snake on Meteor") == true)
+            else if (compareString(HEAD(*queuegame), "SNAKEONMETEOR") == true)
             {
-                printf("Loading %s ...\n", HEAD(*queuegame));
                 skor = SNAKEONMETEOR();
             }
 
-            else
-            {
-                printf("Game %s masih dalam maintenance, belum dapat dimainkan. Silahkan pilih game lain.\n", HEAD(*queuegame));
-            }
+            // else
+            // {
+            //     printf("Game %s masih dalam maintenance, belum dapat dimainkan. Silahkan pilih game lain.\n", HEAD(*queuegame));
+            // }
 
         }
+
         else
         {
             printf("Loading %s ...\n", HEAD(*queuegame));
-            GAMEBUATAN();
+            skor = GAMEBUATAN();
         }
+        inputNamaScoreboard(arraygame, queuegame, scoreboard, skor);
         dequeue(queuegame, &val);
         Push(history, val);
     }
 }
 
-void SKIPGAME(ArrayDin *arraygames, Queue *queuegame, Stack *history, int skips)
+void SKIPGAME(ArrayDin *arraygame, Queue *queuegame, Stack *history, ArrayDin_SB *scoreboard, int skips)
 {
     printf("Berikut adalah daftar game-mu:\n");
     if (!isEmpty(*queuegame))
@@ -403,7 +334,7 @@ void SKIPGAME(ArrayDin *arraygames, Queue *queuegame, Stack *history, int skips)
         if (!isEmpty(*queuegame))
         {
             printf("\n");
-            PLAYGAME(arraygames, queuegame, history);
+            PLAYGAME(arraygame, queuegame, history, scoreboard);
         }
 	    
         else
@@ -413,13 +344,37 @@ void SKIPGAME(ArrayDin *arraygames, Queue *queuegame, Stack *history, int skips)
     }
 }
 
-void QUIT(ArrayDin *Games, Queue *GamesQueue){
-    DeallocateArrayDin(Games);
-    ElType val;
-    while (!isEmpty(*GamesQueue)){
-        dequeue(GamesQueue, &val);
+void QUIT(ArrayDin *Games, Queue *GamesQueue, Stack *History, ArrayDin_SB *Scoreboard, boolean saved){
+    if (saved == true){
+        DeallocateArrayDin(Games);
+        ElType val;
+        while (!isEmpty(*GamesQueue)){
+            dequeue(GamesQueue, &val);
+        }
+        printf("\nAnda keluar dari game BNMO.\nBye bye ...\n\n");
     }
-    printf("Anda keluar dari game BNMO.\nBye bye ...\n\n");
+    else{
+        char *input;
+        input = (char *) malloc (7 * sizeof(char));
+        printf("Anda belum melakukan SAVE! Apakah anda tetap ingin keluar\n");
+        printf("dari game BNMO tanpa melakukan SAVE? (YA/TIDAK) ");
+        inputString(0, input);
+        if (compareString(input, "YA") == true){
+            QUIT(Games, GamesQueue, History, Scoreboard, true);
+        }
+        else if (compareString(input, "TIDAK") == true){
+            char *inputfile;
+            inputfile = (char *) malloc (50 * sizeof(char));
+            printf("\nSilahkan input nama file untuk disimpan (tanpa .txt): ");
+            inputString(0, inputfile);
+            SAVE(Games, History, Scoreboard, inputfile);
+            QUIT(Games, GamesQueue, History, Scoreboard, true);
+        }
+        else{
+            printf("\nCommand tidak dikenali. Silahkan input command (YA/TIDAK).\n\n");
+            QUIT(Games, GamesQueue, History, Scoreboard, false);
+        }
+    }
 }
 
 void HELP(int type){
@@ -487,31 +442,60 @@ void SCOREBOARD(ArrayDin_SB Scoreboard, ArrayDin Games){
     }
 }
 
-void RESETHISTORY(Stack *History)
+void RESETSCOREBOARD(ArrayDin *Games, ArrayDin_SB *Scoreboard)
 {
-    char *input;
-    input = (char *) malloc (10 * sizeof(char));
-    printf("APAKAH KAMU YAKIN INGIN MELAKUKAN RESET HISTORY? (YA/TIDAK) ");
-    inputString(0, input);
-    if (compareString(input, "YA") == true)
+    int scoreboardIdx;
+    printf("DAFTAR SCOREBOARD:\n");
+    printf("0. ALL\n");
+    for (int i = 0; i < Games->Neff; i++)
     {
-        CreateEmptyStack(History);
+        printf("%d. %s\n", i + 1, Games->A[i]);
     }
-    else if (compareString(input, "TIDAK") == true)
+    printf("\n");
+    printf("SCOREBOARD YANG INGIN DIHAPUS: ");
+    inputInteger(&scoreboardIdx);
+    if (scoreboardIdx >= 0 && scoreboardIdx < Games->Neff)
     {
-        printf("History tidak jadi di-reset. Berikut adalah daftar Game yang telah dimainkan:\n");
+        char *input;
+        input = (char *) malloc (10 * sizeof(char));
+        printf("\n");
+        printf("APAKAH ANDA YAKIN INGIN MELAKUKAN RESET\n");
+        if (scoreboardIdx > 0)
         {
-            int number = 1;
-            for (idxTypeStack i = Top(*History); i >= 0; i--)
+            printf("SCOREBOARD %s? (YA/TIDAK) ", Games->A[scoreboardIdx] - 1);
+        }
+        else
+        {
+            printf("SCOREBOARD ALL? (YA/TIDAK) ");
+        }
+        inputString(0, input);
+        if (compareString(input, "YA") == true)
+        {
+            if (scoreboardIdx == 0)
             {
-                printf("%d. %s\n", number, History->T[i]);
-                number++;
+                for (int i = 0; i < Scoreboard->Neff; i++)
+                {
+                    CreateEmpty_M(&Scoreboard->A[i]);
+                }
             }
+            else
+            {
+                CreateEmpty_M(&Scoreboard->A[scoreboardIdx - 1]);
+            }
+            printf("Scoreboard berhasil di-reset.\n");
+        }
+        else if (compareString(input, "TIDAK") == true)
+        {
+            printf("Scoreboard tidak berhasil di-reset.\n");
+        }
+        else
+        {
+            printf("Command tidak dikenali. Silahkan masukkan command (YA/TIDAK).\n\n");
+            RESETSCOREBOARD(Games, Scoreboard);
         }
     }
     else
     {
-        printf("Command tidak dikenali. Silahkan masukkan command (YA/TIDAK).\n\n");
-        RESETHISTORY(History);
+        printf("SCOREBOARD TIDAK TERDAFTAR. SILAHKAN INPUT SCOREBOARD LAIN.\n");
     }
 }
