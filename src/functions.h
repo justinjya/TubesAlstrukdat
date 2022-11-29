@@ -9,7 +9,7 @@
  */
 boolean compareString(char *string1, char *string2);
 
-/*
+/* Mengubah type int menjadi type string
  */
 char* int_to_string(int num);
 
@@ -22,7 +22,8 @@ void concat(char *string1, char *string2, char *string3);
  */
 int stringLen(char *string);
 
-/* 
+/* Menambahkan spasi(-spasi) diakhir string
+ * Digunakan dalam fungsi SCOREBOARD
  */
 void addspace(char *string, int space);
 
@@ -39,9 +40,15 @@ void wordToString(Word currentWord, char *string);
  */
 int wordToInteger(Word currentWord);
 
-/*
+/* Mengubah type string menjadi type integer
  */
 int stringToInteger(char *string);
+
+/* Memisahkan string yang memiliki dua kata terdiri dari
+ * nama dan angka menjadi string dan integer terpisah.
+ * Digunakan dalam fungsi LOAD
+ */
+char* splitStringInt(char *string, int *number);
 
 /* Menerima input stdin yang kemudian diubah menjadi string
  * type = 0 -> Menggunakan mesinkata type 0 (Memisahkan setiap word dengan blank)
@@ -70,5 +77,11 @@ int randomNumber(int lowerlimit, int upperlimit);
 /* Menerima input berupa sebuah Word dan mengembalikan pointer to char dari Word.TabWord sesuai dengan Word.Length
  */
 char* getCurrentWord(Word string);
+
+/* Menerima input berupa string yang kemudian dipakai menjadi nama untuk
+ * diletakkan dalam Scoreboard. Jika nama sudah ada akan mengeluarkan pesan
+ * Nama sudah dipakai dalam Scoreboard <nama game>.
+ */
+void inputNamaScoreboard(ArrayDin *Games, Queue *GamesQueue, ArrayDin_SB *Scoreboard, int Skor);
 
 #endif
