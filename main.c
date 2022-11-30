@@ -25,19 +25,20 @@ int main()
     printf("======================================================================================\n\n");
     printf("Selamat datang pada BNMO!\n\n");
     printf("Jalankan command START atau LOAD <filename tanpa .txt> untuk membuka file.\n");
-    printf("Jalankan command QUIT untuk keluar dari program.\n");
+    printf("Jalankan command QUIT untuk keluar dari program.");
     while (endProgram == false)
     {
+        printf("\nJalankan command HELP untuk melihat daftar commands yang tersedia.");
         printf("\nENTER COMMAND: ");
         inputString(0, command);
         system("cls");
         if (IsEmpty(Games))
         {
-            if (compareString(command, "START") == true)
+            if (compareString(upper(command), "START") == true)
             {
                 STARTBNMO(&Games, &History, &GamesQueue, &Scoreboard);
             }
-            else if (compareString(command, "LOAD") == true)
+            else if (compareString(upper(command), "LOAD") == true)
             {
                 char *inputfile;
                 inputfile = (char *) malloc (30 * sizeof(char));
@@ -45,7 +46,7 @@ int main()
                 if (currentChar == '\n')
                 {
                     wordToString(currentWord, inputfile);
-                    if (compareString(inputfile, "LOAD") == false)
+                    if (compareString(upper(inputfile), "LOAD") == false)
                     {
                         LOADFILE(&Games, &History, &GamesQueue, &Scoreboard, inputfile, false);
                     }
@@ -55,12 +56,12 @@ int main()
                     }
                 }
             }
-            else if (compareString(command, "QUIT") == true)
+            else if (compareString(upper(command), "QUIT") == true)
             {
                 QUIT(&Games, &GamesQueue, &History, &Scoreboard, true);
                 endProgram = true;
             }
-            else if (compareString(command, "HELP") == true)
+            else if (compareString(upper(command), "HELP") == true)
             {
                 HELP(0);
             }
@@ -73,7 +74,7 @@ int main()
         }
         else
         {
-            if (compareString(command, "SAVE") == true)
+            if (compareString(upper(command), "SAVE") == true)
             {
                 char *inputfile;
                 inputfile = (char *) malloc (50 * sizeof(char));
@@ -81,7 +82,7 @@ int main()
                 if (currentChar == '\n')
                 {
                     wordToString(currentWord, inputfile);
-                    if (compareString(inputfile, "SAVE") == false)
+                    if (compareString(upper(inputfile), "SAVE") == false)
                     {
                         SAVE(&Games, &History, &Scoreboard, inputfile);   
                         saved = true;
@@ -92,13 +93,13 @@ int main()
                     }
                 }
             }
-            else if (compareString(command, "CREATE") == true)
+            else if (compareString(upper(command), "CREATE") == true)
             {
                 char *game;
                 game = (char *) malloc (10 * sizeof(char));
                 ADVWORD(0);
                 wordToString(currentWord, game);
-                if (compareString(game, "GAME") == true)
+                if (compareString(upper(game), "GAME") == true)
                 {
                     CREATEGAME(&Games, &Scoreboard);
                 }
@@ -107,13 +108,13 @@ int main()
                     printf("Command tidak dikenali, apakah yang Anda maksud CREATE GAME?\n");
                 }
             }
-            else if (compareString(command, "LIST") == true)
+            else if (compareString(upper(command), "LIST") == true)
             {
                 char *game;
                 game = (char *) malloc (10 * sizeof(char));
                 ADVWORD(0);
                 wordToString(currentWord, game);
-                if (compareString(game, "GAME") == true)
+                if (compareString(upper(game), "GAME") == true)
                 {
                     LISTGAME(&Games);
                 }
@@ -122,13 +123,13 @@ int main()
                     printf("Command tidak dikenali, apakah yang Anda maksud LIST GAME?\n");
                 }
             }
-            else if (compareString(command, "DELETE") == true)
+            else if (compareString(upper(command), "DELETE") == true)
             {
                 char *game;
                 game = (char *) malloc (10 * sizeof(char));
                 ADVWORD(0);
                 wordToString(currentWord, game);
-                if (compareString(game, "GAME") == true)
+                if (compareString(upper(game), "GAME") == true)
                 {
                     DELETEGAME(&Games, &GamesQueue, &Scoreboard);
                 }
@@ -137,13 +138,13 @@ int main()
                     printf("Command tidak dikenali, apakah yang Anda maksud DELETE GAME?\n");
                 }
             }
-            else if (compareString(command, "QUEUE") == true)
+            else if (compareString(upper(command), "QUEUE") == true)
             {
                 char *game;
                 game = (char *) malloc (10 * sizeof(char));
                 ADVWORD(0);
                 wordToString(currentWord, game);
-                if (compareString(game, "GAME") == true)
+                if (compareString(upper(game), "GAME") == true)
                 {
                     QUEUEGAME(&Games, &GamesQueue);
                 }
@@ -152,13 +153,13 @@ int main()
                     printf("Command tidak dikenali, apakah yang Anda maksud QUEUE GAME?\n");
                 }
             }
-            else if (compareString(command, "PLAY") == true)
+            else if (compareString(upper(command), "PLAY") == true)
             {
                 char *game;
                 game = (char *) malloc (10 * sizeof(char));
                 ADVWORD(0);
                 wordToString(currentWord, game);
-                if (compareString(game, "GAME") == true)
+                if (compareString(upper(game), "GAME") == true)
                 {
                     PLAYGAME(&Games, &GamesQueue, &History, &Scoreboard);
                 }
@@ -167,13 +168,13 @@ int main()
                     printf("Command tidak dikenali, apakah yang Anda maksud PLAY GAME?\n");
                 }
             }
-            else if (compareString(command, "SKIP") == true)
+            else if (compareString(upper(command), "SKIP") == true)
             {
                 char *game;
                 game = (char *) malloc (10 * sizeof(char));
                 ADVWORD(0);
                 wordToString(currentWord, game);
-                if (compareString(game, "GAME") == true)
+                if (compareString(upper(game), "GAME") == true)
                 {
                     ADVWORD(0);
                     if (currentChar == '\n')
@@ -195,11 +196,11 @@ int main()
                     printf("Command tidak dikenali, apakah yang Anda maksud SKIP GAME <skips>?\n");
                 }
             }
-            else if (compareString(command, "SCOREBOARD") == true)
+            else if (compareString(upper(command), "SCOREBOARD") == true)
             {
                 SCOREBOARD(Scoreboard, Games);
             }
-            else if (compareString(command, "HISTORY") == true)
+            else if (compareString(upper(command), "HISTORY") == true)
             {
                 ADVWORD(0);
                 if (currentChar == '\n')
@@ -216,17 +217,17 @@ int main()
                     }
                 }
             }
-            else if (compareString(command, "RESET") == true)
+            else if (compareString(upper(command), "RESET") == true)
             {
                 char *wordAfter;
                 wordAfter = (char *) malloc (13 * sizeof(char));
                 ADVWORD(0);
                 wordToString(currentWord, wordAfter);
-                if (compareString(wordAfter, "HISTORY") == true)
+                if (compareString(upper(wordAfter), "HISTORY") == true)
                 {
                     RESETHISTORY(&History);
                 }
-                else if (compareString(wordAfter, "SCOREBOARD") == true)
+                else if (compareString(upper(wordAfter), "SCOREBOARD") == true)
                 {
                     RESETSCOREBOARD(&Games, &Scoreboard);
                 }
@@ -235,12 +236,12 @@ int main()
                     printf("Command tidak dikenali, apakah yang Anda maksud RESET HISTORY/RESET SCOREBOARD?\n");
                 }
             }
-            else if (compareString(command, "QUIT") == true)
+            else if (compareString(upper(command), "QUIT") == true)
             {
                 QUIT(&Games, &GamesQueue, &History, &Scoreboard, saved);
                 endProgram = true;
             }
-            else if (compareString(command, "HELP") == true)
+            else if (compareString(upper(command), "HELP") == true)
             {
                 HELP(1);
             }
