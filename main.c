@@ -3,6 +3,8 @@
 int main()
 {
     system("cls");
+    srand(time(NULL));
+    
     ArrayDin Games;
     Stack History;
     Queue GamesQueue;
