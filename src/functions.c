@@ -207,7 +207,7 @@ void inputNamaScoreboard(ArrayDin *Games, Queue *GamesQueue, ArrayDin_SB *Scoreb
     }
     else
     {
-        printf("Nama sudah dipakai. Silahkan input nama lain.\n");
+        printf("\nNama sudah dipakai. Silahkan input nama lain.\n");
         inputNamaScoreboard(Games, GamesQueue, Scoreboard, Skor);
     }
     SortValueMap(&Scoreboard->A[SearchArrayDin(*Games, HEAD(*GamesQueue))], false);
