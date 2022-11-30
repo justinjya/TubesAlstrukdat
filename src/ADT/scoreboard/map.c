@@ -86,20 +86,28 @@ boolean IsMember_M(Map M, keytype k){
 }
 /* Mengembalikan true jika k adalah member dari M */
 
-boolean eq_string(char* a, char* b){
+boolean eq_string(char* string1, char* string2){
     int lengtha=0;
     int lengthb=0;
     int i = 0;
-    while (a[i]!='\0'){
+    char *a;
+    char *b;
+    a = malloc(12*sizeof(char));
+    b = malloc(12*sizeof(char));
+    while (string1[i]!='\0'){
+        a[i] = string1[i];
         lengtha += 1;
         i+=1;
     }
+    a[11] = '\0';
     i=0;
-    while (b[i]!='\0')
+    while (string2[i]!='\0')
     {
+        b[i] = string2[i];
         lengthb+=1;
         i+=1;
     }
+    b[11] = '\0';
     if (lengtha!=lengthb){
         return false;
     }
@@ -107,11 +115,10 @@ boolean eq_string(char* a, char* b){
         int temp = 1;
         for (i=0;i<lengtha;i++){
             if (a[i]!=b[i]){
-                if(a[i]>'A' && a[i]<'Z'){
+                if(a[i]>='A' && a[i]<='Z'){
                     a[i]+=32;
                     if(a[i]!=b[i]){
                         temp = 0;
-                        a[i]-=32;
                         break;
                     }
                 }
@@ -119,7 +126,6 @@ boolean eq_string(char* a, char* b){
                     b[i]+=32;
                     if(a[i]!=b[i]){
                         temp = 0;
-                        b[i]-=32;
                         break;
                     }
                 }
