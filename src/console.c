@@ -279,7 +279,7 @@ void PLAYGAME(ArrayDin *arraygame, Queue *queuegame, Stack *history, ArrayDin_SB
                 // skor = TOWEROFHANOI();
             }
 
-            else if (compareString(HEAD(*queuegame), "SNAKEONMETEOR") == true)
+            else if (compareString(HEAD(*queuegame), "SNAKE ON METEOR") == true)
             {
                 skor = SNAKEONMETEOR();
             }
