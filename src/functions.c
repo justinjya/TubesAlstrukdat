@@ -1,5 +1,15 @@
 #include "includes.h"
 
+int power(int number, int power)
+{
+    int result = number;
+    for (int i = 1; i < power; i++)
+    {
+        result *= number;
+    }
+    return result;
+}
+
 boolean compareString(char *string1, char *string2)
 {
     while (*string1 != '\0' || *string2 != '\0')
