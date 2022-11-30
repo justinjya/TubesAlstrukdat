@@ -1,4 +1,4 @@
-#include "./src/console.h"
+#include "./src/console.c"
 
 int main()
 {
@@ -197,19 +197,40 @@ int main()
             {
                 SCOREBOARD(Scoreboard, Games);
             }
+            else if (compareString(command, "HISTORY") == true)
+            {
+                ADVWORD(0);
+                if (currentChar == '\n')
+                {
+                    int n;
+                    n = wordToInteger(currentWord);
+                    if (n == -9999)
+                    {
+                        printf("Command belum memiliki parameter. Silahkan input command sesuai format HISTORY <skips>\n");   
+                    }
+                    else
+                    {
+                        HISTORY(&History, n);
+                    }
+                }
+            }
             else if (compareString(command, "RESET") == true)
             {
                 char *wordAfter;
                 wordAfter = (char *) malloc (13 * sizeof(char));
                 ADVWORD(0);
                 wordToString(currentWord, wordAfter);
-                if (compareString(wordAfter, "SCOREBOARD") == true)
+                if (compareString(wordAfter, "HISTORY") == true)
+                {
+                    RESETHISTORY(&History);
+                }
+                else if (compareString(wordAfter, "SCOREBOARD") == true)
                 {
                     RESETSCOREBOARD(&Games, &Scoreboard);
                 }
                 else
                 {
-                    printf("Command tidak dikenali, apakah yang Anda maksud RESET SCOREBOARD?\n");
+                    printf("Command tidak dikenali, apakah yang Anda maksud RESET HISTORY/RESET SCOREBOARD?\n");
                 }
             }
             else if (compareString(command, "QUIT") == true)
