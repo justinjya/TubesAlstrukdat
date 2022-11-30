@@ -179,7 +179,6 @@ void inputInteger(int *value)
 
 int randomNumber(int lowerlimit, int upperlimit)
 {
-    srand(time(NULL));
     int number;
     number = (rand() % (upperlimit - lowerlimit + 1)) + lowerlimit;
     return number; 
