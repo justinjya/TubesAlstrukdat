@@ -22,6 +22,10 @@ void concat(char *string1, char *string2, char *string3);
  */
 int stringLen(char *string);
 
+/* Mengembalikan string yang telah diubah setiap karakter menjadi huruf kapital
+ */
+char* upper(char *string);
+
 /* Menambahkan spasi(-spasi) diakhir string
  * Digunakan dalam fungsi SCOREBOARD
  */
