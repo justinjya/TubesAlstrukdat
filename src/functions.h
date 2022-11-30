@@ -3,6 +3,10 @@
 
 #include "includes.h"
 
+/* Mengembalikan nilai number pangkat power
+ */
+int power(int number, int power);
+
 /* Membandingkan string1 dengan string2
  * Mengeluarkan 1 bila string1 = string2
  * Mengeluarkan 2 bila string1 != string2
