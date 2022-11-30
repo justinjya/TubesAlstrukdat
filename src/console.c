@@ -454,7 +454,7 @@ void RESETSCOREBOARD(ArrayDin *Games, ArrayDin_SB *Scoreboard)
     printf("\n");
     printf("SCOREBOARD YANG INGIN DIHAPUS: ");
     inputInteger(&scoreboardIdx);
-    if (scoreboardIdx >= 0 && scoreboardIdx < Games->Neff)
+    if (scoreboardIdx >= 0 && scoreboardIdx <= Games->Neff)
     {
         char *input;
         input = (char *) malloc (10 * sizeof(char));
@@ -462,7 +462,7 @@ void RESETSCOREBOARD(ArrayDin *Games, ArrayDin_SB *Scoreboard)
         printf("APAKAH ANDA YAKIN INGIN MELAKUKAN RESET\n");
         if (scoreboardIdx > 0)
         {
-            printf("SCOREBOARD %s? (YA/TIDAK) ", Games->A[scoreboardIdx] - 1);
+            printf("SCOREBOARD %s? (YA/TIDAK) ", Games->A[scoreboardIdx - 1]);
         }
         else
         {
