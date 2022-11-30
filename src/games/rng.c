@@ -21,14 +21,15 @@ int RNG(){
             printf("Masukan tidak valid.\n");
         }
         else{
-        jumlah += 1;
         if (tebak == 0) {
             nyerah = true;
             jumlah = 25;
         } else if (tebak > angka){
             printf("Lebih kecil\n");
+            jumlah += 1;
         } else if (tebak < angka){
             printf("Lebih besar\n");
+            jumlah += 1;
         }
         }
     }
@@ -41,6 +42,5 @@ int RNG(){
     }
     skor = (25-jumlah)*4;
     printf("Skor akhir: %d\n", skor);
-    // INPUTNAMASCOREBOARD(skor);
     return skor;
 }
