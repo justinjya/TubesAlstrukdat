@@ -57,12 +57,12 @@ void SKIPGAME(ArrayDin *arraygame, Queue *queuegame, Stack *history, ArrayDin_SB
 
 /* Keluar dari program.
  */
-void QUIT(ArrayDin *Games, Queue *GamesQueue);
+void QUIT(ArrayDin *Games, Queue *GamesQueue, Stack *History, ArrayDin_SB *Scoreboard, boolean saved);
 
 /* Menampilan daftar command-command yang dapat dijalankan
  * oleh pemain.
  */
-void HELP();
+void HELP(int type);
 
 /* Menampilkan Scoreboard setiap Game yang tersedia dalam sistem
  */
