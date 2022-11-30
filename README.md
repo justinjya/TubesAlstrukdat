@@ -1,4 +1,4 @@
-# Tugas Besar 1 IF2111 Algoritma dan Struktur Data STI
+# Tugas Besar 2 IF2111 Algoritma dan Struktur Data STI
 K3 | Kelompok 5
 
 ### Deskripsi Singkat Program :
