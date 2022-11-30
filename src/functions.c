@@ -197,9 +197,10 @@ char* getCurrentWord(Word string){
 void inputNamaScoreboard(ArrayDin *Games, Queue *GamesQueue, ArrayDin_SB *Scoreboard, int Skor)
 {
     char *nama;
-    nama = (char *) malloc (25 * sizeof(char));
-    printf("Nama: ");
+    nama = (char *) malloc (12 * sizeof(char));
+    printf("Nama (Max. 11 karakter): ");
     inputString(0, nama);
+    nama[11] = '\0';
     if (!IsMember_M(Scoreboard->A[SearchArrayDin(*Games, HEAD(*GamesQueue))], nama))
     {
         Insert_M(&Scoreboard->A[SearchArrayDin(*Games, HEAD(*GamesQueue))], nama, Skor);
