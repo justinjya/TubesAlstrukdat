@@ -411,34 +411,33 @@ void SCOREBOARD(ArrayDin_SB Scoreboard, ArrayDin Games){
             printf("|--------------------------|\n");
             int j;
             for (j=0;j<Scoreboard.A[i].Count;j++){
-                if(stringLen(Scoreboard.A[i].Elements[j].Key) == 12){
-                    if(stringLen(int_to_string(Scoreboard.A[i].Elements[j].Value))==1){
-                        printf("| %s| %d          |\n",Scoreboard.A[i].Elements[j].Key,Scoreboard.A[i].Elements[j].Value);
-                    }
-                    else{
-                        printf("| %s| %d         |\n",Scoreboard.A[i].Elements[j].Key,Scoreboard.A[i].Elements[j].Value);
-                    }
+                int k;
+                char *string1;
+                char *string2;
+                char *temp;
+                string1 = malloc(13*sizeof(char));
+                string2 = malloc(11*sizeof(char));
+                for (k=0;k<stringLen(Scoreboard.A[i].Elements[j].Key);k++){
+                    string1[k] = Scoreboard.A[i].Elements[j].Key[k];
                 }
-                else{
-                    int k;
-                    char *string3;
-                    string3 = malloc(13*sizeof(char));
-                    for (k=0;k<stringLen(Scoreboard.A[i].Elements[j].Key);k++){
-                        string3[k] = Scoreboard.A[i].Elements[j].Key[k];
-                    }
-                    string3[k] = '\0';
-                    int a = 12 - stringLen(string3); // maks nama 12 karakter
-                    addspace(string3,a);
-                    if(stringLen(int_to_string(Scoreboard.A[i].Elements[j].Value))==1){
-                        printf("| %s| %d          |\n",string3,Scoreboard.A[i].Elements[j].Value);
-                    }
-                    else{
-                        printf("| %s| %d         |\n",string3,Scoreboard.A[i].Elements[j].Value);
-                    }
+                string1[stringLen(Scoreboard.A[i].Elements[j].Key)] = '\0';
+                temp = int_to_string(Scoreboard.A[i].Elements[j].Value);
+                for (k=0;k<stringLen(temp);k++){
+                    string2[k] = temp[k];
                 }
+                string2[stringLen(temp)] = '\0';
+                if(stringLen(string1) < 12){
+                    int a = 12 - stringLen(string1); // maks nama 12 karakter
+                    addspace(string1,a);
+                }
+                if(stringLen(string2) < 11){
+                    int b = 11 - stringLen(string2); // maks angka 10 karakter
+                    addspace(string2,b);
+                }
+                printf("| %s| %s|\n",string1,string2);
             }
+            printf("\n");
         }
-        printf("\n");
     }
 }
 
