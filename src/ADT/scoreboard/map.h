@@ -69,7 +69,7 @@ void Delete_M(Map *M, keytype k);
 boolean IsMember_M(Map M, keytype k);
 /* Mengembalikan true jika k adalah member dari M */
 
-boolean eq_string(char* a, char* b);
+boolean eq_string(char* string1, char* string2);
 /* Mengembalikan nilai true jika string1 sama dengan string2
  * Mengembalikan nilai false jika string1 tidak sama dengan string2
  * Kedua string dikatakan sama apabila memiliki panjang yang sama dan huruf per hurufnya merupakan abjad yang sama.
