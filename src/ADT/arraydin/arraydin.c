@@ -111,31 +111,18 @@ void PrintArrayDin(ArrayDin array)
     }
 }
 
-void ReverseArrayDin(ArrayDin *array)
+boolean compareStringArrayDin(char *string1, char *string2)
 {
-    IdxType i = array->Neff - 1;
-    IdxType count = 0;
-    ElType temp;
-    while (count < i)
+    while (*string1 != '\0' || *string2 != '\0')
     {
-        temp = array->A[count];
-        array->A[count] = array->A[i];  
-        array->A[i] = temp;
-        count++;
-        i--;
+        if (*string1 != *string2)
+        {
+            return false;
+        }
+        string1++;
+        string2++;
     }
-}
-
-ArrayDin CopyArrayDin(ArrayDin array)
-{
-    ArrayDin ArrCopy;
-    ArrCopy = MakeArrayDin();
-    IdxType i;
-    for (i = 0; i < array.Neff; i++)
-    {
-        InsertLast(&ArrCopy, array.A[i]);
-    }
-    return ArrCopy;
+    return true;
 }
 
 IdxType SearchArrayDin(ArrayDin array, ElType el)
@@ -143,7 +130,7 @@ IdxType SearchArrayDin(ArrayDin array, ElType el)
     IdxType i;
     for (i = 0; i < array.Neff; i++)
     {
-        if (array.A[i] == el)
+        if (compareStringArrayDin(array.A[i], el))
         {
             return i;
         }
