@@ -1,7 +1,7 @@
 #include "functions.c"
 #include "./games/rng.c"
 #include "./games/dinerdash.c"
-// #include "./games/hangman.c"
+#include "./games/hangman.c"
 #include "./games/towerofhanoi.c"
 #include "./games/snakeonmeteor.c"
 
@@ -270,8 +270,7 @@ void PLAYGAME(ArrayDin *arraygame, Queue *queuegame, Stack *history, ArrayDin_SB
 
             else if (compareString(HEAD(*queuegame), "HANGMAN") == true)
             {
-                skor = 0;
-                // skor = HANGMAN();
+                skor = HANGMAN();
             }
             
             else if (compareString(HEAD(*queuegame), "TOWER OF HANOI") == true)
