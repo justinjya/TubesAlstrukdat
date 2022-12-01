@@ -430,7 +430,7 @@ void SCOREBOARD(ArrayDin_SB Scoreboard, ArrayDin Games){
                 }
                 string2[stringLen(temp)] = '\0';
                 if(stringLen(string1) < 12){
-                    int a = 12 - stringLen(string1); // maks nama 12 karakter
+                    int a = 12 - stringLen(string1); // maks nama 11 karakter
                     addspace(string1,a);
                 }
                 if(stringLen(string2) < 11){
