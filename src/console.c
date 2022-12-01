@@ -2,7 +2,7 @@
 #include "./games/rng.c"
 #include "./games/dinerdash.c"
 // #include "./games/hangman.c"
-// #include "./games/towerofhanoi.c"
+#include "./games/towerofhanoi.c"
 #include "./games/snakeonmeteor.c"
 
 int GAMEBUATAN()
@@ -275,8 +275,7 @@ void PLAYGAME(ArrayDin *arraygame, Queue *queuegame, Stack *history, ArrayDin_SB
             
             else if (compareString(HEAD(*queuegame), "TOWER OF HANOI") == true)
             {
-                skor = 0;
-                // skor = TOWEROFHANOI();
+                skor = TOWEROFHANOI();
             }
 
             else if (compareString(HEAD(*queuegame), "SNAKE ON METEOR") == true)
