@@ -527,3 +527,30 @@ void HISTORY(Stack *history, int n)
         }
     }
 }
+
+void RESETHISTORY(Stack *history)
+{
+    char *input;
+    input = (char *) malloc (10 * sizeof(char));
+    printf("APAKAH KAMU YAKIN INGIN MELAKUKAN RESET HISTORY? (YA/TIDAK) ");
+    inputString(0, input);
+
+    if (compareString(input, "YA") == true)
+    {
+        CreateEmptyStack(history);
+    }
+
+    else if (compareString(input, "TIDAK") == true)
+    {
+        printf("\nHistory tidak jadi di-reset. Berikut adalah daftar Game yang telah dimainkan:\n");
+        {
+            HISTORY(history, Top(*history) + 1);
+        }
+    }
+
+    else
+    {
+        printf("Command tidak dikenali. Silahkan masukkan command (YA/TIDAK).\n\n");
+        RESETHISTORY(history);
+    }
+}
