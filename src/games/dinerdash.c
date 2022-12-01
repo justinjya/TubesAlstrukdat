@@ -124,14 +124,14 @@ int DINERDASH(){
         printf("MASUKKAN COMMAND: ");
         STARTWORD(NULL,0);
         printf("\n");
-        if(compareString(getCurrentWord(currentWord),"COOK") == true || compareString(getCurrentWord(currentWord),"SERVE") == true || compareString(getCurrentWord(currentWord),"SKIP") == true || compareString(getCurrentWord(currentWord),"QUIT") == true){
-            if(compareString(getCurrentWord(currentWord),"COOK")==true){
+        if(compareString(upper(getCurrentWord(currentWord)),"COOK") == true || compareString(upper(getCurrentWord(currentWord)),"SERVE") == true || compareString(upper(getCurrentWord(currentWord)),"SKIP") == true || compareString(upper(getCurrentWord(currentWord)),"QUIT") == true){
+            if(compareString(upper(getCurrentWord(currentWord)),"COOK")==true){
                 ADVWORD(0);
                 if(currentChar == '\n'){
                     boolean found = false;
                     i = pesanan.HEAD;
                     while (i!=(pesanan.TAIL+1)%pesanan.MaxEl && found == false){
-                        if(compareString(pesanan.Tab[i].makanan, getCurrentWord(currentWord))==true){
+                        if(compareString(pesanan.Tab[i].makanan, upper(getCurrentWord(currentWord)))==true){
                             found = true;
                         }
                         i = (i+1)%pesanan.MaxEl;
@@ -192,19 +192,19 @@ int DINERDASH(){
                 }
             
             }
-            else if(compareString(getCurrentWord(currentWord),"SERVE") == true){
+            else if(compareString(upper(getCurrentWord(currentWord)),"SERVE") == true){
                 ADVWORD(0);
                 if(currentChar == '\n'){
                     boolean found = false;
                     i = 0;
                     while (i<readytoserve.Neff && found == false){
-                        if(compareString(readytoserve.A[i].makanan, getCurrentWord(currentWord)) == true){
+                        if(compareString(readytoserve.A[i].makanan, upper(getCurrentWord(currentWord))) == true){
                             found = true;
                         }
                         i++;
                     }
                     if(found){       
-                        if (compareString(getCurrentWord(currentWord),pesanan.Tab[pesanan.HEAD].makanan) == true){
+                        if (compareString(upper(getCurrentWord(currentWord)),pesanan.Tab[pesanan.HEAD].makanan) == true){
                             masakan m = MakeMasakan(pesanan.Tab[pesanan.HEAD].makanan,pesanan.Tab[pesanan.HEAD].ketahanan);
                             saldo += pesanan.Tab[pesanan.HEAD].harga;
                             printf("Berhasil mengantar %s\n",pesanan.Tab[pesanan.HEAD].makanan);
@@ -245,7 +245,7 @@ int DINERDASH(){
                             }
                         }
                         else{
-                            printf("%s belum dapat disajikan karena %s belum selesai\n\n",getCurrentWord(currentWord),pesanan.Tab[pesanan.HEAD].makanan);
+                            printf("%s belum dapat disajikan karena %s belum selesai\n\n",upper(getCurrentWord(currentWord)),pesanan.Tab[pesanan.HEAD].makanan);
                         }
 
                     }
@@ -262,7 +262,7 @@ int DINERDASH(){
                     
                 }
             }
-            else if(compareString(getCurrentWord(currentWord),"SKIP") == true){
+            else if(compareString(upper(getCurrentWord(currentWord)),"SKIP") == true){
                 IgnoreBlanks();
                 if(currentChar == '\n'){
                     PushPesanan(&pesanan,CreatePesanan(food_id_generator(LengthQueueOfPesanan(pesanan)+served_customer),randomNumber(1,5),randomNumber(1,5),randomNumber(10,50) * 1000));        
@@ -306,7 +306,7 @@ int DINERDASH(){
                     
                 }
             }
-            else if(compareString(getCurrentWord(currentWord),"QUIT") == true){
+            else if(compareString(upper(getCurrentWord(currentWord)),"QUIT") == true){
                     endGame = true;
             }
 
