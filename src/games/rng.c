@@ -10,7 +10,7 @@ int RNG(){
     jumlah = 0;
     nyerah = false;
 
-    printf("\n==================================== RNG ====================================\n");
+	printf("\n========================================== RNG =========================================\n");
     printf("RNG Telah dimulai. Uji keberuntungan Anda dengan menebak X.\n");
     printf("X berada pada rentang angka 1 - 100\n");
     printf("Masukkan '0' jika ingin menyerah.\n");
@@ -32,6 +32,7 @@ int RNG(){
 			}
         }
     }
+	printf("\n===================================== GAME BERAKHIR ====================================\n");
     if (nyerah == true){
         printf("\n");
         printf("Anda kurang beruntung, X adalah %d \n", angka);
