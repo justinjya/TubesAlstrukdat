@@ -230,7 +230,7 @@ int TOWEROFHANOI(){
     }
     score = ((jumlahPiringan * 20) - (moves - (power(2, jumlahPiringan) - 1))) / 10; //Hitung skor akhir pemain
     printf("\n");
-    printf("SELAMAT, KAMU BERHASIL!\n\n");
+    printf("\n=============================== SELAMAT, KAMU BERHASIL ================================\n\n");
     printf("Jumlah putaran: %d\n", moves);
     printf("Skor akhir: %d\n", score);
     return score;
