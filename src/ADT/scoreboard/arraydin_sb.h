@@ -57,21 +57,17 @@ ElType_SB Get_SB(ArrayDin_SB array, IdxType i);
 int GetCapacity_SB(ArrayDin_SB array);
 
 /**
+ * array mungkin penuh
  * Menambahkan Neff ArrayDin_SB
  * Digunakan ketika menamnbahkan Game baru
  */
 void AddNeff_SB(ArrayDin_SB *array);
 
 /**
+ * array tidak kosong
  * Mengurangi Neff ArrayDin_SB
  * Digunakan ketika menghapus Game
  */
 void SubNeff_SB(ArrayDin_SB *array);
-
-/**
- * Fungsi untuk melakukan search suatu ArrayDin_SB.
- * Prekondisi: array terdefinisi
- */
-IdxType SearchArrayDin_SB(ArrayDin_SB array, ElType_SB el);
 
 #endif
