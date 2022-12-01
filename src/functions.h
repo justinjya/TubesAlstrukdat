@@ -30,6 +30,10 @@ int stringLen(char *string);
  */
 char* upper(char *string);
 
+/* Mengembalikan string yang telah diubah setiap karakter menjadi huruf kecil
+ */
+char* lower(char *string);
+
 /* Menambahkan spasi(-spasi) diakhir string
  * Digunakan dalam fungsi SCOREBOARD
  */
