@@ -4,29 +4,29 @@
 
 int main(){
   List l;
-  CreateEmpty(&l);
-  if(IsEmpty(l)){
+  CreateEmpty_LL(&l);
+  if(IsEmpty_LL(l)){
     printf("kosong\n");
   }
   printf("setelahinsvfirst\n");
-  InsVFirst(&l,CreatePoint(1,2));
-  PrintInfo(l);
+  InsVFirst_LL(&l,CreatePoint(1,2));
+  PrintInfo_LL(l);
   printf("\n");
   printf("setelahinsvfirst\n");
-  InsVFirst(&l,CreatePoint(1,3));
-  PrintInfo(l);
+  InsVFirst_LL(&l,CreatePoint(1,3));
+  PrintInfo_LL(l);
   printf("\nsetelahinsvfirst\n");
-  InsVFirst(&l,CreatePoint(1,4));
-  PrintInfo(l);
-  if(IsEmpty(l)){printf("\nkosong");}
-  printf("\n%d elemen",NbElmt(l));
-  if(Search(l,CreatePoint(1,5))!=NULL){
+  InsVFirst_LL(&l,CreatePoint(1,4));
+  PrintInfo_LL(l);
+  if(IsEmpty_LL(l)){printf("\nkosong");}
+  printf("\n%d elemen",NbElmt_LL(l));
+  if(Search_LL(l,CreatePoint(1,5))!=NULL){
     printf("\nada <1,5>");
   }
   else{
     printf("\ngaada <1,5>");
   }
-  if(Search(l,CreatePoint(1,4))!=NULL){
+  if(Search_LL(l,CreatePoint(1,4))!=NULL){
     printf("\nada <1,4>");
   }
   else{
@@ -34,168 +34,168 @@ int main(){
   }
   point x;
   printf("\nsetelahdelvlast");
-  DelVLast(&l,&x);
+  DelVLast_LL(&l,&x);
   printf("\n");
-  PrintInfo(l);
+  PrintInfo_LL(l);
   printf("\n<%d,%d>",x.x,x.y);
   printf("\nsetelahdelvlast");
-  DelVLast(&l,&x);
+  DelVLast_LL(&l,&x);
   printf("\n");
-  PrintInfo(l);
+  PrintInfo_LL(l);
   printf("\n<%d,%d>",x.x,x.y);
   printf("\nsetelahdelvlast");
-  DelVLast(&l,&x);
+  DelVLast_LL(&l,&x);
   printf("\n");
-  PrintInfo(l);
+  PrintInfo_LL(l);
   printf("\n<%d,%d>\n",x.x,x.y);
-  if(Search(l,CreatePoint(1,4))!=NULL){
+  if(Search_LL(l,CreatePoint(1,4))!=NULL){
     printf("<1,4> ada\n");
   }
   else{
     printf("<1,4> gaada\n");
   }
-  printf("%d elemen\n",NbElmt(l));
+  printf("%d elemen\n",NbElmt_LL(l));
   printf("setelahinsvlast\n");
-  InsVLast(&l,CreatePoint(1,2));
-  PrintInfo(l);
+  InsVLast_LL(&l,CreatePoint(1,2));
+  PrintInfo_LL(l);
   printf("\n");
   printf("setelahinsvlast\n");
-  InsVLast(&l,CreatePoint(1,3));
-  PrintInfo(l);
+  InsVLast_LL(&l,CreatePoint(1,3));
+  PrintInfo_LL(l);
   printf("\n");
   printf("setelahinsvlast\n");
-  InsVLast(&l,CreatePoint(1,4));
-  PrintInfo(l);
+  InsVLast_LL(&l,CreatePoint(1,4));
+  PrintInfo_LL(l);
 
   printf("\nsetelahdelvfirst");
-  DelVFirst(&l,&x);
+  DelVFirst_LL(&l,&x);
   printf("\n");
-  PrintInfo(l);
+  PrintInfo_LL(l);
   printf("\n<%d,%d>",x.x,x.y);
   printf("\nsetelahdelvfirst");
-  DelVFirst(&l,&x);
+  DelVFirst_LL(&l,&x);
   printf("\n");
-  PrintInfo(l);
+  PrintInfo_LL(l);
   printf("\n<%d,%d>",x.x,x.y);
   printf("\nsetelahdelvfirst");
-  DelVFirst(&l,&x);
+  DelVFirst_LL(&l,&x);
   printf("\n");
-  PrintInfo(l);
+  PrintInfo_LL(l);
   printf("\n<%d,%d>\n",x.x,x.y);
 
   address p;
   printf("setelah insertfirst\n");
-  p = Alokasi(CreatePoint(1,2));
-  InsertFirst(&l,p);
-  PrintInfo(l);
+  p = Alokasi_LL(CreatePoint(1,2));
+  InsertFirst_LL(&l,p);
+  PrintInfo_LL(l);
   printf("\n");
   printf("setelah insertfirst\n");
-  p = Alokasi(CreatePoint(1,3));
-  InsertFirst(&l,p);
-  PrintInfo(l);
+  p = Alokasi_LL(CreatePoint(1,3));
+  InsertFirst_LL(&l,p);
+  PrintInfo_LL(l);
   printf("\n");
   printf("setelah insertfirst\n");
-  p = Alokasi(CreatePoint(1,4));
-  InsertFirst(&l,p);
-  PrintInfo(l);
+  p = Alokasi_LL(CreatePoint(1,4));
+  InsertFirst_LL(&l,p);
+  PrintInfo_LL(l);
   printf("\n");
 
   printf("setelah deletefirst\n");
-  DelFirst(&l,&p);
-  PrintInfo(l);
+  DelFirst_LL(&l,&p);
+  PrintInfo_LL(l);
   printf("\n");
   printf("<%d,%d>\n",p->info.x,p->info.y);
   printf("setelah deletefirst\n");
-  DelFirst(&l,&p);
-  PrintInfo(l);
+  DelFirst_LL(&l,&p);
+  PrintInfo_LL(l);
   printf("\n");
   printf("<%d,%d>\n",p->info.x,p->info.y);
   printf("setelah deletefirst\n");
-  DelFirst(&l,&p);
-  PrintInfo(l);
+  DelFirst_LL(&l,&p);
+  PrintInfo_LL(l);
   printf("\n");
   printf("<%d,%d>\n",p->info.x,p->info.y);
 
   printf("setelah insertlast\n");
-  p = Alokasi(CreatePoint(1,2));
-  InsertLast(&l,p);
-  PrintInfo(l);
+  p = Alokasi_LL(CreatePoint(1,2));
+  InsertLast_LL(&l,p);
+  PrintInfo_LL(l);
   printf("\n");
   printf("setelah insertlast\n");
-  p = Alokasi(CreatePoint(1,3));
-  InsertLast(&l,p);
-  PrintInfo(l);
+  p = Alokasi_LL(CreatePoint(1,3));
+  InsertLast_LL(&l,p);
+  PrintInfo_LL(l);
   printf("\n");
   printf("setelah insertlast\n");
-  p = Alokasi(CreatePoint(1,4));
-  InsertLast(&l,p);
-  PrintInfo(l);
+  p = Alokasi_LL(CreatePoint(1,4));
+  InsertLast_LL(&l,p);
+  PrintInfo_LL(l);
   printf("\n");
 
   printf("setelah deletelast\n");
-  DelLast(&l,&p);
-  PrintInfo(l);
+  DelLast_LL(&l,&p);
+  PrintInfo_LL(l);
   printf("\n");
   printf("<%d,%d>\n",p->info.x,p->info.y);
   printf("setelah deletelast\n");
-  DelLast(&l,&p);
-  PrintInfo(l);
+  DelLast_LL(&l,&p);
+  PrintInfo_LL(l);
   printf("\n");
   printf("<%d,%d>\n",p->info.x,p->info.y);
   printf("setelah deletelast\n");
-  DelLast(&l,&p);
-  PrintInfo(l);
+  DelLast_LL(&l,&p);
+  PrintInfo_LL(l);
   printf("\n");
   printf("<%d,%d>\n",p->info.x,p->info.y);
 
   printf("setelah DelP(&l,CreatePoint(1,2))\n");
-  DelP(&l,CreatePoint(1,2));
-  PrintInfo(l);
+  DelP_LL(&l,CreatePoint(1,2));
+  PrintInfo_LL(l);
   printf("\n");
   printf("setelah insertlast\n");
-  p = Alokasi(CreatePoint(1,2));
-  InsertLast(&l,p);
-  PrintInfo(l);
+  p = Alokasi_LL(CreatePoint(1,2));
+  InsertLast_LL(&l,p);
+  PrintInfo_LL(l);
   printf("\n");
   printf("setelah insertlast\n");
-  p = Alokasi(CreatePoint(1,3));
-  InsertLast(&l,p);
-  PrintInfo(l);
+  p = Alokasi_LL(CreatePoint(1,3));
+  InsertLast_LL(&l,p);
+  PrintInfo_LL(l);
   printf("\n");
   printf("setelah insertlast\n");
-  p = Alokasi(CreatePoint(1,4));
-  InsertLast(&l,p);
-  PrintInfo(l);
+  p = Alokasi_LL(CreatePoint(1,4));
+  InsertLast_LL(&l,p);
+  PrintInfo_LL(l);
   printf("\n");
   printf("setelah DelP(&l,CreatePoint(1,2))\n");
-  DelP(&l,CreatePoint(1,2));
-  PrintInfo(l);
+  DelP_LL(&l,CreatePoint(1,2));
+  PrintInfo_LL(l);
   printf("\n");
   printf("setelah DelP(&l,CreatePoint(1,5))\n");
-  DelP(&l,CreatePoint(1,5));
-  PrintInfo(l);
+  DelP_LL(&l,CreatePoint(1,5));
+  PrintInfo_LL(l);
   printf("\n");
   printf("setelah insertfirst\n");
-  p = Alokasi(CreatePoint(1,2));
-  InsertFirst(&l,p);
-  PrintInfo(l);
+  p = Alokasi_LL(CreatePoint(1,2));
+  InsertFirst_LL(&l,p);
+  PrintInfo_LL(l);
   printf("\n");
   printf("setelah DelAfter(&l,&p,Search(l,CreatePoint(1,3)))\n");
-  DelAfter(&l,&p,Search(l,CreatePoint(1,3)));
-  PrintInfo(l);
+  DelAfter_LL(&l,&p,Search_LL(l,CreatePoint(1,3)));
+  PrintInfo_LL(l);
   printf("\n");
   printf("setelah DelAfter(&l,&p,Search(l,CreatePoint(1,3)))\n");
-  DelAfter(&l,&p,Search(l,CreatePoint(1,3)));
-  PrintInfo(l);
+  DelAfter_LL(&l,&p,Search_LL(l,CreatePoint(1,3)));
+  PrintInfo_LL(l);
   printf("\n");
   printf("setelah DelAfter(&l,&p,Search(l,CreatePoint(1,2)))\n");
-  DelAfter(&l,&p,Search(l,CreatePoint(1,2)));
-  PrintInfo(l);
+  DelAfter_LL(&l,&p,Search_LL(l,CreatePoint(1,2)));
+  PrintInfo_LL(l);
   printf("\n");
   printf("setelah DelAfter(&l,&p,Search(l,CreatePoint(1,2)))\n");
-  DelAfter(&l,&p,Search(l,CreatePoint(1,2)));
-  PrintInfo(l);
+  DelAfter_LL(&l,&p,Search_LL(l,CreatePoint(1,2)));
+  PrintInfo_LL(l);
   printf("\n");
-  printf("%d elemen",NbElmt(l));
+  printf("%d elemen",NbElmt_LL(l));
   return 0;
 }
