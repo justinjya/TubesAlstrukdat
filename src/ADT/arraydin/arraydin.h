@@ -97,16 +97,9 @@ void DeleteFirst(ArrayDin *array);
 void PrintArrayDin(ArrayDin array);
 
 /**
- * Fungsi untuk melakukan reverse suatu ArrayDin.
- * Prekondisi: array terdefinisi
+ * Fungsi untuk membandingkan dua string
  */
-void ReverseArrayDin(ArrayDin *array);
-
-/**
- * Fungsi untuk melakukan copy suatu ArrayDin.
- * Prekondisi: array terdefinisi
- */
-ArrayDin CopyArrayDin(ArrayDin array);
+boolean compareStringArrayDin(char *string1, char *string2);
 
 /**
  * Fungsi untuk melakukan search suatu ArrayDin.
