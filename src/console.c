@@ -83,6 +83,7 @@ void LOADFILE(ArrayDin *Games, Stack *History, Queue *GamesQueue, ArrayDin_SB *S
             printf("File %s berhasil dibaca. BNMO berhasil dijalankan.\n", inputfile);
         }
         SortValueMap(&Scoreboard->A[0], false);
+	fclose(pita);
     }
 }
 
