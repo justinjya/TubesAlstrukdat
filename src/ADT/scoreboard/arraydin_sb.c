@@ -56,16 +56,3 @@ void SubNeff_SB(ArrayDin_SB *array)
 {
     array->Neff--;
 }
-
-IdxType SearchArrayDin_SB(ArrayDin_SB array, ElType_SB el)
-{
-    IdxType i;
-    for (i = 0; i < array.Neff; i++)
-    {
-        if (array.A[i].Elements == el.Elements && array.A[i].Count == el.Count)
-        {
-            return i;
-        }
-    }
-    return -1;
-}
