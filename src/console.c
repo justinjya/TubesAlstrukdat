@@ -7,73 +7,74 @@
 
 int GAMEBUATAN()
 {
-    char *rand;
     int score;
-    rand = (char *) malloc (1 * sizeof(char));
-    score = (int) rand % 100;
+    score = randomNumber(0, 100);
     printf("Skor akhir: %d\n", score);
     return score;
 }
 
 void LOADFILE(ArrayDin *Games, Stack *History, Queue *GamesQueue, ArrayDin_SB *Scoreboard, char *inputfile, boolean Start)
 {
-    char placeholder[] = ".\\data\\";
-    char directory[50];
-    char txt[] = ".txt";
-    char filename[25];
-
+    #ifdef _WIN32
+        char *placeholder = ".\\data\\";
+    #else
+        char *placeholder = "./data/";
+    #endif
+    char *txt = ".txt";
+    char *filename;
+    char *directory;
+    filename = (char *) malloc (25 * sizeof(char));
+    directory = (char *) malloc (50 * sizeof(char));
     concat(inputfile, txt, filename);
     concat(placeholder, filename, directory);
 
-    char *temp;
-    int score, amount, totalScoreboard;
-    int arrayNumber = 1;
-    int arrayScoreboard = 0;
-
-    START(directory);
-    if (pita == NULL)
+    FILE *file;
+    file = fopen(directory, "r");
+    if (file == NULL)
     {
         printf("File tidak dapat dibuka. Silahkan masukkan nama file lain.\n");
     }
     else
     {
-        fclose(pita);
+        fclose(file);
+        int amount, score, totalScoreboard, i, j;
+        char *temp;
+
         STARTWORD(directory, 1);
         amount = wordToInteger(currentWord);
         totalScoreboard = wordToInteger(currentWord);
         *Scoreboard = MakeArrayDin_SB(amount);
-        while (arrayNumber <= totalScoreboard + 2)
+
+        for (i = 0; i < amount; i++)
         {
-            if (amount != -9999)
-            {
-                for (int j = 0; j < amount; j++)
-                {
-                    ADVWORD(1);
-                    temp = (char *) malloc (30 * sizeof(char));
-                    wordToString(currentWord, temp);
-                    if (arrayNumber == 1)
-                    {
-                        InsertLast(Games, temp);
-                    }
-                    else if (arrayNumber == 2)
-                    {
-                        Push(History, temp);
-                    }
-                    else
-                    {
-                        temp = splitStringInt(temp, &score);
-                        Insert_M(&Scoreboard->A[arrayScoreboard], temp, score);
-                    }
-                }
-            }
-            if (arrayNumber > 2)
-            {
-                arrayScoreboard++;
-            }
             ADVWORD(1);
-            arrayNumber++;
-            amount = wordToInteger(currentWord);
+            temp = (char *) malloc (30 * sizeof(char));
+            wordToString(currentWord, temp);
+            InsertLast(Games, temp);
         }
+        ADVWORD(1);
+        amount = wordToInteger(currentWord);
+        for (i = 0; i < amount; i++)
+        {
+            ADVWORD(1);
+            temp = (char *) malloc (30 * sizeof(char));
+            wordToString(currentWord, temp);
+            Push(History, temp);
+        }
+        for (i = 0; i < totalScoreboard; i++)
+        {
+            ADVWORD(1);
+            amount = wordToInteger(currentWord);
+            for (j = 0; j < amount; j++)
+            {
+                ADVWORD(1);
+                temp = (char *) malloc (30 * sizeof(char));
+                wordToString(currentWord, temp);
+                temp = splitStringInt(temp, &score);
+                Insert_M(&Scoreboard->A[i], temp, score);
+            }
+        }
+
         if (Start == true)
         {
             printf("File konfigurasi sistem berhasil dibaca. BNMO berhasil dijalankan.\n");
@@ -82,8 +83,7 @@ void LOADFILE(ArrayDin *Games, Stack *History, Queue *GamesQueue, ArrayDin_SB *S
         {
             printf("File %s berhasil dibaca. BNMO berhasil dijalankan.\n", inputfile);
         }
-        SortValueMap(&Scoreboard->A[0], false);
-	fclose(pita);
+        fclose(pita);
     }
 }
 
@@ -94,11 +94,16 @@ void STARTBNMO(ArrayDin *Games, Stack *History, Queue *GamesQueue, ArrayDin_SB *
 
 void SAVE(ArrayDin *Games, Stack *History, ArrayDin_SB *Scoreboard, char *inputfile)
 {
-    char placeholder[] = ".\\data\\";
-    char directory[50];
-    char txt[] = ".txt";
-    char filename[25];
-
+    #ifdef _WIN32
+        char *placeholder = ".\\data\\";
+    #else
+        char *placeholder = "./data/";
+    #endif
+    char *txt = ".txt";
+    char *filename;
+    char *directory;
+    filename = (char *) malloc (25 * sizeof(char));
+    directory = (char *) malloc (50 * sizeof(char));
     concat(inputfile, txt, filename);
     concat(placeholder, filename, directory);
 
@@ -125,7 +130,7 @@ void SAVE(ArrayDin *Games, Stack *History, ArrayDin_SB *Scoreboard, char *inputf
         fprintf(open, "%d\n", Scoreboard->A[i].Count);
         for (int j = 0; j < Scoreboard->A[i].Count; j++)
         {
-            fprintf(open, "%s %d\n", Scoreboard->A[i].Elements[j]);
+            fprintf(open, "%s %d\n", Scoreboard->A[i].Elements[j].Key, Scoreboard->A[i].Elements[j].Value);
         }
     }
 
@@ -361,7 +366,7 @@ void QUIT(ArrayDin *Games, Queue *GamesQueue, Stack *History, ArrayDin_SB *Score
         if (compareString(upper(input), "YA") == true){
             QUIT(Games, GamesQueue, History, Scoreboard, true);
         }
-        else if (compareString(input, "TIDAK") == true){
+        else if (compareString(upper(input), "TIDAK") == true){
             char *inputfile;
             inputfile = (char *) malloc (50 * sizeof(char));
             printf("\nSilahkan input nama file untuk disimpan (tanpa .txt): ");
