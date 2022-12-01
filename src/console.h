@@ -73,4 +73,11 @@ void SCOREBOARD(ArrayDin_SB Scoreboard, ArrayDin Games);
  */
 void RESETSCOREBOARD(ArrayDin *Games, ArrayDin_SB *Scoreboard);
 
+/* Menampilkan history dari game yang telah dimainkan
+*/
+void HISTORY(Stack *history, int n);
+
+/*Menghilangkan semua isi History yang tersedia dalam sistem
+*/
+void RESETHISTORY(Stack *history);
 #endif
