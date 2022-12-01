@@ -40,7 +40,7 @@ int HANGMAN(){
     char *input;
     input = (char *) malloc (25 * sizeof(char));
     printf("\n==================================== HANGMAN ====================================\n");
-    printf("tolong isi deskripsi ini ya jan\n");
+    printf(""Hangman merupakan permainan menebak kata dengan menebak satu-satu huruf yang ada pada kata. Pemain memiliki 10 kesempatan dalam bermain. Jika pemain berhasil menebak kata, maka pemain akan mendapatkan poin sesuai panjang kata yang berhasil ditebak, dan permainan akan berlanjut sampai kesempatan habis.\n");
     while (!valid){
         printf("Pilihan menu:\n");
         printf("  1. Bermain langsung\n");
