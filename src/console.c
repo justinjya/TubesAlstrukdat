@@ -52,28 +52,6 @@ void LOADFILE(ArrayDin *Games, Stack *History, Queue *GamesQueue, ArrayDin_SB *S
             wordToString(currentWord, temp);
             InsertLast(Games, temp);
         }
-        ADVWORD(1);
-        amount = wordToInteger(currentWord);
-        for (i = 0; i < amount; i++)
-        {
-            ADVWORD(1);
-            temp = (char *) malloc (30 * sizeof(char));
-            wordToString(currentWord, temp);
-            Push(History, temp);
-        }
-        for (i = 0; i < totalScoreboard; i++)
-        {
-            ADVWORD(1);
-            amount = wordToInteger(currentWord);
-            for (j = 0; j < amount; j++)
-            {
-                ADVWORD(1);
-                temp = (char *) malloc (30 * sizeof(char));
-                wordToString(currentWord, temp);
-                temp = splitStringInt(temp, &score);
-                Insert_M(&Scoreboard->A[i], temp, score);
-            }
-        }
 
         if (Start == true)
         {
@@ -81,6 +59,28 @@ void LOADFILE(ArrayDin *Games, Stack *History, Queue *GamesQueue, ArrayDin_SB *S
         }
         else
         {
+			ADVWORD(1);
+            amount = wordToInteger(currentWord);
+            for (i = 0; i < amount; i++)
+            {
+                ADVWORD(1);
+                temp = (char *) malloc (30 * sizeof(char));
+                wordToString(currentWord, temp);
+                Push(History, temp);
+            }
+            for (i = 0; i < totalScoreboard; i++)
+            {
+                ADVWORD(1);
+                amount = wordToInteger(currentWord);
+                for (j = 0; j < amount; j++)
+                {
+                    ADVWORD(1);
+                    temp = (char *) malloc (30 * sizeof(char));
+                    wordToString(currentWord, temp);
+                    temp = splitStringInt(temp, &score);
+                    Insert_M(&Scoreboard->A[i], temp, score);
+                }
+            }
             printf("File %s berhasil dibaca. BNMO berhasil dijalankan.\n", inputfile);
         }
         fclose(pita);
