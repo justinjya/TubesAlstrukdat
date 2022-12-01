@@ -7,12 +7,12 @@ int main()
     char ch;
     ArrayDin array;
     i = 0;
-    system("cls");
+    system("cls||clear");
     printf("Ketik enter untuk melanjutkan program.\n");
     while (i < 10)
     {
         scanf("%c", &ch);
-        system("cls");
+        system("cls||clear");
         if (i == 0)
         {
             printf("MakeArrayDin()\n");
