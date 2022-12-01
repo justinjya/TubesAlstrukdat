@@ -122,6 +122,20 @@ int mod(int x, int y){
     }
 }
 
+/*Snake on meteor merupakan game snake, dimana terdapat makanan, obstacle, serta meteor di area permainan tempat snake berada. 
+  Dimensi area permainan adalah 5x5 unit
+  Panjang awal dari snake adalah 3 unit
+  Jika makanan berhasil dimakan oleh snake, maka snake akan langsung bertambah panjang ekornya sebanyak 1 unit  
+  dan makanan baru akan di-random lagi pada sebuah titik <x,y>
+  Apabila salah satu bagian dari snake terkena meteor, maka bagian tersebut akan dihapus dari snake dan panjang dari snake akan berkurang sebanyak 1
+  Kondisi Kalah:
+  -Seluruh komponen snake (kepala, badan, ekor) terkena meteor
+  -Kepala dari snake terkena meteor
+  -Ekor baru tidak dapat di-spawn karena tidak dapat area di kiri, atas, bawah ataupun kanan ekor lama
+  Ketika Kepala dari snake mengenai obstacle, maka permainan berakhir. Obstacle muncul di awal permainan dan tidak dapat ditembus oleh snake. 
+  Ketika kepala snake melewati sisi atas peta, maka kepala snake akan muncul dari sisi bawah peta. 
+  Hal yang sama berlaku ketika kepala snake melewati sisi kiri/ kanan peta, maka kepala snake akan muncul dari sisi yang berlawanan. 
+*/
 int SNAKEONMETEOR()
 {
     List Snake = MakeSnake();
