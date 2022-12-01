@@ -101,6 +101,25 @@ char* upper(char *string)
     return uppered;
 }
 
+char* lower(char *string)
+{
+    char *lowered;
+    lowered = (char *) malloc (50 * sizeof(char));
+    for (int i = 0; i < stringLen(string); i++)
+    {
+        if (string[i] >= 65 && string[i] <= 90)
+        {
+            lowered[i] = string[i] + 32;
+        }
+        else
+        {
+            lowered[i] = string[i];
+        }
+    }
+    lowered[stringLen(string)] = '\0';
+    return lowered;
+}
+
 void addspace(char *string, int space) {
     int i;
     int length = stringLen(string);
