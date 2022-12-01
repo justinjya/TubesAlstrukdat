@@ -359,7 +359,7 @@ void QUIT(ArrayDin *Games, Queue *GamesQueue, Stack *History, ArrayDin_SB *Score
         printf("Anda belum melakukan SAVE! Apakah anda tetap ingin keluar\n");
         printf("dari game BNMO tanpa melakukan SAVE? (YA/TIDAK) ");
         inputString(0, input);
-        if (compareString(input, "YA") == true){
+        if (compareString(upper(input), "YA") == true){
             QUIT(Games, GamesQueue, History, Scoreboard, true);
         }
         else if (compareString(input, "TIDAK") == true){
@@ -472,7 +472,7 @@ void RESETSCOREBOARD(ArrayDin *Games, ArrayDin_SB *Scoreboard)
             printf("SCOREBOARD ALL? (YA/TIDAK) ");
         }
         inputString(0, input);
-        if (compareString(input, "YA") == true)
+        if (compareString(upper(input), "YA") == true)
         {
             if (scoreboardIdx == 0)
             {
@@ -487,7 +487,7 @@ void RESETSCOREBOARD(ArrayDin *Games, ArrayDin_SB *Scoreboard)
             }
             printf("Scoreboard berhasil di-reset.\n");
         }
-        else if (compareString(input, "TIDAK") == true)
+        else if (compareString(upper(input), "TIDAK") == true)
         {
             printf("Scoreboard tidak berhasil di-reset.\n");
         }
@@ -536,12 +536,12 @@ void RESETHISTORY(Stack *history)
     printf("APAKAH KAMU YAKIN INGIN MELAKUKAN RESET HISTORY? (YA/TIDAK) ");
     inputString(0, input);
 
-    if (compareString(input, "YA") == true)
+    if (compareString(upper(input), "YA") == true)
     {
         CreateEmptyStack(history);
     }
 
-    else if (compareString(input, "TIDAK") == true)
+    else if (compareString(upper(input), "TIDAK") == true)
     {
         printf("\nHistory tidak jadi di-reset. Berikut adalah daftar Game yang telah dimainkan:\n");
         {
