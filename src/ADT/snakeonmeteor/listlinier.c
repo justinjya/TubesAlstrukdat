@@ -97,7 +97,7 @@ void DelVLast_LL(List *L, point *X)
     Dealokasi_LL(&hasil);
 }
 
-void InsertFirst__LL(List *L, address P)
+void InsertFirst_LL(List *L, address P)
 {
 
     Next(P) = First(*L);
