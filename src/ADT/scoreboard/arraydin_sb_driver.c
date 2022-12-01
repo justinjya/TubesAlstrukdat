@@ -54,6 +54,9 @@ int main()
     printf("the empty map amount is %d\n",countempty);
     printf("subneff\n");
     SubNeff_SB(&array);
-    printf("neffafter: %d",array.Neff);
+    printf("neffafter: %d\n",array.Neff);
+    DeallocateArrayDin_SB(&array);
+    printf("After deallocate\n");
+    printf("neff: %d",array.Neff);
     return 0;
 }
