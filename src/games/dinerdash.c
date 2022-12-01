@@ -110,6 +110,7 @@ int DINERDASH(){
     PushPesanan(&pesanan,CreatePesanan("M0",randomNumber(1,3),randomNumber(2,5),randomNumber(10,50) * 1000));
     PushPesanan(&pesanan,CreatePesanan("M1",randomNumber(1,3),randomNumber(2,5),randomNumber(10,50) * 1000));
     PushPesanan(&pesanan,CreatePesanan("M2",randomNumber(1,3),randomNumber(2,5),randomNumber(10,50) * 1000));
+    printf("\n==================================== DINER DASH ====================================\n");
     printf("Selamat datang di Diner Dash!\n\n");
     boolean endGame = false;
     
