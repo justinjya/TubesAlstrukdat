@@ -129,6 +129,7 @@ int SNAKEONMETEOR()
         Obstacle = CreatePoint(randomNumber(0,4),randomNumber(0,4));
         Food = CreatePoint(randomNumber(0,4),randomNumber(0,4));
     }
+    printf("\n==================================== SNAKE ON METEOR ====================================\n");
     printf("Selamat datang di snake on meteor!\n\n");
     printf("Mengenerate peta, snake, dan makanan . . .\n\n");
     printf("Berhasil digenerate!\n\n");
