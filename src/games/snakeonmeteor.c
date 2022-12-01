@@ -1,5 +1,6 @@
 #include "../functions.h"
 
+/* Mengembalikan snake awal dengan komponen sebuah head dan dua komponen tubuh lainnya yaitu berupa badan dan ekor snake*/
 List MakeSnake()
 {
     List snake;
@@ -34,6 +35,7 @@ List MakeSnake()
     return snake;
 }
 
+/*Menggambar arena permainan berukuran 5x5 dimana terdapat snake, meteor, obstacle, serta food pada layar device */
 void PrintArena(List snake, point meteor, point obstacle, point food)
 {
     char* TANDA[25];
@@ -87,6 +89,7 @@ void PrintArena(List snake, point meteor, point obstacle, point food)
     printf("\n---------------------");
 }
 
+/*Mengembalikkan komponen tubuh selain head of snake. Jika snake kosong, mengembalikkan list kosong. Jika Snake terdiri dari Head saja, mengembalikkan list kosong*/
 List SnakeBody(List Snake){
     if(IsEmpty_LL(Snake)){
         return Snake;
@@ -105,6 +108,7 @@ List SnakeBody(List Snake){
     }
 }
 
+/*mengembalikkan nilai x modulo y. x dan y bertipe integer*/
 int mod(int x, int y){
     if(x>=0){
         return x%y;
