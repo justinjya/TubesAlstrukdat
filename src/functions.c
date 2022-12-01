@@ -221,7 +221,7 @@ void inputString(int type, char* value)
 
 void inputInteger(int *value)
 {
-    STARTWORD(NULL, 1);
+    STARTWORD(NULL, 0);
     *value = wordToInteger(currentWord); 
 }
 
