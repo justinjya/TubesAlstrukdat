@@ -24,7 +24,7 @@ address Alokasi_LL(point X)
     if (P != NULL)
     {
         ABSIS(Info(P)) = ABSIS(X);
-        ORDINAT(Info(p)) = ORDINAT(X);
+        ORDINAT(Info(P)) = ORDINAT(X);
         Next(P) = NULL;
     }
     return P;
@@ -38,7 +38,7 @@ void Dealokasi_LL(address *P)
 address Search_LL(List L, point X)
 {
 
-    if (IsEmpty(L))
+    if (IsEmpty_LL(L))
     {
         return NULL;
     }
@@ -150,10 +150,10 @@ void DelFirst_LL(List *L, address *P)
 void DelP_LL(List *L, point X)
 {
 
-    if (!IsEmpty(*L))
+    if (!IsEmpty_LL(*L))
     {
         address addressX, P, temp;
-        addressX = Search(*L, X);
+        addressX = Search_LL(*L, X);
         if (addressX != NULL)
         {
             if (addressX != First(*L))
