@@ -335,19 +335,6 @@ int SNAKEONMETEOR()
             printf("\n");
         }
     }
-    printf("GAME BERAKHIR!\n");
+    printf("==================================== GAME BERAKHIR ====================================\n");
     printf("Skor akhir: %d\n",NbElmt_LL(Snake)*2);
-
-    // Insert_M(&Scoreboard.A[SearchArrayDin(Games,"Snake On Meteor")],stringnama,NbElmt_LL(Snake) * 2);
-    // int el_idx = Scoreboard.A[SearchArrayDin(Games,"Snake On Meteor")].Count-1;
-    // infotype temp1;
-    // while (Scoreboard.A[SearchArrayDin(Games,"Snake On Meteor")].Elements[el_idx].Value > Scoreboard.A[SearchArrayDin(Games,"Snake On Meteor")].Elements[el_idx-1].Value){
-    //     temp1.Key = Scoreboard.A[SearchArrayDin(Games,"Snake On Meteor")].Elements[el_idx].Key;
-    //     temp1.Value = Scoreboard.A[SearchArrayDin(Games,"Snake On Meteor")].Elements[el_idx].Value;
-    //     Scoreboard.A[SearchArrayDin(Games,"Snake On Meteor")].Elements[el_idx].Key = Scoreboard.A[SearchArrayDin(Games,"Snake On Meteor")].Elements[el_idx-1].Key;
-    //     Scoreboard.A[SearchArrayDin(Games,"Snake On Meteor")].Elements[el_idx].Value = Scoreboard.A[SearchArrayDin(Games,"Snake On Meteor")].Elements[el_idx-1].Value;
-    //     Scoreboard.A[SearchArrayDin(Games,"Snake On Meteor")].Elements[el_idx-1].Key = temp1.Key;
-    //     Scoreboard.A[SearchArrayDin(Games,"Snake On Meteor")].Elements[el_idx-1].Value = temp1.Value;
-    //     el_idx--;
-    // }
 }
