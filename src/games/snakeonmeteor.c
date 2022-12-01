@@ -148,24 +148,24 @@ int SNAKEONMETEOR()
             printf("TURN %d\n",turn);
             printf("Silahkan masukkan command anda: ");
             STARTWORD(NULL,0);
-            if(compareString(getCurrentWord(currentWord), "a") || compareString(getCurrentWord(currentWord),"d") || compareString(getCurrentWord(currentWord),"s") || compareString(getCurrentWord(currentWord),"w")){
+            if(compareString(lower(getCurrentWord(currentWord)), "a") || compareString(lower(getCurrentWord(currentWord)),"d") || compareString(lower(getCurrentWord(currentWord)),"s") || compareString(lower(getCurrentWord(currentWord)),"w")){
                 if(Info(Next(First(Snake))).x == mod(Info(First(Snake)).x + 1,5) && Info(Next(First(Snake))).y == Info(First(Snake)).y){
-                    if(!compareString(getCurrentWord(currentWord), "d")){
+                    if(!compareString(lower(getCurrentWord(currentWord)), "d")){
                         input_valid = true;           
                     }
                 }
                 else if(Info(Next(First(Snake))).x == mod(Info(First(Snake)).x - 1,5) && Info(Next(First(Snake))).y == Info(First(Snake)).y){
-                    if(!compareString(getCurrentWord(currentWord), "a")){
+                    if(!compareString(lower(getCurrentWord(currentWord)), "a")){
                         input_valid = true;   
                     }
                 }
                 else if(Info(Next(First(Snake))).y == mod(Info(First(Snake)).y + 1,5) && Info(Next(First(Snake))).x == Info(First(Snake)).x){
-                    if(!compareString(getCurrentWord(currentWord), "s")){
+                    if(!compareString(lower(getCurrentWord(currentWord)), "s")){
                         input_valid = true;
                     }
                 }
                 else if(Info(Next(First(Snake))).y == mod(Info(First(Snake)).y - 1,5) && Info(Next(First(Snake))).x == Info(First(Snake)).x){
-                    if(!compareString(getCurrentWord(currentWord), "w")){
+                    if(!compareString(lower(getCurrentWord(currentWord)), "w")){
                         input_valid = true;
                     }
                 }
@@ -186,7 +186,7 @@ int SNAKEONMETEOR()
             }
         }
 
-        if(compareString(getCurrentWord(currentWord),"w")){
+        if(compareString(lower(getCurrentWord(currentWord)),"w")){
             if(First(Snake)->info.y - 1 == Meteor.y && First(Snake)->info.x == Meteor.x && meteorhot && turn-temp == 1){
                 printf("Meteor masih panas! Anda belum dapat kembali ke titik tersebut.\n");
                 printf("Silahkan masukkan command lainnya\n\n");
@@ -196,7 +196,7 @@ int SNAKEONMETEOR()
                 temp = -999;
             }
         }
-        else if(compareString(getCurrentWord(currentWord),"a")){
+        else if(compareString(lower(getCurrentWord(currentWord)),"a")){
             if(First(Snake)->info.x - 1 == Meteor.x && First(Snake)->info.y == Meteor.y && meteorhot && turn-temp == 1){
                 printf("Meteor masih panas! Anda belum dapat kembali ke titik tersebut.\n");
                 printf("Silahkan masukkan command lainnya\n\n");
@@ -206,7 +206,7 @@ int SNAKEONMETEOR()
                 temp = -999;
             }
         }
-        else if(compareString(getCurrentWord(currentWord),"d")){
+        else if(compareString(lower(getCurrentWord(currentWord)),"d")){
             if(First(Snake)->info.x + 1 == Meteor.x && First(Snake)->info.y == Meteor.y && meteorhot && turn-temp == 1){
                 printf("Meteor masih panas! Anda belum dapat kembali ke titik tersebut.\n");
                 printf("Silahkan masukkan command lainnya\n\n");
@@ -231,13 +231,13 @@ int SNAKEONMETEOR()
             int x_temp, y_temp, x_temp1, y_temp1;
             x_temp = ABSIS(Info(First(Snake)));
             y_temp = ORDINAT(Info(First(Snake)));
-            if(compareString(getCurrentWord(currentWord),"w")){
+            if(compareString(lower(getCurrentWord(currentWord)),"w")){
                 ORDINAT(Info(First(Snake))) = mod(move(Info(First(Snake)),0,-1).y,5);
             }
-            else if(compareString(getCurrentWord(currentWord),"s")){
+            else if(compareString(lower(getCurrentWord(currentWord)),"s")){
                 ORDINAT(Info(First(Snake))) = mod(move(Info(First(Snake)),0,1).y,5);
             }
-            else if(compareString(getCurrentWord(currentWord),"a")){
+            else if(compareString(lower(getCurrentWord(currentWord)),"a")){
                 ABSIS(Info(First(Snake))) = mod(move(Info(First(Snake)),-1,0).x,5);
             }
             else{
@@ -337,4 +337,5 @@ int SNAKEONMETEOR()
     }
     printf("==================================== GAME BERAKHIR ====================================\n");
     printf("Skor akhir: %d\n",NbElmt_LL(Snake)*2);
+    return NbElmt_LL(Snake)*2;
 }
