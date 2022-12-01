@@ -245,7 +245,7 @@ char* getCurrentWord(Word string){
 void inputNamaScoreboard(ArrayDin *Games, Queue *GamesQueue, ArrayDin_SB *Scoreboard, int Skor)
 {
     char *nama;
-    nama = (char *) malloc (15 * sizeof(char));
+    nama = (char *) malloc (50 * sizeof(char));
     printf("Nama (Max. 11 karakter): ");
     inputString(0, nama);
     while (stringLen(nama) > 11)
