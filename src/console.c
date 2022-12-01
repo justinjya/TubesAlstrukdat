@@ -394,8 +394,12 @@ void HELP(int type){
         printf("  5. QUEUE GAME - Menambahkan game ke dalam antrean game\n");
         printf("  6. PLAY GAME - Memainkan game yang berada di depan antrean\n");
         printf("  7. SKIP GAME <n> - Melewati game yang berada di dalam antrean sebanyak n kali\n");
-        printf("  8. QUIT - Keluar dari program\n");
-        printf("  9. HELP - Menampilkan daftar command yang dapat dijalankan\n");
+        printf("  8. SCOREBOARD - Menampilkan scoreboard setiap game yang tersedia dari sistem\n");
+        printf("  9. RESET SCOREBOARD - Menghapus isi scoreboard setiap game/suaatu game yang tersedia dari sistem\n");
+        printf("  10. HISTORY - Menampilkan riwayat permainan user\n");
+        printf("  11. RESET HISTORY - Menghapus riwayat permainan user\n");
+        printf("  12. QUIT - Keluar dari program\n");
+        printf("  13. HELP - Menampilkan daftar commands yang dapat dijalankan\n");
     }
 }
 
@@ -496,5 +500,31 @@ void RESETSCOREBOARD(ArrayDin *Games, ArrayDin_SB *Scoreboard)
     else
     {
         printf("SCOREBOARD TIDAK TERDAFTAR. SILAHKAN INPUT SCOREBOARD LAIN.\n");
+    }
+}
+
+void HISTORY(Stack *history, int n)
+{
+    idxTypeStack last;
+    last = (Top(*history) + 1) - n;
+    if (last < 0)
+    {
+        last = 0;
+    }
+
+    if (Top(*history) == Nil)
+    {
+        printf("Anda belum memiliki riwayat permainan.\n");
+    }
+
+    else
+    {
+        printf("Berikut adalah daftar Game yang telah dimainkan:\n");
+        int number = 1;
+        for (idxTypeStack i = Top(*history); i >= last; i--)
+        {
+            printf("%d. %s\n", number, history->T[i]);
+            number++;
+        }
     }
 }
