@@ -5,7 +5,11 @@ ArrayDin loadHangman(){
     ArrayDin arr;
     arr = MakeArrayDin();
     char *temp;
-    STARTWORD(".\\data\\hangman.txt", 1);
+    #ifdef _WIN32
+        STARTWORD(".\\data\\hangman.txt", 1);
+    #else
+        STARTWORD("./data/hangman.txt");
+    #endif
     while (currentChar != MARK){
         temp = (char *) malloc (25 * sizeof(char));
         wordToString(currentWord, temp);
