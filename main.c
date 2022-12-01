@@ -2,7 +2,7 @@
 
 int main()
 {
-    system("cls");
+    system("cls||clear");
     srand(time(NULL));
     
     ArrayDin Games;
@@ -31,7 +31,7 @@ int main()
         printf("\nJalankan command HELP untuk melihat daftar commands yang tersedia.");
         printf("\nENTER COMMAND: ");
         inputString(0, command);
-        system("cls");
+        system("cls||clear");
         if (IsEmpty(Games))
         {
             if (compareString(upper(command), "START") == true)
