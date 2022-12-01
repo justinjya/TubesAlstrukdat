@@ -8,7 +8,7 @@ ArrayDin loadHangman(){
     #ifdef _WIN32
         STARTWORD(".\\data\\hangman.txt", 1);
     #else
-        STARTWORD("./data/hangman.txt");
+        STARTWORD("./data/hangman.txt", 1);
     #endif
     while (currentChar != MARK){
         temp = (char *) malloc (25 * sizeof(char));
