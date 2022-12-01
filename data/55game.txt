@@ -1,9 +1,9 @@
 55
 RNG
-Diner Dash
-Dinosaur in Earth
-Risewoman
-Eifel Tower
+DINER DASH
+HANGMAN
+TOWER OF HANOI
+SNAKE ON METEOR
 Ancient Asylum
 Private Age
 Strategize of Vengeance
