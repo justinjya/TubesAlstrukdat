@@ -1,4 +1,4 @@
-#include "../functions.c"
+#include "../functions.h"
 
 struct pole{
    int stack[10];
@@ -223,7 +223,6 @@ int TOWEROFHANOI(){
     fillSrc(jumlahPiringan);
     display(jumlahPiringan);
     while(win != 1){ // Saat kondisi akhir (menang) belum terpenuhi
-        // move += 1; //Gerakan bertambah 1 tiap proses pemindahan
         x = pop(&asal);
         push(x, asal, &moves); //Gerakan bertambah 1 tiap berhasil proses pemindahan
         win = gameWinCondition(jumlahPiringan);
