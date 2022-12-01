@@ -3,7 +3,6 @@
 /* RNG (Random Number Generator) merupakan permainan yang membuat pemain
  * menebak angka X.
  */
-
 int RNG(){
     int jumlah, angka, tebak, skor;
     boolean nyerah;
