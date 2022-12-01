@@ -19,18 +19,15 @@ void CreateEmpty_LL(List *L)
 address Alokasi_LL(point X)
 {
 
-    ElmtList *P = (ElmtList *)malloc(sizeof(ElmtList));
+    address P;
+    P = (address) malloc (sizeof(ElmtList));
     if (P != NULL)
     {
         ABSIS(Info(P)) = ABSIS(X);
-        ORDINAT(Info(P)) = ORDINAT(X);
+        ORDINAT(Info(p)) = ORDINAT(X);
         Next(P) = NULL;
-        return P;
     }
-    else
-    {
-        return NULL;
-    }
+    return P;
 }
 void Dealokasi_LL(address *P)
 {
@@ -41,66 +38,65 @@ void Dealokasi_LL(address *P)
 address Search_LL(List L, point X)
 {
 
-    address hasil = NULL;
-    if (!IsEmpty_LL(L))
+    if (IsEmpty(L))
     {
-        address P = First(L);
-        boolean found = false;
-        while (P != NULL && !found)
+        return NULL;
+    }
+    else
+    {
+        address P;
+        P = First(L);
+        while (P != NULL)
         {
             if (ABSIS(Info(P)) == ABSIS(X) && ORDINAT(Info(P)) == ORDINAT(X))
             {
-                found = true;
-                hasil = P;
+                return P;
             }
-            else
-            {
-                P = Next(P);
-            }
+            P = Next(P);
         }
+        return NULL;
     }
-    return hasil;
 }
-/*
+
 void InsVFirst_LL(List *L, point X)
 {
 
-    address tambah = Alokasi_LL(X);
-    if (tambah != NULL)
-    {
-        InsertFirst_LL(L, tambah);
+    address First;
+    First = Alokasi_LL(X);
+    if(First != NULL){
+        InsertFirst_LL(L, First);
     }
 }
-*/
+
 void InsVLast_LL(List *L, point X)
 {
 
-    address tambah = Alokasi_LL(X);
-    if (tambah != NULL)
-    {
-        InsertLast_LL(L, tambah);
+    address Last;
+    Last = Alokasi_LL(X);
+    if(Last != NULL){
+        InsertLast_LL(L, Last);
     }
 }
 
 void DelVFirst_LL(List *L, point *X)
 {
 
-    address hasil;
-    DelFirst_LL(L, &hasil);
-    X->x = Info(hasil).x;
-    X->y = Info(hasil).y;
-    Dealokasi_LL(&hasil);
+    address Del;
+    DelFirst_LL(L, &Del);
+    (*X).x = Info(Del).x;
+    (*X).y = Info(Del).y;
+    Dealokasi_LL(&Del);
 }
 void DelVLast_LL(List *L, point *X)
 {
 
     address hasil;
     DelLast_LL(L, &hasil);
-    X->x = Info(hasil).x;
-    X->y = Info(hasil).y;
+    (*X).x = Info(hasil).x;
+    (*X).y = Info(hasil).y;
     Dealokasi_LL(&hasil);
 }
-/*
+
 void InsertFirst__LL(List *L, address P)
 {
 
@@ -110,7 +106,7 @@ void InsertFirst__LL(List *L, address P)
         Last(*L) = P;
     }
 }
-*/
+
 void InsertAfter_LL(List *L, address P, address Prec)
 {
 
@@ -154,35 +150,28 @@ void DelFirst_LL(List *L, address *P)
 void DelP_LL(List *L, point X)
 {
 
-    address P = Search_LL(*L, X);
-    if (P != NULL)
+    if (!IsEmpty(*L))
     {
-        address Acari = First(*L);
-        address prec = NULL;
-        address x;
-        boolean found = (Info(Acari).x == X.x && Info(Acari).y == X.y);
-        if (found)
+        address addressX, P, temp;
+        addressX = Search(*L, X);
+        if (addressX != NULL)
         {
-            DelFirst_LL(L, &P);
-        }
-        else
-        {
-            while (Acari != NULL && !found)
+            if (addressX != First(*L))
             {
-                if (Info(Acari).x == X.x && Info(Acari).y == X.y)
+                P = First(*L);
+                while (Next(P) != addressX)
                 {
-                    found = true;
-                    DelAfter_LL(L, &x, prec);
+                    P = Next(P);
                 }
-                else
-                {
-                    prec = Acari;
-                    Acari = Next(Acari);
-                }
+                DelAfter_LL(L, &temp, P);
+            }
+            else
+            {
+                DelFirst_LL(L, &temp);
             }
         }
+        Dealokasi_LL(&addressX);
     }
-    Dealokasi_LL(&P);
 }
 void DelLast_LL(List *L, address *P)
 {
@@ -249,15 +238,13 @@ void PrintInfo_LL(List L)
 int NbElmt_LL(List L)
 {
 
-    int count = 0;
-    if (!IsEmpty_LL(L))
+    address P;
+    int N = 0;
+    P = First(L);
+    while (P != NULL)
     {
-        address P = First(L);
-        while (P != NULL)
-        {
-            count += 1;
-            P = Next(P);
-        }
+        N++;
+        P = Next(P);
     }
-    return count;
+    return N;
 }
