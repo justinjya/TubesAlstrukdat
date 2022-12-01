@@ -5,12 +5,13 @@
  */
 
 int RNG(){
-	int jumlah, angka, tebak, skor;
+    int jumlah, angka, tebak, skor;
     boolean nyerah;
     angka = randomNumber(1, 100);
     jumlah = 0;
     nyerah = false;
 
+    printf("\n==================================== RNG ====================================\n");
     printf("RNG Telah dimulai. Uji keberuntungan Anda dengan menebak X.\n");
     printf("X berada pada rentang angka 1 - 100\n");
     printf("Masukkan '0' jika ingin menyerah.\n");
@@ -19,18 +20,17 @@ int RNG(){
         inputInteger(&tebak);
         if (tebak < 0 || tebak > 100){
             printf("Masukan tidak valid.\n");
-        }
-        else{
-        if (tebak == 0) {
-            nyerah = true;
-            jumlah = 25;
-        } else if (tebak > angka){
-            printf("Lebih kecil\n");
-            jumlah += 1;
-        } else if (tebak < angka){
-            printf("Lebih besar\n");
-            jumlah += 1;
-        }
+        } else {
+			if (tebak == 0){
+				nyerah = true;
+				jumlah = 25;
+			} else if (tebak > angka){
+				printf("Lebih kecil\n");
+				jumlah += 1;
+			} else if (tebak < angka){
+				printf("Lebih besar\n");
+				jumlah += 1;
+			}
         }
     }
     if (nyerah == true){
