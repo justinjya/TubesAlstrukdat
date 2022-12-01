@@ -8,12 +8,12 @@ int main()
     ElType val;
     Queue Q;
     i = 0;
-    system("cls");
+    system("cls||clear");
     printf("Ketik enter untuk melanjutkan program.\n");
     while (i < 7)
     {
         scanf("%c", &ch);
-        system("cls");
+        system("cls||clear");
         if (i == 0)
         {
             printf("CreateQueue(Q), isEmpty(Q), isFull(Q), & length(Q)\n");
