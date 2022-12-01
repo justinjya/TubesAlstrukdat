@@ -92,14 +92,14 @@ boolean eq_string(char* string1, char* string2){
     int i = 0;
     char *a;
     char *b;
-    a = malloc(12*sizeof(char));
-    b = malloc(12*sizeof(char));
+    a = malloc(50*sizeof(char));
+    b = malloc(50*sizeof(char));
     while (string1[i]!='\0'){
         a[i] = string1[i];
         lengtha += 1;
         i+=1;
     }
-    a[11] = '\0';
+    a[i] = '\0';
     i=0;
     while (string2[i]!='\0')
     {
@@ -107,7 +107,7 @@ boolean eq_string(char* string1, char* string2){
         lengthb+=1;
         i+=1;
     }
-    b[11] = '\0';
+    b[i] = '\0';
     if (lengtha!=lengthb){
         return false;
     }
