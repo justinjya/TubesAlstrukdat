@@ -59,7 +59,7 @@ void LOADFILE(ArrayDin *Games, Stack *History, Queue *GamesQueue, ArrayDin_SB *S
         }
         else
         {
-			ADVWORD(1);
+            ADVWORD(1);
             amount = wordToInteger(currentWord);
             for (i = 0; i < amount; i++)
             {
