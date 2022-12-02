@@ -101,7 +101,7 @@ int main()
                 wordToString(currentWord, game);
                 if (compareString(upper(game), "GAME") == true)
                 {
-                    CREATEGAME(&Games, &Scoreboard);
+                    CREATEGAME(&Games, &Scoreboard, &saved);
                 }
                 else
                 {
@@ -131,7 +131,7 @@ int main()
                 wordToString(currentWord, game);
                 if (compareString(upper(game), "GAME") == true)
                 {
-                    DELETEGAME(&Games, &GamesQueue, &Scoreboard);
+                    DELETEGAME(&Games, &GamesQueue, &Scoreboard, &saved);
                 }
                 else
                 {
@@ -162,6 +162,7 @@ int main()
                 if (compareString(upper(game), "GAME") == true)
                 {
                     PLAYGAME(&Games, &GamesQueue, &History, &Scoreboard);
+                    saved = false;
                 }
                 else
                 {
@@ -188,6 +189,7 @@ int main()
                         else
                         {
                             SKIPGAME(&Games, &GamesQueue, &History, &Scoreboard, skips);
+                            saved = false;
                         }
                     }
                 }
@@ -226,10 +228,12 @@ int main()
                 if (compareString(upper(wordAfter), "HISTORY") == true)
                 {
                     RESETHISTORY(&History);
+                    saved = false;
                 }
                 else if (compareString(upper(wordAfter), "SCOREBOARD") == true)
                 {
                     RESETSCOREBOARD(&Games, &Scoreboard);
+                    saved = false;
                 }
                 else
                 {
