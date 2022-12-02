@@ -162,12 +162,12 @@ void CREATEGAME(ArrayDin *arrayGames, ArrayDin_SB *Scoreboard){
     
     /* Proses pencarian nama games yang diinput apakah sudah terdaftar sebelumnya */
     for (i; i < (*arrayGames).Neff; i++){
-        if (compareString((*arrayGames).A[i], gamesname) == 1){
+        if (compareString((*arrayGames).A[i], upper(gamesname)) == 1){
             found = true;
         }
     }
     if (found == false) /* Kondisi ketika game belum terdaftar */{
-        InsertLast(arrayGames, gamesname);
+        InsertLast(arrayGames, upper(gamesname));
         AddNeff_SB(Scoreboard);
         printf("Game berhasil ditambahkan.\n");
     } else /* Kondisi ketika game seudah terdaftar */{
