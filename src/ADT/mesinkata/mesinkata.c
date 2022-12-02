@@ -112,11 +112,7 @@ void CopyWord(int type)
         }
         else
         {
-            #ifdef _WIN32
-                currentWord.Length = i;
-            #else
-                currentWord.Length = i - 1;
-            #endif
+            currentWord.Length = i;
         }
     }
 }
