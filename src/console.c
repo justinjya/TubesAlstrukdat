@@ -176,21 +176,21 @@ void CREATEGAME(ArrayDin *arrayGames, ArrayDin_SB *Scoreboard){
 }
 
 void DELETEGAME(ArrayDin *arrayGames, Queue *queueGames, ArrayDin_SB *scoreboard){
-	char *input;
+    char *input;
     int i, a;
     boolean found;
     found = false;
-	input = (char *) malloc (5 * sizeof(char));
+    input = (char *) malloc (5 * sizeof(char));
 
-	LISTGAME(arrayGames);
-	printf("\nMasukkan nomor game yang akan dihapus: ");
-	inputInteger(&a);
+    LISTGAME(arrayGames);
+    printf("\nMasukkan nomor game yang akan dihapus: ");
+    inputInteger(&a);
 	
-	if ((a>=1) && (a<=5)){
-		printf("Game gagal dihapus.\n");
-	}
-	else if (a>5){
-		i = a-1;
+    if ((a>=1) && (a<=5)){
+	printf("Game gagal dihapus.\n");
+    }
+    else if (a>5){
+	i = a-1;
         for (int j = 0; j <= IDX_TAIL(*queueGames); j++) {
             if (arrayGames->A[i] == queueGames->buffer[j]) {
                 found = true;
@@ -204,7 +204,7 @@ void DELETEGAME(ArrayDin *arrayGames, Queue *queueGames, ArrayDin_SB *scoreboard
         else {
             printf("Game gagal dihapus.\n");
         }
-	}
+    }
 }
 
 void QUEUEGAME(ArrayDin *Games, Queue *Queue){
