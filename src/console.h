@@ -30,7 +30,7 @@ void LISTGAME(ArrayDin *arrayGames);
 
 /* Menambahkan game baru pada daftar game.
  */
-void CREATEGAME(ArrayDin *arrayGames, ArrayDin_SB *Scoreboard);
+void CREATEGAME(ArrayDin *arrayGames, ArrayDin_SB *Scoreboard, boolean *saved);
 
 /* Menghapus sebuah game dari daftar game. Aturan penghapusan :
  * - Game yang dapat dihapus hanya game yang dibuat secara
@@ -38,7 +38,7 @@ void CREATEGAME(ArrayDin *arrayGames, ArrayDin_SB *Scoreboard);
  * - 5 game pertama pada file konfigurasi tidak dapat dihapus.
  * - Game yang saat itu terdapat di dalam queue game tidak dapat dihapus.
  */
-void DELETEGAME(ArrayDin *arrayGames, Queue *queueGames, ArrayDin_SB *scoreboard);
+void DELETEGAME(ArrayDin *arrayGames, Queue *queueGames, ArrayDin_SB *scoreboard, boolean *saved);
 
 /* Mendaftarkan permainan kedalam list. List queue akan hilang ketika
  * pemain menjalankan command QUIT.
