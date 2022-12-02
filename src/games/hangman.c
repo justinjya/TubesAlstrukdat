@@ -190,7 +190,11 @@ int HANGMAN(){
         }
     }
     FILE *open;
-    open = fopen(".\\data\\hangman.txt", "w");
+    #ifdef _WIN32
+        open = fopen(".\\data\\hangman.txt", "w");
+    #else
+        open = fopen("./data/hangman.txt", "w");
+    #endif
     for (int i = 0; i < listkata.Neff; i++){
         fprintf(open, "%s\n", listkata.A[i]);
     }
