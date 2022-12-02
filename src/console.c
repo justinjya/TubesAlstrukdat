@@ -149,7 +149,7 @@ void LISTGAME(ArrayDin *arrayGames){
     }
 }
 
-void CREATEGAME(ArrayDin *arrayGames, ArrayDin_SB *Scoreboard){
+void CREATEGAME(ArrayDin *arrayGames, ArrayDin_SB *Scoreboard, boolean *saved){
     char *gamesname;
     gamesname = (char *) malloc (50 * sizeof(char));
     int i = 0;
@@ -170,12 +170,13 @@ void CREATEGAME(ArrayDin *arrayGames, ArrayDin_SB *Scoreboard){
         InsertLast(arrayGames, upper(gamesname));
         AddNeff_SB(Scoreboard);
         printf("Game berhasil ditambahkan.\n");
+	*saved = false;
     } else /* Kondisi ketika game seudah terdaftar */{
         printf("Game sudah terdaftar. Silahkan masukkan nama game lain.\n");
     }
 }
 
-void DELETEGAME(ArrayDin *arrayGames, Queue *queueGames, ArrayDin_SB *scoreboard){
+void DELETEGAME(ArrayDin *arrayGames, Queue *queueGames, ArrayDin_SB *scoreboard, boolean *saved){
     char *input;
     int i, a;
     boolean found;
@@ -200,6 +201,7 @@ void DELETEGAME(ArrayDin *arrayGames, Queue *queueGames, ArrayDin_SB *scoreboard
             DeleteAt(arrayGames, i);
             SubNeff_SB(scoreboard);
             printf("Game berhasil dihapus.\n");
+	    *saved = false;
         }
         else {
             printf("Game gagal dihapus.\n");
