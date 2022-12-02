@@ -92,7 +92,7 @@ char* getCurrentWord(Word string);
 
 /* Menerima input berupa string yang kemudian dipakai menjadi nama untuk
  * diletakkan dalam Scoreboard. Jika nama sudah ada akan mengeluarkan pesan
- * Nama sudah dipakai dalam Scoreboard <nama game>.
+ * Nama sudah dipakai dalam Scoreboard <nama game> dan meminta input ulang.
  */
 void inputNamaScoreboard(ArrayDin *Games, Queue *GamesQueue, ArrayDin_SB *Scoreboard, int Skor);
 
