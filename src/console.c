@@ -116,13 +116,10 @@ void SAVE(ArrayDin *Games, Stack *History, ArrayDin_SB *Scoreboard, char *inputf
         fprintf(open, "%s\n", Games->A[i]);
     }
 
-    if (!IsEmptyStack(*History))
+    fprintf(open, "%d\n", Top(*History) + 1);
+    for (int i = 0; i <= Top(*History); i++)
     {
-        fprintf(open, "%d\n", Top(*History) + 1);
-        for (int i = 0; i <= Top(*History); i++)
-        {
-            fprintf(open, "%s\n", History->T[i]);
-        }
+        fprintf(open, "%s\n", History->T[i]);
     }
 
     for (int i = 0; i < Scoreboard->Neff; i++)
